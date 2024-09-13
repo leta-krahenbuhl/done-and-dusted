@@ -1,0 +1,17 @@
+@use "../../styles/partials/variables" as *;
+
+@mixin button1 {
+  width: 210px;
+  height: 50px;
+  background-color: $primary-button2;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+}
+
+@mixin button1-hover {
+  background-color: $primary-font1;
+  color: $primary-font2;
+}

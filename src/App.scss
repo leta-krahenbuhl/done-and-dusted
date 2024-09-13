@@ -1,0 +1,18 @@
+@use "./styles/partials/variables" as *;
+
+// was here from beginning
+// #root {
+//   max-width: 1280px;
+//   margin: 0 auto;
+//   padding: 2rem;
+//   text-align: center;
+// }
+
+// mine
+.app {
+  width: 100vw;
+  height: 100vh;
+  background-color: $primary-purple1;
+  color: $primary-font2;
+  font-family: "Afacad", Helvetica, sans-serif;
+}
