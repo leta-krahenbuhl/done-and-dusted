@@ -1,8 +1,20 @@
 import "./Landing.scss";
 import logo from "../../assets/images/logo.svg";
 import cleaningIllustration1 from "../../assets/images/cleaning1.svg";
+import { useState } from "react";
+import SignUp from "../../components/SignUp/SignUp";
 
 export default function Landing() {
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+
+  const handleClickSignup = () => {
+    setIsSignUpOpen(true);
+  };
+
+  const handleCloseSignUp = () => {
+    setIsSignUpOpen(false);
+  };
+
   return (
     <div className="landing">
       <header className="landing-header">
@@ -24,10 +36,19 @@ export default function Landing() {
           </p>
           <div className="landing-main__buttons">
             <button className="landing-main__button">LOG IN</button>
-            <button className="landing-main__button">SIGN UP</button>
+            <button
+              className="landing-main__button"
+              onClick={handleClickSignup}
+            >
+              SIGN UP
+            </button>
           </div>
         </div>
       </main>
+      <SignUp
+        isSignUpOpen={isSignUpOpen}
+        handleCloseSignUp={handleCloseSignUp}
+      />
     </div>
   );
 }

@@ -1,14 +1,13 @@
 .landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   min-height: 100vh;
 }
 
-.landing-header {
-  padding-top: 3rem;
-  padding-bottom: 1rem;
-}
-
 .landing-main {
+  margin-top: -2rem;
   display: flex;
   justify-content: center;
   width: 100%;
