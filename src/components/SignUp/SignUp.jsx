@@ -16,10 +16,30 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
           &times;
         </button>
         <h1 className="signup-overlay__h1">Sign Up</h1>
-        <form>
-          <input type="text" placeholder="Username" />
-          <input type="password" placeholder="Password" />
-          <button type="submit">Submit</button>
+        <form className="signup-overlay-form">
+          <input
+            type="text"
+            placeholder="Username"
+            className="signup-overlay-form__input"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            className="signup-overlay-form__input"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="signup-overlay-form__input"
+          />
+          <input
+            type="password"
+            placeholder="Confirm password"
+            className="signup-overlay-form__input"
+          />
+          <button type="submit" className="signup-overlay-form__button">
+            Submit
+          </button>
         </form>
       </div>
     </div>

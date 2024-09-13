@@ -4,7 +4,7 @@
   width: 210px;
   height: 50px;
   background-color: $primary-button2;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   font-size: 1.2rem;
   font-weight: 700;
@@ -13,5 +13,22 @@
 
 @mixin button1-hover {
   background-color: $primary-font1;
+  color: $primary-white;
+}
+
+@mixin button2 {
+  color: $primary-white;
+  width: 210px;
+  height: 50px;
+  background-color: $primary-font1;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+}
+
+@mixin button2-hover {
+  background-color: $primary-button2;
   color: $primary-white;
 }
