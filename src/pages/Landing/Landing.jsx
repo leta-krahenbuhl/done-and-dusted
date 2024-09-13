@@ -3,9 +3,11 @@ import logo from "../../assets/images/logo.svg";
 import cleaningIllustration1 from "../../assets/images/cleaning1.svg";
 import { useState } from "react";
 import SignUp from "../../components/SignUp/SignUp";
+import LogIn from "../../components/LogIn/LogIn";
 
 export default function Landing() {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isLogInOpen, setIsLogInOpen] = useState(false);
 
   const handleClickSignup = () => {
     setIsSignUpOpen(true);
@@ -13,6 +15,14 @@ export default function Landing() {
 
   const handleCloseSignUp = () => {
     setIsSignUpOpen(false);
+  };
+
+  const handleClickLogIn = () => {
+    setIsLogInOpen(true);
+  };
+
+  const handleCloseLogIn = () => {
+    setIsLogInOpen(false);
   };
 
   return (
@@ -35,7 +45,9 @@ export default function Landing() {
             everyone who's boss!
           </p>
           <div className="landing-main__buttons">
-            <button className="landing-main__button">LOG IN</button>
+            <button className="landing-main__button" onClick={handleClickLogIn}>
+              LOG IN
+            </button>
             <button
               className="landing-main__button"
               onClick={handleClickSignup}
@@ -49,6 +61,7 @@ export default function Landing() {
         isSignUpOpen={isSignUpOpen}
         handleCloseSignUp={handleCloseSignUp}
       />
+      <LogIn isLogInOpen={isLogInOpen} handleCloseLogIn={handleCloseLogIn} />
     </div>
   );
 }

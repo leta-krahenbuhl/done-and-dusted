@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.signup-overlay {
+.login-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -50,7 +50,7 @@
   }
 }
 
-.signup-overlay-form {
+.login-overlay-form {
   display: flex;
   flex-direction: column;
   width: 100%;
