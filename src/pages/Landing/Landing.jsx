@@ -33,7 +33,7 @@ export default function Landing() {
       <main className="landing-main">
         <img
           src={cleaningIllustration1}
-          alt="logo"
+          alt="cleaning illustration"
           className="landing-main__illustration"
         />
         <div className="landing-main__text-and-buttons">

@@ -1,0 +1,10 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 4rem;
+  background-color: $primary-purple1;
+  padding: 1rem 1rem 0.5rem 1rem;
+}
