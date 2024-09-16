@@ -28,7 +28,7 @@ export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
             className="login-overlay-form__input"
           />
           <button type="submit" className="login-overlay-form__button">
-            Submit
+            Login
           </button>
         </form>
       </div>
