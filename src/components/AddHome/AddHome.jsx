@@ -1,34 +1,59 @@
 import "./AddHome.scss";
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 export default function AddHome({ isAddHomeOpen, handleCloseAddHome }) {
   const [homeName, setHomeName] = useState("");
 
   const handleAddHome = async (e) => {
-    //     e.preventDefault();
-    //     if (!homeName) {
-    //       return alert("Please enter a name for your home.");
-    //     }
-    //     if (admin.length < 1) {
-    //       return alert("Please enter an admin.");
-    //     }
-    //     try {
-    //       const response = await fetch("/api/signup", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({ username, password }),
-    //       });
-    //       const data = await response.json();
-    //       if (response.ok) {
-    //         alert("New user created successfully. Log in to start!");
-    //       } else {
-    //         alert(data.message);
-    //       }
-    //     } catch (error) {
-    //       console.error("Error:", error);
-    //     }
+    e.preventDefault();
+    console.log("add home clicked");
+
+    // Retrieve the token from local storage
+    const token = localStorage.getItem("token");
+    console.log("token:", token);
+
+    // Decode the token to get the username
+    let username = "";
+    if (token) {
+      console.log("there is a token!");
+      const decoded = jwtDecode(token);
+      username = decoded.username; // Access the username from the decoded token
+    }
+
+    const habitants = username;
+    const admins = username;
+
+    console.log("habitants/admins:", habitants);
+
+    if (!homeName) {
+      return alert("Please enter a name for your home.");
+    }
+
+    if (admin.length < 1) {
+      return alert("Please enter an admin.");
+    }
+
+    console.log(homeName, habitants, admins);
+
+    try {
+      const response = await fetch("/api/add-home", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ homeName, habitants, admins }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("New home created successfully.");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   if (!isAddHomeOpen) return null;
