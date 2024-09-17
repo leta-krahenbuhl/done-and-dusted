@@ -1,7 +1,43 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.home {
+.home-all {
+  flex-direction: column;
   background-color: $primary-purple3;
   height: 100%;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 6rem);
+
+  &__image {
+    width: 25rem;
+    margin: 3rem;
+  }
+
+  &__text-container {
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    font-size: 2rem;
+  }
+
+  &__text-big {
+    font-size: 1.2rem;
+  }
+
+  &__button {
+    justify-self: right;
+    @include button1;
+  }
+
+  &__button:hover {
+    @include button1-hover;
+  }
 }
