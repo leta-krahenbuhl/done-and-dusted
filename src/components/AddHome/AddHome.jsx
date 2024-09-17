@@ -4,37 +4,32 @@ import { jwtDecode } from "jwt-decode";
 
 export default function AddHome({ isAddHomeOpen, handleCloseAddHome }) {
   const [homeName, setHomeName] = useState("");
+  const [admins, setAdmins] = useState([]);
+  const [habitants, setHabitants] = useState([]);
 
   const handleAddHome = async (e) => {
     e.preventDefault();
-    console.log("add home clicked");
 
     // Retrieve the token from local storage
     const token = localStorage.getItem("token");
-    console.log("token:", token);
 
     // Decode the token to get the username
     let username = "";
     if (token) {
-      console.log("there is a token!");
       const decoded = jwtDecode(token);
       username = decoded.username; // Access the username from the decoded token
+      //   console.log("username:", username); // works!
+      setAdmins(admins.push(username));
+      setHabitants(habitants.push(username));
     }
 
-    const habitants = username;
-    const admins = username;
-
-    console.log("habitants/admins:", habitants);
+    // const habitants = username;
+    // const admins = username;
+    // console.log("habitants/admins:", admins); //works
 
     if (!homeName) {
       return alert("Please enter a name for your home.");
     }
-
-    if (admin.length < 1) {
-      return alert("Please enter an admin.");
-    }
-
-    console.log(homeName, habitants, admins);
 
     try {
       const response = await fetch("/api/add-home", {
