@@ -32,7 +32,7 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
 
       const data = await response.json();
       if (response.ok) {
-        alert("User created successfully");
+        alert("New user created successfully. Log in to start!");
       } else {
         alert(data.message);
       }

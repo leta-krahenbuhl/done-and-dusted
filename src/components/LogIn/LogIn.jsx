@@ -1,6 +1,38 @@
 import "./LogIn.scss";
 
 export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
+<<<<<<< Updated upstream
+=======
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        // Store the token in local storage or state
+        localStorage.setItem("token", data.token);
+        navigate("/home");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+>>>>>>> Stashed changes
   if (!isLogInOpen) return null;
 
   return (
