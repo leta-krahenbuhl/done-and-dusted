@@ -1,7 +1,6 @@
 import "./Header.scss";
 import logo from "../../assets/images/logo.svg";
 import LogOut from "../LogOut/LogOut";
-
 import { jwtDecode } from "jwt-decode";
 
 export default function Header() {

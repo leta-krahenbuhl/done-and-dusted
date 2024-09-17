@@ -32,7 +32,7 @@ export default function AddHome({ isAddHomeOpen, handleCloseAddHome }) {
     }
 
     try {
-      const response = await fetch("/api/add-home", {
+      const response = await fetch("/api/homes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
