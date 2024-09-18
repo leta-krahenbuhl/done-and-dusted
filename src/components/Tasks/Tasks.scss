@@ -1,0 +1,17 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.tasks-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tasks-button {
+  @include button2;
+  width: 4rem;
+}
+
+.tasks-button:hover {
+  @include button2-hover;
+}

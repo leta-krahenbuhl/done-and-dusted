@@ -13,6 +13,7 @@ const PrivateRoute = ({ children }) => {
       if (decodedToken.exp < currentTime) {
         // If expired, remove the token
         localStorage.removeItem("token");
+        alert("Your session has expired. Please log in again.");
         return <Navigate to="/" />;
       }
 

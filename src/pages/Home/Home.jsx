@@ -7,19 +7,19 @@ import { jwtDecode } from "jwt-decode"; // Import jwtDecode
 import axios from "axios"; // Import axios for making HTTP requests
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import Tasks from "../../components/Tasks/Tasks";
 
 export default function Home() {
   const [isAddHomeOpen, setIsAddHomeOpen] = useState(false);
   const [homeName, setHomeName] = useState(null);
   const [error, setError] = useState(null);
 
-  // Decode the token to get the username
+  // Check if user has home and get it
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
       const { username } = jwtDecode(token);
-      // console.log("username:", username); // works!
 
       // Fetch home data
       axios
@@ -48,6 +48,7 @@ export default function Home() {
     setIsAddHomeOpen(false);
   };
 
+  // If user doesn't have a home yet
   if (!homeName) {
     return (
       <div className="home-none-all">
@@ -73,6 +74,7 @@ export default function Home() {
     );
   }
 
+  // User is part of a home
   return (
     <div className="home-all">
       <Header />
@@ -86,13 +88,13 @@ export default function Home() {
           </TabList>
 
           <TabPanel>
-            <h2>Any content 1</h2>
+            <Tasks />
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <h2>Week 2</h2>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 3</h2>
+            <h2>Week 3</h2>
           </TabPanel>
         </Tabs>
       </article>
