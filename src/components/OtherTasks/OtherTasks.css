@@ -1,1 +1,43 @@
-/*# sourceMappingURL=OtherTasks.css.map */
+.other-tasks-all {
+  background-color: #9a9cd5;
+  padding: 1rem;
+  border-radius: 5px;
+}
+.other-tasks-all__text {
+  margin: 0rem;
+  font-size: 0.9rem;
+}
+
+.other-tasks__column-headers-div {
+  display: flex;
+  width: 100%;
+  height: 1.5rem;
+  justify-content: space-between;
+}
+.other-tasks__column-headers {
+  width: 30%;
+  margin-top: 0rem;
+  font-size: 0.8rem;
+}
+.other-tasks__list {
+  list-style-type: none;
+  padding: 0; /* Optional: Remove default padding */
+  margin: 0; /* Optional: Remove default margin */
+}
+.other-tasks__list-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+.other-tasks__list-item-part {
+  width: 30%;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+.other-tasks__list-item-part--title {
+  font-weight: 700;
+  font-size: 1rem;
+}/*# sourceMappingURL=OtherTasks.css.map */

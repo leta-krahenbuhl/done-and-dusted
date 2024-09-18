@@ -1,3 +1,4 @@
+import "./LogOut.scss";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook from react-router-dom
 
 export default function LogOut() {
@@ -13,7 +14,7 @@ export default function LogOut() {
 
   return (
     <button onClick={handleLogout} className="logout-button">
-      Log Out
+      LOG OUT
     </button>
   );
 }

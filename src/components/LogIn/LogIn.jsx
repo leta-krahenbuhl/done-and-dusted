@@ -23,7 +23,6 @@ export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
       if (response.ok) {
         // Store the token in local storage or state
         localStorage.setItem("token", data.token);
-        alert("Logged in successfully");
         navigate("/home");
       } else {
         alert(data.message);

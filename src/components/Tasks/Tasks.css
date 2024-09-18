@@ -1,7 +1,36 @@
+.tasks-all {
+  border-radius: 5px;
+}
+
 .tasks-header {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.tasks-content__button-div {
+  text-align: right;
+}
+.tasks-content__h3 {
+  margin-bottom: 0.5rem;
+  margin-left: 0.2rem;
+  font-size: 1.2rem;
+}
+.tasks-content__button {
+  color: #ffffff;
+  width: 210px;
+  height: 50px;
+  background-color: #27267e;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  margin-top: 2rem;
+}
+.tasks-content__button:hover {
+  background-color: #fab44b;
+  color: #ffffff;
 }
 
 .tasks-button {

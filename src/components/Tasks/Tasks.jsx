@@ -65,18 +65,19 @@ export default function Tasks({ homeName }) {
         </button>
       </div>
       <div className="tasks-content">
-        <h3 className="tasks-h3">Daily</h3>
+        <h3 className="tasks-content__h3">Daily</h3>
         <DailyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
 
-        <h3 className="tasks-h3">Weekly</h3>
+        <h3 className="tasks-content__h3">Weekly</h3>
         <WeeklyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
 
-        <h3 className="tasks-h3">Other</h3>
+        <h3 className="tasks-content__h3">Other</h3>
         <OtherTasks homeName={homeName} currentWeekISO={currentWeekISO} />
-
-        <button className="button-add-tasks" onClick={handleAddTask}>
-          ADD TASK
-        </button>
+        <div className="tasks-content__button-div">
+          <button className="tasks-content__button" onClick={handleAddTask}>
+            ADD TASK
+          </button>
+        </div>
         <AddTasks
           homeName={homeName}
           isAddTaskOpen={isAddTaskOpen}

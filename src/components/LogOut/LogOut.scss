@@ -1,0 +1,16 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.logout-button {
+  background-color: transparent;
+  border: none;
+  font-size: 0.8rem;
+  color: $primary-white;
+  font-weight: 700;
+  height: 1.2rem;
+}
+
+.logout-button:hover {
+  color: $primary-button2;
+  cursor: pointer;
+}

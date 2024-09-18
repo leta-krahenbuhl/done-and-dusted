@@ -1,13 +1,17 @@
 .daily-tasks-all {
   background-color: #9a9cd5;
-  margin: 1rem;
   padding: 1rem;
   border-radius: 5px;
+}
+.daily-tasks-all__text {
+  margin: 0rem;
+  font-size: 0.9rem;
 }
 
 .daily-tasks__column-headers-div {
   display: flex;
   width: 100%;
+  height: 1.5rem;
   justify-content: space-between;
 }
 .daily-tasks__column-headers {
@@ -31,7 +35,9 @@
 .daily-tasks__list-item-part {
   width: 30%;
   font-weight: 400;
+  font-size: 0.9rem;
 }
 .daily-tasks__list-item-part--title {
   font-weight: 700;
+  font-size: 1rem;
 }/*# sourceMappingURL=DailyTasks.css.map */

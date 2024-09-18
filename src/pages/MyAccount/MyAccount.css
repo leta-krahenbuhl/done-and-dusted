@@ -1,0 +1,7 @@
+.account {
+  background-color: #9a9cd5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 6rem);
+}/*# sourceMappingURL=MyAccount.css.map */

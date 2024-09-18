@@ -45,7 +45,6 @@
 .home-all {
   flex-direction: column;
   background-color: #7375c2;
-  height: 100%;
 }
 
 .home {
@@ -62,6 +61,7 @@
   width: 80%;
   font-weight: 700;
   color: #27267e;
+  margin-bottom: 5rem;
 }
 
 .home .react-tabs__tab-list {
@@ -74,7 +74,6 @@
 
 .home .react-tabs__tab {
   display: inline-block;
-  border: 1px solid transparent;
   border-bottom: none;
   bottom: -1px;
   position: relative;
@@ -84,6 +83,11 @@
   border-radius: 5px 5px 0 0;
   margin-right: 0.5rem;
   width: 8rem;
+  text-align: center;
+}
+
+.home .react-tabs__tab:hover {
+  background-color: #fab44b;
 }
 
 .home .react-tabs__tab--selected {
@@ -114,4 +118,7 @@
 .react-tabs__tab-panel--selected {
   display: block;
   background-color: #8788ca;
+  border-radius: 0px 5px 5px 5px;
+  padding: 1rem;
+  margin-top: 0.06rem;
 }/*# sourceMappingURL=Home.css.map */

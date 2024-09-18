@@ -27,15 +27,31 @@ export default function WeeklyTasks({ homeName, currentWeekISO }) {
   return (
     <div className="weekly-tasks-all">
       {weeklyTasks.length === 0 ? (
-        <p>No weekly tasks found</p>
+        <p className="weekly-tasks-all__text">No weekly tasks found</p>
       ) : (
-        <ul>
-          {weeklyTasks.map((task) => (
-            <li key={task.id}>
-              {task.taskName} | {task.minutes}mins | {task.dueDate}
-            </li>
-          ))}
-        </ul>
+        <div className="weekly-tasks">
+          <div className="weekly-tasks__column-headers-div">
+            <p className="weekly-tasks__column-headers">Task</p>
+            <p className="weekly-tasks__column-headers">Duration</p>
+
+            <p className="weekly-tasks__column-headers">Due</p>
+          </div>
+          <ul className="weekly-tasks__list">
+            {weeklyTasks.map((task) => (
+              <li key={task.id} className="weekly-tasks__list-item">
+                <div className="weekly-tasks__list-item-part weekly-tasks__list-item-part--title">
+                  {task.taskName}
+                </div>
+                <div className="weekly-tasks__list-item-part">
+                  {task.minutes}mins
+                </div>
+                <div className="weekly-tasks__list-item-part">
+                  {task.dueDate}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

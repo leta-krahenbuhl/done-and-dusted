@@ -27,15 +27,31 @@ export default function OtherTasks({ homeName, currentWeekISO }) {
   return (
     <div className="other-tasks-all">
       {otherTasks.length === 0 ? (
-        <p>No other tasks found</p>
+        <p className="other-tasks-all__text">No other tasks found</p>
       ) : (
-        <ul>
-          {otherTasks.map((task) => (
-            <li key={task.id}>
-              {task.taskName} | {task.minutes}mins | {task.dueDate}
-            </li>
-          ))}
-        </ul>
+        <div className="other-tasks">
+          <div className="other-tasks__column-headers-div">
+            <p className="other-tasks__column-headers">Task</p>
+            <p className="other-tasks__column-headers">Duration</p>
+
+            <p className="other-tasks__column-headers">Due</p>
+          </div>
+          <ul className="other-tasks__list">
+            {otherTasks.map((task) => (
+              <li key={task.id} className="other-tasks__list-item">
+                <div className="other-tasks__list-item-part other-tasks__list-item-part--title">
+                  {task.taskName}
+                </div>
+                <div className="other-tasks__list-item-part">
+                  {task.minutes}mins
+                </div>
+                <div className="other-tasks__list-item-part">
+                  {task.dueDate}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

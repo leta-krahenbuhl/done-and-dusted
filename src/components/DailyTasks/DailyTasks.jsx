@@ -27,7 +27,7 @@ export default function DailyTasks({ homeName, currentWeekISO }) {
   return (
     <div className="daily-tasks-all">
       {dailyTasks.length === 0 ? (
-        <p>No tasks found</p>
+        <p className="daily-tasks-all__text">No daily tasks found</p>
       ) : (
         <div className="daily-tasks">
           <div className="daily-tasks__column-headers-div">
@@ -43,7 +43,7 @@ export default function DailyTasks({ homeName, currentWeekISO }) {
                   {task.taskName}
                 </div>
                 <div className="daily-tasks__list-item-part">
-                  {task.minutes}
+                  {task.minutes}mins
                 </div>
                 <div className="daily-tasks__list-item-part">
                   {task.dueDate}

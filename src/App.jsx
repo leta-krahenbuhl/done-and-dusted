@@ -4,6 +4,7 @@ import Home from "../src/pages/Home/Home";
 import PrivateRoute from "./components/PrivateRoute";
 
 import "./App.css";
+import MyAccount from "./pages/MyAccount/MyAccount";
 
 function App() {
   return (
@@ -16,6 +17,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <PrivateRoute>
+                <MyAccount />
               </PrivateRoute>
             }
           />

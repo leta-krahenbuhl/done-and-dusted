@@ -3,15 +3,20 @@
 
 .daily-tasks-all {
   background-color: $primary-purple3;
-  margin: 1rem;
   padding: 1rem;
   border-radius: 5px;
+
+  &__text {
+    margin: 0rem;
+    font-size: 0.9rem;
+  }
 }
 
 .daily-tasks {
   &__column-headers-div {
     display: flex;
     width: 100%;
+    height: 1.5rem;
     justify-content: space-between;
   }
 
@@ -39,9 +44,11 @@
   &__list-item-part {
     width: 30%;
     font-weight: 400;
+    font-size: 0.9rem;
 
     &--title {
       font-weight: 700;
+      font-size: 1rem;
     }
   }
 }
