@@ -65,7 +65,10 @@ export default function Tasks({ homeName }) {
         </button>
       </div>
       <div className="tasks-content">
-        <h3 className="tasks-content__h3">Daily</h3>
+        <div className="tasks-content__headers">
+          <h3 className="tasks-content__h3">Daily</h3>
+          <h3 className="tasks-content__h3">Done</h3>
+        </div>
         <DailyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
 
         <h3 className="tasks-content__h3">Weekly</h3>

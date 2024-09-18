@@ -6,9 +6,6 @@ export default function InitialIcon({ username }) {
   const [colour, setColour] = useState("");
   const [data, setData] = useState();
 
-  //   console.log("username from InitialIcon: ", username);
-  console.log("data: ", colour);
-
   // Get all user's colour
   useEffect(() => {
     // Fetch user
