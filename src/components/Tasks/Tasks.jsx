@@ -1,8 +1,11 @@
 import "./Tasks.scss";
 import { useState } from "react";
 import { format } from "date-fns";
+import DailyTasks from "../DailyTasks/DailyTasks";
+import AddTasks from "../AddTasks/AddTasks";
 
-export default function Tasks() {
+export default function Tasks({ homeName }) {
+  const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
   const [tasks, setTasks] = useState({});
   const [currentWeekStart, setCurrentWeekStart] = useState(
     getMonday(new Date())
@@ -36,7 +39,14 @@ export default function Tasks() {
     });
   };
 
-  // if no tasks yet
+  // show add task overlay
+  const handleAddTask = () => {
+    setIsAddTaskOpen(true);
+  };
+
+  const handleCloseAddTask = () => {
+    setIsAddTaskOpen(false);
+  };
 
   return (
     <div className="tasks-all">
@@ -50,7 +60,20 @@ export default function Tasks() {
         </button>
       </div>
       <div className="tasks-content">
-        <p>Content for {formattedWeekStart}</p>
+        <h3 className="tasks-h3">Daily</h3>
+        <DailyTasks />
+        <h3 className="tasks-h3">Weekly</h3>
+        <p>Content for weekly tasks</p>
+        <h3 className="tasks-h3">Other</h3>
+        <p>Content for other tasks</p>
+        <button className="button-add-tasks" onClick={handleAddTask}>
+          ADD TASK
+        </button>
+        <AddTasks
+          homeName={homeName}
+          isAddTaskOpen={isAddTaskOpen}
+          handleCloseAddTask={handleCloseAddTask}
+        />
       </div>
     </div>
   );

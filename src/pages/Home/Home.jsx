@@ -30,12 +30,11 @@ export default function Home() {
         })
         .then((response) => {
           setHomeName(response.data.homeName);
-          console.log("response.data.homeName:", response.data.homeName);
         })
         .catch((err) => {
           console.error(err);
           setError(err.response?.data?.message || "An error occurred");
-          console.log("error", error);
+          console.error("error", error);
         });
     }
   }, []);
@@ -88,7 +87,7 @@ export default function Home() {
           </TabList>
 
           <TabPanel>
-            <Tasks />
+            <Tasks homeName={homeName} />
           </TabPanel>
           <TabPanel>
             <h2>Week 2</h2>

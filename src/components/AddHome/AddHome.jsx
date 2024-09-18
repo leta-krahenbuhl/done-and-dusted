@@ -18,14 +18,9 @@ export default function AddHome({ isAddHomeOpen, handleCloseAddHome }) {
     if (token) {
       const decoded = jwtDecode(token);
       username = decoded.username; // Access the username from the decoded token
-      //   console.log("username:", username); // works!
       setAdmins(admins.push(username));
       setHabitants(habitants.push(username));
     }
-
-    // const habitants = username;
-    // const admins = username;
-    // console.log("habitants/admins:", admins); //works
 
     if (!homeName) {
       return alert("Please enter a name for your home.");
