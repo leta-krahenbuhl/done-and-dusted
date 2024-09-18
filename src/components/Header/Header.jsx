@@ -1,5 +1,6 @@
 import "./Header.scss";
 import logo from "../../assets/images/logo.svg";
+import avatarJane from "../../assets/images/avatar-jane.svg";
 import LogOut from "../LogOut/LogOut";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
@@ -20,9 +21,20 @@ export default function Header() {
       <Link to="/home">
         <img src={logo} alt="logo" className="header__logo" />
       </Link>
-      <div className="greeting-avatar">Hi, {username ? username : "You"}!</div>
-      <Link to="/account">MY ACCOUNT</Link>
-      <LogOut />
+      <div className="header__center">
+        <div className="header__greeting-avatar">
+          <div className="header__greeting">
+            Hi, {username ? username : "You"}!
+          </div>
+          <img src={avatarJane} alt="avatar" className="header__avatar" />
+        </div>
+      </div>
+      <div className="header__right">
+        <Link to="/account" className="header__link">
+          MY ACCOUNT
+        </Link>
+        <LogOut />
+      </div>
     </div>
   );
 }
