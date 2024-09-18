@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
   const [username, setUsername] = useState("");
+  const [colour, setColour] = useState("pink");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -21,13 +22,17 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
       return alert("Please enter a password.");
     }
 
+    if (!colour) {
+      return alert("Please choose a colour.");
+    }
+
     try {
       const response = await fetch("/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, colour }),
       });
 
       const data = await response.json();
@@ -65,6 +70,21 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
+          <select
+            id="colour"
+            name="colour"
+            className="signup-overlay-form__input"
+            value={colour}
+            onChange={(e) => setColour(e.target.value)}
+          >
+            <option value="lightpink">Pink</option>
+            <option value="darkseagreen">Green</option>
+            <option value="gold">Yellow</option>
+            <option value="aquamarine">Turquoise</option>
+            <option value="cornflowerblue">Blue</option>
+            <option value="tomato">Orange</option>
+            <option value="lightgrey">Grey</option>
+          </select>
           <input
             type="password"
             placeholder="Password"

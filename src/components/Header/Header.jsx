@@ -4,8 +4,9 @@ import avatarJane from "../../assets/images/avatar-jane.svg";
 import LogOut from "../LogOut/LogOut";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
+import InitialIcon from "../InitialIcon/InitialIcon";
 
-export default function Header() {
+export default function Header({ user }) {
   // Retrieve the token from local storage
   const token = localStorage.getItem("token");
 
@@ -26,7 +27,13 @@ export default function Header() {
           <div className="header__greeting">
             Hi, {username ? username : "You"}!
           </div>
-          <img src={avatarJane} alt="avatar" className="header__avatar" />
+          {username === "Jane" ? (
+            <img src={avatarJane} alt="avatar" className="header__avatar" />
+          ) : (
+            <>
+              <InitialIcon username={username} />
+            </>
+          )}
         </div>
       </div>
       <div className="header__right">

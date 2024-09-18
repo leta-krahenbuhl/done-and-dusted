@@ -13,14 +13,24 @@ export default function Home() {
   const [isAddHomeOpen, setIsAddHomeOpen] = useState(false);
   const [homeName, setHomeName] = useState(null);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState("");
+
+  // Get username (=user)
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const { username } = jwtDecode(token);
+  //   setUser(username);
+  //   console.log("user: ", user);
+  // }, []);
 
   // Check if user has home and get it
   useEffect(() => {
+    //should this be outside of the useEffect?
     const token = localStorage.getItem("token");
+    const { username } = jwtDecode(token);
+    setUser(username);
 
     if (token) {
-      const { username } = jwtDecode(token);
-
       // Fetch home data
       axios
         .get("/api/homes/user-home", {
@@ -47,11 +57,13 @@ export default function Home() {
     setIsAddHomeOpen(false);
   };
 
+  // console.log("user: ", user);
+
   // If user doesn't have a home yet
   if (!homeName) {
     return (
       <div className="home-none-all">
-        <Header />
+        <Header user={user} />
         <article className="home-none">
           <img src={cleaningWoman} alt="logo" className="home-none__image" />
           <div className="home-none__text-container">

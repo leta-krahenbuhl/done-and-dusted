@@ -8,43 +8,43 @@
   height: 4rem;
   background-color: $primary-purple1;
   padding: 1rem;
-}
 
-.header__logo {
-  height: 4rem;
-  margin-top: 1rem;
-}
+  &__logo {
+    height: 4rem;
+    margin-top: 1rem;
+  }
 
-.header__center {
-  display: flex;
-  flex: 1; /* Allows this section to take up remaining space */
-  justify-content: center; /* Center content horizontally */
-}
+  &__center {
+    display: flex;
+    flex: 1; /* Allows this section to take up remaining space */
+    justify-content: center; /* Center content horizontally */
+  }
 
-.header__greeting-avatar {
-  display: flex;
-  flex-direction: row; /* Place items side by side */
-  align-items: center; /* Center items vertically */
-  font-size: 1.5rem;
-}
+  &__greeting-avatar {
+    display: flex;
+    flex-direction: row; /* Place items side by side */
+    align-items: center; /* Center items vertically */
+    font-size: 1.5rem;
+  }
 
-.header__avatar {
-  height: 4rem;
-  margin-left: 0.5rem; /* Space between greeting and avatar */
-}
+  &__avatar {
+    height: 4rem;
+    margin-left: 0.5rem;
+  }
 
-.header__right {
-  display: flex;
-  align-items: center; /* Center items vertically */
-}
+  &__right {
+    display: flex;
+    align-items: center; /* Center items vertically */
+  }
 
-.header__link {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: $primary-white;
-  margin-right: 1.5rem;
-}
+  &__link {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $primary-white;
+    margin-right: 1.5rem;
+  }
 
-.header__link:hover {
-  color: $primary-button2;
+  &__link:hover {
+    color: $primary-button2;
+  }
 }
