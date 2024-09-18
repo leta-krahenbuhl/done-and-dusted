@@ -5,10 +5,12 @@ export default function AddTasks({
   homeName,
   isAddTaskOpen,
   handleCloseAddTask,
+  currentWeekStart,
 }) {
   const [taskName, setTaskName] = useState("");
   const [minutes, setMinutes] = useState(5);
   const [repeat, setRepeat] = useState("daily");
+  const [dueDate, setDueDate] = useState();
 
   const handleAddTask = async (e) => {
     // console.log("add tasks clicked"); //works
@@ -19,10 +21,17 @@ export default function AddTasks({
       return alert("Please enter a task description.");
     }
 
+    // error handling
+    if (!dueDate) {
+      return alert("Please choose a due date.");
+    }
+
     const done = false;
     const dateCreated = new Date();
 
-    console.log("minutes:", minutes);
+    // To check date formats. May have to unify at some point?
+    // console.log("dateCreated:", dateCreated);
+    // console.log("formattedDueDate:", formattedDueDate);
 
     try {
       const response = await fetch("/api/tasks", {
@@ -37,6 +46,8 @@ export default function AddTasks({
           repeat,
           done,
           homeName,
+          dueDate,
+          week: currentWeekStart,
         }),
       });
 
@@ -105,6 +116,17 @@ export default function AddTasks({
             <option value="weekly">weekly</option>
             <option value="other">other</option>
           </select>
+
+          <label htmlFor="dueDate">Due date</label>
+          <input
+            type="date"
+            id="dueDate"
+            name="dueDate"
+            className="add-task-overlay-form__input"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+
           <button
             type="submit"
             className="add-task-overlay-form__button"

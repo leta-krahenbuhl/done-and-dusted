@@ -61,7 +61,7 @@ export default function Tasks({ homeName }) {
       </div>
       <div className="tasks-content">
         <h3 className="tasks-h3">Daily</h3>
-        <DailyTasks />
+        <DailyTasks homeName={homeName} currentWeekStart={currentWeekStart} />
         <h3 className="tasks-h3">Weekly</h3>
         <p>Content for weekly tasks</p>
         <h3 className="tasks-h3">Other</h3>
@@ -73,6 +73,7 @@ export default function Tasks({ homeName }) {
           homeName={homeName}
           isAddTaskOpen={isAddTaskOpen}
           handleCloseAddTask={handleCloseAddTask}
+          currentWeekStart={currentWeekStart}
         />
       </div>
     </div>
