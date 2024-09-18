@@ -1,13 +1,14 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.home-all {
+.home-none-all {
   flex-direction: column;
   background-color: $primary-purple3;
   height: 100%;
 }
 
-.home {
+.home-none {
+  background-color: $primary-purple3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,4 +41,86 @@
   &__button:hover {
     @include button1-hover;
   }
+}
+
+.home-all {
+  flex-direction: column;
+  background-color: $primary-purple3;
+  height: 100%;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home .react-tabs {
+  display: flex;
+  flex-direction: column;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 20rem;
+  width: 80%;
+  font-weight: 700;
+  color: $primary-font1;
+}
+
+.home .react-tabs__tab-list {
+  // border-bottom: 1px solid #aaa;
+  margin: 0 0 10px;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 0rem;
+  border: none;
+}
+
+.home .react-tabs__tab {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  // padding: 6px 12px;
+  cursor: pointer;
+  background-color: $primary-purple1;
+  border-radius: 5px 5px 0 0;
+  margin-right: 0.5rem;
+  width: 8rem;
+}
+
+// add .home for specificity, otherwise this gets overwritten
+.home .react-tabs__tab--selected {
+  background-color: $primary-purple2;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  color: $primary-font1;
+}
+
+// .react-tabs__tab--disabled {
+//   color: GrayText;
+//   cursor: default;
+// }
+
+.react-tabs__tab:focus {
+  outline: none;
+}
+
+.home .react-tabs__tab:focus:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: $primary-purple2;
+}
+
+.react-tabs__tab-panel {
+  display: none;
+}
+
+.react-tabs__tab-panel--selected {
+  display: block;
+  background-color: $primary-purple2;
 }

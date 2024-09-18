@@ -1,31 +1,32 @@
-.home-all {
+.home-none-all {
   flex-direction: column;
   background-color: #7375c2;
   height: 100%;
 }
 
-.home {
+.home-none {
+  background-color: #7375c2;
   display: flex;
   justify-content: center;
   align-items: center;
   height: calc(100% - 6rem);
 }
-.home__image {
+.home-none__image {
   width: 25rem;
   margin: 3rem;
 }
-.home__text-container {
+.home-none__text-container {
   width: 25rem;
   display: flex;
   flex-direction: column;
 }
-.home__header {
+.home-none__header {
   font-size: 2rem;
 }
-.home__text-big {
+.home-none__text-big {
   font-size: 1.2rem;
 }
-.home__button {
+.home-none__button {
   justify-self: right;
   width: 210px;
   height: 50px;
@@ -36,7 +37,81 @@
   font-weight: 700;
   font-family: "Afacad", Helvetica, sans-serif;
 }
-.home__button:hover {
+.home-none__button:hover {
   background-color: #27267e;
   color: #ffffff;
+}
+
+.home-all {
+  flex-direction: column;
+  background-color: #7375c2;
+  height: 100%;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home .react-tabs {
+  display: flex;
+  flex-direction: column;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 20rem;
+  width: 80%;
+  font-weight: 700;
+  color: #27267e;
+}
+
+.home .react-tabs__tab-list {
+  margin: 0 0 10px;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 0rem;
+  border: none;
+}
+
+.home .react-tabs__tab {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  background-color: #6365b9;
+  border-radius: 5px 5px 0 0;
+  margin-right: 0.5rem;
+  width: 8rem;
+}
+
+.home .react-tabs__tab--selected {
+  background-color: #8788ca;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  color: #27267e;
+}
+
+.react-tabs__tab:focus {
+  outline: none;
+}
+
+.home .react-tabs__tab:focus:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: #8788ca;
+}
+
+.react-tabs__tab-panel {
+  display: none;
+}
+
+.react-tabs__tab-panel--selected {
+  display: block;
+  background-color: #8788ca;
 }/*# sourceMappingURL=Home.css.map */
