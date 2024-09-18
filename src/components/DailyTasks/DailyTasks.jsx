@@ -2,17 +2,17 @@ import "./DailyTasks.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function DailyTasks({ homeName, currentWeekStart }) {
+export default function DailyTasks({ homeName, currentWeekISO }) {
   const [dailyTasks, setDailyTasks] = useState([]);
   const [error, setError] = useState(null);
 
   // Get all tasks for this week and with repeat 'daily'
   useEffect(() => {
     // Fetch tasks
-    console.log("currentWeekStart", currentWeekStart);
+    console.log("currentWeekISO from DailyTasks.jsx", currentWeekISO);
     axios
       .get("/api/tasks/daily", {
-        params: { homeName, currentWeekStart },
+        params: { homeName, currentWeekISO },
       })
       .then((response) => {
         setDailyTasks(response.data);
@@ -21,7 +21,7 @@ export default function DailyTasks({ homeName, currentWeekStart }) {
         console.error(err);
         setError(err.response?.data?.message || "An error occurred");
       });
-  }, [homeName, currentWeekStart]);
+  }, [homeName, currentWeekISO]);
 
   if (error) return <p>Error: {error}</p>;
 

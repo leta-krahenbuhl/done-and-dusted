@@ -6,10 +6,13 @@ import AddTasks from "../AddTasks/AddTasks";
 
 export default function Tasks({ homeName }) {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
-  const [tasks, setTasks] = useState({});
+  // const [tasks, setTasks] = useState({});
   const [currentWeekStart, setCurrentWeekStart] = useState(
     getMonday(new Date())
   );
+
+  // Current week for further use as ISO string
+  const currentWeekISO = currentWeekStart.toISOString().substring(0, 10);
 
   // Function to get the Monday of the given date's week
   function getMonday(date) {
@@ -61,7 +64,7 @@ export default function Tasks({ homeName }) {
       </div>
       <div className="tasks-content">
         <h3 className="tasks-h3">Daily</h3>
-        <DailyTasks homeName={homeName} currentWeekStart={currentWeekStart} />
+        <DailyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
         <h3 className="tasks-h3">Weekly</h3>
         <p>Content for weekly tasks</p>
         <h3 className="tasks-h3">Other</h3>
@@ -73,7 +76,7 @@ export default function Tasks({ homeName }) {
           homeName={homeName}
           isAddTaskOpen={isAddTaskOpen}
           handleCloseAddTask={handleCloseAddTask}
-          currentWeekStart={currentWeekStart}
+          currentWeekISO={currentWeekISO}
         />
       </div>
     </div>

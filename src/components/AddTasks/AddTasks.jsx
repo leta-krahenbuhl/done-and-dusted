@@ -5,7 +5,7 @@ export default function AddTasks({
   homeName,
   isAddTaskOpen,
   handleCloseAddTask,
-  currentWeekStart,
+  currentWeekISO,
 }) {
   const [taskName, setTaskName] = useState("");
   const [minutes, setMinutes] = useState(5);
@@ -47,7 +47,7 @@ export default function AddTasks({
           done,
           homeName,
           dueDate,
-          week: currentWeekStart,
+          week: currentWeekISO,
         }),
       });
 
