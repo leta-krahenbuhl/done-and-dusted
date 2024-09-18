@@ -27,7 +27,6 @@ export default function AddTasks({
     }
 
     const done = false;
-    const dateCreated = new Date();
 
     // To check date formats. May have to unify at some point?
     // console.log("dateCreated:", dateCreated);
@@ -42,7 +41,6 @@ export default function AddTasks({
         body: JSON.stringify({
           taskName,
           minutes,
-          dateCreated,
           repeat,
           done,
           homeName,

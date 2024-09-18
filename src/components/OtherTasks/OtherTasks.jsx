@@ -1,20 +1,20 @@
-import "./WeeklyTasks.scss";
+import "./OtherTasks.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function WeeklyTasks({ homeName, currentWeekISO }) {
-  const [weeklyTasks, setWeeklyTasks] = useState([]);
+export default function OtherTasks({ homeName, currentWeekISO }) {
+  const [otherTasks, setOtherTasks] = useState([]);
   const [error, setError] = useState(null);
 
-  // Get all tasks for this week and with repeat 'weekly'
+  // Get all tasks for this week and with repeat 'other'
   useEffect(() => {
     // Fetch tasks
     axios
-      .get("/api/tasks/weekly", {
+      .get("/api/tasks/other", {
         params: { homeName, currentWeekISO },
       })
       .then((response) => {
-        setWeeklyTasks(response.data);
+        setOtherTasks(response.data);
       })
       .catch((err) => {
         console.error(err);
@@ -25,12 +25,12 @@ export default function WeeklyTasks({ homeName, currentWeekISO }) {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="weekly-tasks-all">
-      {weeklyTasks.length === 0 ? (
-        <p>No weekly tasks found</p>
+    <div className="other-tasks-all">
+      {otherTasks.length === 0 ? (
+        <p>No other tasks found</p>
       ) : (
         <ul>
-          {weeklyTasks.map((task) => (
+          {otherTasks.map((task) => (
             <li key={task.id}>
               {task.taskName} | {task.minutes}mins | {task.dueDate}
             </li>

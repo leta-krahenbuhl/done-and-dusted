@@ -1,0 +1,37 @@
+.daily-tasks-all {
+  background-color: #9a9cd5;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.daily-tasks__column-headers-div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.daily-tasks__column-headers {
+  width: 30%;
+  margin-top: 0rem;
+  font-size: 0.8rem;
+}
+.daily-tasks__list {
+  list-style-type: none;
+  padding: 0; /* Optional: Remove default padding */
+  margin: 0; /* Optional: Remove default margin */
+}
+.daily-tasks__list-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+.daily-tasks__list-item-part {
+  width: 30%;
+  font-weight: 400;
+}
+.daily-tasks__list-item-part--title {
+  font-weight: 700;
+}/*# sourceMappingURL=DailyTasks.css.map */

@@ -1,0 +1,47 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.daily-tasks-all {
+  background-color: $primary-purple3;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.daily-tasks {
+  &__column-headers-div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__column-headers {
+    width: 30%;
+    margin-top: 0rem;
+    font-size: 0.8rem;
+  }
+
+  &__list {
+    list-style-type: none;
+    padding: 0; /* Optional: Remove default padding */
+    margin: 0; /* Optional: Remove default margin */
+  }
+
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary-white;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+
+  &__list-item-part {
+    width: 30%;
+    font-weight: 400;
+
+    &--title {
+      font-weight: 700;
+    }
+  }
+}

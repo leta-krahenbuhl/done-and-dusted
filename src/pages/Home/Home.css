@@ -1,11 +1,11 @@
 .home-none-all {
   flex-direction: column;
-  background-color: #7375c2;
+  background-color: #9a9cd5;
   height: 100%;
 }
 
 .home-none {
-  background-color: #7375c2;
+  background-color: #9a9cd5;
   display: flex;
   justify-content: center;
   align-items: center;

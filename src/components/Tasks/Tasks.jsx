@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import DailyTasks from "../DailyTasks/DailyTasks";
 import AddTasks from "../AddTasks/AddTasks";
 import WeeklyTasks from "../WeeklyTasks/WeeklyTasks";
+import OtherTasks from "../OtherTasks/OtherTasks";
 
 export default function Tasks({ homeName }) {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
@@ -66,11 +67,13 @@ export default function Tasks({ homeName }) {
       <div className="tasks-content">
         <h3 className="tasks-h3">Daily</h3>
         <DailyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
+
         <h3 className="tasks-h3">Weekly</h3>
         <WeeklyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
 
         <h3 className="tasks-h3">Other</h3>
-        <p>Content for other tasks</p>
+        <OtherTasks homeName={homeName} currentWeekISO={currentWeekISO} />
+
         <button className="button-add-tasks" onClick={handleAddTask}>
           ADD TASK
         </button>
