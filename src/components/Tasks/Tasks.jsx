@@ -3,6 +3,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import DailyTasks from "../DailyTasks/DailyTasks";
 import AddTasks from "../AddTasks/AddTasks";
+import WeeklyTasks from "../WeeklyTasks/WeeklyTasks";
 
 export default function Tasks({ homeName }) {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
@@ -66,7 +67,8 @@ export default function Tasks({ homeName }) {
         <h3 className="tasks-h3">Daily</h3>
         <DailyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
         <h3 className="tasks-h3">Weekly</h3>
-        <p>Content for weekly tasks</p>
+        <WeeklyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
+
         <h3 className="tasks-h3">Other</h3>
         <p>Content for other tasks</p>
         <button className="button-add-tasks" onClick={handleAddTask}>

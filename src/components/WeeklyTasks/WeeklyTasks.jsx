@@ -1,20 +1,20 @@
-import "./DailyTasks.scss";
+import "./WeeklyTasks.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function DailyTasks({ homeName, currentWeekISO }) {
-  const [dailyTasks, setDailyTasks] = useState([]);
+export default function WeeklyTasks({ homeName, currentWeekISO }) {
+  const [weeklyTasks, setWeeklyTasks] = useState([]);
   const [error, setError] = useState(null);
 
   // Get all tasks for this week and with repeat 'daily'
   useEffect(() => {
     // Fetch tasks
     axios
-      .get("/api/tasks/daily", {
+      .get("/api/tasks/weekly", {
         params: { homeName, currentWeekISO },
       })
       .then((response) => {
-        setDailyTasks(response.data);
+        setWeeklyTasks(response.data);
       })
       .catch((err) => {
         console.error(err);
@@ -25,14 +25,16 @@ export default function DailyTasks({ homeName, currentWeekISO }) {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="daily-tasks-all">
-      <p>Daily tasks:</p>
-      {dailyTasks.length === 0 ? (
-        <p>No tasks found</p>
+    <div className="weekly-tasks-all">
+      <p>Weekly tasks:</p>
+      {weeklyTasks.length === 0 ? (
+        <p>No weekly tasks found</p>
       ) : (
         <ul>
-          {dailyTasks.map((task) => (
-            <li key={task.id}>{task.taskName}</li>
+          {weeklyTasks.map((task) => (
+            <li key={task.id}>
+              {task.taskName} | {task.minutes}mins | {task.dueDate}
+            </li>
           ))}
         </ul>
       )}
