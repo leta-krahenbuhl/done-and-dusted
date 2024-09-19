@@ -49,8 +49,6 @@ export default function Home() {
     setIsAddHomeOpen(false);
   };
 
-  // console.log("user: ", user);
-
   // If user doesn't have a home yet
   if (!homeName) {
     return (
@@ -61,8 +59,8 @@ export default function Home() {
           <div className="home-none__text-container">
             <h1 className="home-none__header">Welcome to Done&Dusted.</h1>
             <p className="home-none__text-big">
-              You're not part of a home yet. Ask a home admin to add you on
-              their home, or set up your own home to get started.
+              You're not part of a home yet. Set up your own home to get
+              started, or ask a home admin to add you on theirs.
             </p>
             <button className="home-none__button" onClick={handleAddHome}>
               ADD A HOME

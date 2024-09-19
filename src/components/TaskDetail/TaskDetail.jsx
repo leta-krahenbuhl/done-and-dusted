@@ -189,7 +189,11 @@ export default function TaskDetail({
             onSubmit={handleSubmitEditTask}
             className="task-detail-overlay-form"
           >
-            <label for="task-description">Task</label>
+            <h2 className="task-detail-overlay-form__h2">
+              EDIT: {selectedTask?.taskName}
+            </h2>
+
+            <label for="task-description">Task description</label>
             <input
               id="task-description"
               type="text"
@@ -200,7 +204,7 @@ export default function TaskDetail({
               required
             />
 
-            <label for="minutes">Task length</label>
+            <label for="minutes">Time</label>
             <select
               id="minutes"
               name="minutes"
@@ -227,7 +231,7 @@ export default function TaskDetail({
               required
             />
 
-            <label for="repeat">How often is this task due?</label>
+            <label for="repeat">Repeat</label>
             <select
               id="repeat"
               name="repeat"
@@ -239,19 +243,20 @@ export default function TaskDetail({
               <option value="weekly">weekly</option>
               <option value="other">other</option>
             </select>
-
-            <button
-              className="task-detail-overlay__button-submit"
-              type="submit"
-            >
-              SUBMIT
-            </button>
-            <button
-              className="task-detail-overlay__button"
-              onClick={handleCancel}
-            >
-              CANCEL
-            </button>
+            <div className="task-detail-overlay-form__button-container">
+              <button
+                className="task-detail-overlay__button"
+                onClick={handleCancel}
+              >
+                CANCEL
+              </button>
+              <button
+                className="task-detail-overlay-form__button-submit"
+                type="submit"
+              >
+                SUBMIT
+              </button>
+            </div>
           </form>
         )}
         <button

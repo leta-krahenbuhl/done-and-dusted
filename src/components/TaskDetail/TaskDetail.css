@@ -98,4 +98,63 @@
 .task-detail-overlay__button:hover {
   background-color: #fab44b;
   color: #ffffff;
+}
+
+.task-detail-overlay-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.task-detail-overlay-form__h2 {
+  text-align: center;
+  color: #27267e;
+  margin: 0;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.task-detail-overlay-form__input {
+  margin-bottom: 0.8rem;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.task-detail-overlay-form__button {
+  color: #ffffff;
+  width: 210px;
+  height: 50px;
+  background-color: #27267e;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  width: 100%;
+}
+.task-detail-overlay-form__button:hover {
+  background-color: #fab44b;
+  color: #ffffff;
+}
+.task-detail-overlay-form__button-submit {
+  color: #ffffff;
+  width: 210px;
+  height: 50px;
+  background-color: #27267e;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  margin-bottom: 1rem;
+  background-color: #a9e2e4;
+  color: #27267e;
+}
+.task-detail-overlay-form__button-submit:hover {
+  background-color: #fab44b;
+  color: #ffffff;
+}
+.task-detail-overlay-form__button-container {
+  display: flex;
+  gap: 1rem;
 }/*# sourceMappingURL=TaskDetail.css.map */
