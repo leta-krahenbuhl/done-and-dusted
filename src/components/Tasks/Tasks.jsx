@@ -104,6 +104,7 @@ export default function Tasks({ homeName }) {
             ADD TASK
           </button>
         </div>
+
         <AddTasks
           homeName={homeName}
           isAddTaskOpen={isAddTaskOpen}
