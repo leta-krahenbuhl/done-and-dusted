@@ -77,8 +77,33 @@ export default function TaskDetail({
   };
 
   // Handle if task is done
-  const handleDone = () => {
-    console.log("Done!");
+  const handleDone = async () => {
+    try {
+      const response = await axios.patch("/api/tasks/update-done", {
+        done: true,
+        taskId: selectedTask?._id,
+      });
+
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        alert(error.response.data.message);
+      } else {
+        alert(`An error occurred while trying to update this task.`);
+      }
+    }
+
+    // Code to handle form submission goes here
+    setIsEdit(false);
   };
 
   // Delete task
