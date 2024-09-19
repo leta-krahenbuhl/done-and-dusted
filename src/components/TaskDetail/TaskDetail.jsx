@@ -67,7 +67,6 @@ export default function TaskDetail({
       }
     }
 
-    // Code to handle form submission goes here
     setIsEdit(false);
   };
 
@@ -110,8 +109,39 @@ export default function TaskDetail({
   };
 
   // Delete task
-  const handleDeleteTask = () => {
-    console.log("delete clicked");
+  const handleDeleteTask = async () => {
+    console.log("click");
+    const taskId = selectedTask?._id;
+
+    // Error handling
+    if (!taskId) {
+      return alert("Developer error. No task id.");
+    }
+    console.log("taskId: ", taskId); // this works fine!
+
+    try {
+      const response = await axios.delete("/api/tasks/delete", {
+        data: { taskId },
+      });
+
+      if (response.status === 200) {
+        setIsEdit(false);
+        window.location.reload();
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        alert(error.response.data.message);
+      } else {
+        alert(`An error occurred, couldn't delete task.`);
+      }
+    }
   };
 
   if (!isTaskDetailOpen) return null;
