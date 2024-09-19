@@ -13,6 +13,7 @@ export default function TaskDetail({
   const [dueDate, setDueDate] = useState("");
   const [repeat, setRepeat] = useState("");
   const [taskId, setTaskId] = useState("");
+  //   const [done, setDone] = useState("");
 
   // Update state when entering edit mode
   const handleEditClick = () => {
@@ -78,9 +79,11 @@ export default function TaskDetail({
 
   // Handle if task is done
   const handleDone = async () => {
+    const toggledDone = !selectedTask?.done;
+
     try {
       const response = await axios.patch("/api/tasks/update-done", {
-        done: true,
+        done: toggledDone,
         taskId: selectedTask?._id,
       });
 
@@ -157,7 +160,7 @@ export default function TaskDetail({
                 className="task-detail-overlay__button task-detail-overlay__button--done"
                 onClick={handleDone}
               >
-                DONE!
+                {!selectedTask?.done ? "DONE!" : "Mark as undone"}
               </button>
               <div className="task-detail-overlay__button-container">
                 <button

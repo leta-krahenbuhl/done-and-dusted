@@ -37,6 +37,9 @@
   border-radius: 5px;
   padding: 0.5rem;
 }
+.daily-tasks__list-item--done {
+  background-color: #a9e2e4;
+}
 .daily-tasks__list-item:hover {
   background-color: #fab44b;
   cursor: pointer;

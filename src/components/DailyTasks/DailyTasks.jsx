@@ -8,9 +8,11 @@ export default function DailyTasks({
   handleListItemClick,
 }) {
   const [dailyTasksUndone, setDailyTasksUndone] = useState([]);
+  const [dailyTasksDone, setDailyTasksDone] = useState([]);
+
   const [error, setError] = useState(null);
 
-  // Fetch tasks
+  // Get undone tasks
   useEffect(() => {
     axios
       .get("/api/tasks/daily-undone", {
@@ -18,6 +20,21 @@ export default function DailyTasks({
       })
       .then((response) => {
         setDailyTasksUndone(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.response?.data?.message || "An error occurred");
+      });
+  }, [homeName, currentWeekISO]);
+
+  //Get done tasks
+  useEffect(() => {
+    axios
+      .get("/api/tasks/daily-done", {
+        params: { homeName, currentWeekISO },
+      })
+      .then((response) => {
+        setDailyTasksDone(response.data);
       })
       .catch((err) => {
         console.error(err);
@@ -61,7 +78,30 @@ export default function DailyTasks({
               </ul>
             </div>
             <div className="daily-tasks-done">
-              {/* Placeholder for tasks done if needed */}
+              <div className="daily-tasks__column-headers-div">
+                <p className="daily-tasks__column-headers">Task</p>
+                <p className="daily-tasks__column-headers">Duration</p>
+                <p className="daily-tasks__column-headers">Due</p>
+              </div>
+              <ul className="daily-tasks__list">
+                {dailyTasksDone.map((task) => (
+                  <li
+                    key={task.id}
+                    className="daily-tasks__list-item daily-tasks__list-item--done"
+                    onClick={() => handleListItemClick(task)}
+                  >
+                    <div className="daily-tasks__list-item-part daily-tasks__list-item-part--title">
+                      {task.taskName}
+                    </div>
+                    <div className="daily-tasks__list-item-part">
+                      {task.minutes} mins
+                    </div>
+                    <div className="daily-tasks__list-item-part">
+                      {task.dueDate}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </>
         )}
