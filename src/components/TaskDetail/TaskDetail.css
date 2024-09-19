@@ -40,9 +40,62 @@
 .task-detail-overlay__button-close:hover {
   background: #fab44b;
 }
+.task-detail-overlay__text-container {
+  width: 100%;
+  text-align: left;
+}
 .task-detail-overlay__h2 {
+  text-align: center;
   color: #27267e;
   margin: 0;
   padding-top: 1rem;
   padding-bottom: 2rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.task-detail-overlay__attribute-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.task-detail-overlay__task-attribute-legend {
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
+  width: 2rem;
+}
+.task-detail-overlay__task-attribute {
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
+  flex: 1;
+  font-weight: 400;
+}
+.task-detail-overlay__buttons {
+  display: flex;
+  flex-direction: column;
+}
+.task-detail-overlay__button-container {
+  display: flex;
+  gap: 1rem;
+}
+.task-detail-overlay__button {
+  color: #ffffff;
+  width: 210px;
+  height: 50px;
+  background-color: #27267e;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  margin-bottom: 1rem;
+}
+.task-detail-overlay__button--done {
+  background-color: #a9e2e4;
+  color: #27267e;
+  width: 100%;
+  margin-top: 2rem;
+}
+.task-detail-overlay__button:hover {
+  background-color: #fab44b;
+  color: #ffffff;
 }/*# sourceMappingURL=TaskDetail.css.map */

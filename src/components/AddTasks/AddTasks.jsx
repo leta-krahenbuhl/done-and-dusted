@@ -6,6 +6,7 @@ export default function AddTasks({
   isAddTaskOpen,
   handleCloseAddTask,
   currentWeekISO,
+  setIsAddTaskOpen,
 }) {
   const [taskName, setTaskName] = useState("");
   const [minutes, setMinutes] = useState(5);
@@ -13,7 +14,6 @@ export default function AddTasks({
   const [dueDate, setDueDate] = useState();
 
   const handleAddTask = async (e) => {
-    // console.log("add tasks clicked"); //works
     e.preventDefault();
 
     // error handling
@@ -27,10 +27,6 @@ export default function AddTasks({
     }
 
     const done = false;
-
-    // To check date formats. May have to unify at some point?
-    // console.log("dateCreated:", dateCreated);
-    // console.log("formattedDueDate:", formattedDueDate);
 
     try {
       const response = await fetch("/api/tasks", {
@@ -51,7 +47,9 @@ export default function AddTasks({
 
       const data = await response.json();
       if (response.ok) {
-        alert(`Task ${taskName} created successfully`);
+        // alert(`Task ${taskName} created successfully`);
+        setIsAddTaskOpen(false);
+        window.location.reload();
       } else {
         alert(data.message);
       }

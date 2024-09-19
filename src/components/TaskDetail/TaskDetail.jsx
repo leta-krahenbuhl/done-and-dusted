@@ -49,7 +49,7 @@ export default function TaskDetail({
       });
 
       if (response.status === 200) {
-        alert(`Task ${taskName} edited successfully`);
+        window.location.reload();
       } else {
         alert(response.data.message);
       }
@@ -95,37 +95,67 @@ export default function TaskDetail({
         onClick={(e) => e.stopPropagation()}
       >
         {!isEdit ? (
-          <>
+          <div className="task-detail-overlay__text-container">
             <h2 className="task-detail-overlay__h2">
               {selectedTask?.taskName}
             </h2>
-            <p>Duration: {selectedTask?.minutes} mins</p>
-            <p>Due Date: {selectedTask?.dueDate}</p>
-            <button
-              className="task-detail-overlay__button"
-              onClick={handleEditClick}
-            >
-              EDIT
-            </button>
-            <button
-              className="task-detail-overlay__button"
-              onClick={handleDeleteTask}
-            >
-              DELETE
-            </button>
-            <button
-              className="task-detail-overlay__button"
-              onClick={handleCancel}
-            >
-              CANCEL
-            </button>
-            <button
-              className="task-detail-overlay__button"
-              onClick={handleDone}
-            >
-              DONE!
-            </button>
-          </>
+            <div className="task-detail-overlay__task-attributes">
+              <div className="task-detail-overlay__attribute-container">
+                <p className="task-detail-overlay__task-attribute-legend">
+                  Time:
+                </p>
+                <p className="task-detail-overlay__task-attribute">
+                  {selectedTask?.minutes} mins
+                </p>
+              </div>
+
+              <div className="task-detail-overlay__attribute-container">
+                <p className="task-detail-overlay__task-attribute-legend">
+                  Due:
+                </p>
+                <p className="task-detail-overlay__task-attribute">
+                  {selectedTask?.dueDate}
+                </p>
+              </div>
+
+              <div className="task-detail-overlay__attribute-container">
+                <p className="task-detail-overlay__task-attribute-legend">
+                  Repeat:
+                </p>
+                <p className="task-detail-overlay__task-attribute">
+                  {selectedTask?.repeat}
+                </p>
+              </div>
+            </div>
+            <div className="task-detail-overlay__buttons">
+              <button
+                className="task-detail-overlay__button task-detail-overlay__button--done"
+                onClick={handleDone}
+              >
+                DONE!
+              </button>
+              <div className="task-detail-overlay__button-container">
+                <button
+                  className="task-detail-overlay__button"
+                  onClick={handleEditClick}
+                >
+                  EDIT
+                </button>
+                <button
+                  className="task-detail-overlay__button"
+                  onClick={handleDeleteTask}
+                >
+                  DELETE
+                </button>
+                <button
+                  className="task-detail-overlay__button"
+                  onClick={handleCancel}
+                >
+                  CANCEL
+                </button>
+              </div>
+            </div>
+          </div>
         ) : (
           <form
             onSubmit={handleSubmitEditTask}
