@@ -15,14 +15,6 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [user, setUser] = useState("");
 
-  // Get username (=user)
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const { username } = jwtDecode(token);
-  //   setUser(username);
-  //   console.log("user: ", user);
-  // }, []);
-
   // Check if user has home and get it
   useEffect(() => {
     //should this be outside of the useEffect?
