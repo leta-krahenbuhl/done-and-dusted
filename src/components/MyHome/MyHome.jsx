@@ -1,8 +1,12 @@
 import "./MyHome.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import InitialIconByHabitant from "../InitialIconByHabitant/InitialIconByHabitant";
+import AddPeople from "../AddPeople/AddPeople";
 
 export default function MyHome({ homeName }) {
+  const [isAddPeopleOpen, setIsAddPeopleOpen] = useState(false);
+
   const [homeData, setHomeData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -23,6 +27,7 @@ export default function MyHome({ homeName }) {
     fetchData();
   }, [homeName]); // Ensure it runs when homeName changes
 
+  // Error handling
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -32,6 +37,16 @@ export default function MyHome({ homeName }) {
     return <div>Loading...</div>;
   }
 
+  // Show AddPeople overlay
+  const handleAddPeople = () => {
+    setIsAddPeopleOpen(true);
+  };
+
+  // Close AddPeople overlay
+  const handleCloseAddPeople = () => {
+    setIsAddPeopleOpen(false);
+  };
+
   return (
     <div className="my-home-all">
       <div className="my-home-content">
@@ -39,15 +54,20 @@ export default function MyHome({ homeName }) {
         <div className="my-home-content__people-container">
           {homeData.habitants.map((habitant, index) => (
             <div key={index} className="my-home-content__person">
-              <img
-                src={`/image.jpg`}
-                alt={`avatar`}
-                className="my-home-content__person-image"
-              />
+              <InitialIconByHabitant habitant={habitant} />
               <p className="my-home-content__person-name">{habitant}</p>
             </div>
           ))}
         </div>
+        <button className="my-home-content__button" onClick={handleAddPeople}>
+          ADD PEOPLE
+        </button>
+        <AddPeople
+          homeName={homeName}
+          isAddPeopleOpen={isAddPeopleOpen}
+          setIsAddPeopleOpen={setIsAddPeopleOpen}
+          handleCloseAddPeople={handleCloseAddPeople}
+        />
       </div>
     </div>
   );
