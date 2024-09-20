@@ -1,6 +1,7 @@
 import "./TaskDetail.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export default function TaskDetail({
   selectedTask,
@@ -14,6 +15,8 @@ export default function TaskDetail({
   const [repeat, setRepeat] = useState("");
   const [taskId, setTaskId] = useState("");
   //   const [done, setDone] = useState("");
+
+  //   console.log("selectedTask: ", selectedTask); // works
 
   // Update state when entering edit mode
   const handleEditClick = () => {
@@ -79,11 +82,37 @@ export default function TaskDetail({
   // Handle if task is done
   const handleDone = async () => {
     const toggledDone = !selectedTask?.done;
+    let doneBy = selectedTask.doneBy;
+
+    // Retrieve the token from local storage (to get username)
+    const token = localStorage.getItem("token");
+
+    // Decode the token to get the username
+    let username = "";
+    if (token) {
+      const decoded = jwtDecode(token);
+      username = decoded.username; // Access the username from the decoded token
+    }
+
+    if (!selectedTask?.doneBy) {
+      return alert(
+        "Developer error. Old task, no 'doneBy'. Task not updated. Delete this task! "
+      );
+    }
+
+    if (selectedTask?.doneBy === "not-done") {
+      doneBy = username;
+    }
+
+    if (selectedTask?.doneBy !== "not-done") {
+      doneBy = "not-done";
+    }
 
     try {
       const response = await axios.patch("/api/tasks/update-done", {
         done: toggledDone,
         taskId: selectedTask?._id,
+        doneBy,
       });
 
       if (response.status === 200) {

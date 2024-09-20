@@ -56,9 +56,3 @@ export default function OtherTasks({ homeName, currentWeekISO }) {
     </div>
   );
 }
-
-//     // To check if tasks object empty
-//     if (Object.keys(tasks).length === 0) {
-//   }
-
-// If no tasks at all, render sth different?

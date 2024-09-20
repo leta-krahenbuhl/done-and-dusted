@@ -64,6 +64,8 @@ export default function Tasks({ homeName }) {
     setIsTaskDetailOpen(true);
   };
 
+  // console.log("selectedTask: ", selectedTask); // works
+
   // console.log("task: ", selectedTask); //works
   // console.log("isTaskDetailOpen: ", isTaskDetailOpen);  //works
 

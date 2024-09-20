@@ -27,6 +27,7 @@ export default function AddTasks({
     }
 
     const done = false;
+    const doneBy = "not-done";
 
     try {
       const response = await fetch("/api/tasks", {
@@ -41,6 +42,7 @@ export default function AddTasks({
           done,
           homeName,
           dueDate,
+          doneBy,
           week: currentWeekISO,
         }),
       });
