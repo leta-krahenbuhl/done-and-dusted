@@ -39,9 +39,9 @@ export default function TaskDetail({
     if (!taskId) {
       return alert("Developer error. No task id.");
     }
-    console.log("taskId: ", taskId);
-    console.log("selectedTask: ", selectedTask);
-    console.log("repeat: ", repeat);
+    // console.log("taskId: ", taskId);
+    // console.log("selectedTask: ", selectedTask);
+    // console.log("repeat: ", repeat);
 
     try {
       const response = await axios.patch("/api/tasks/edit", {

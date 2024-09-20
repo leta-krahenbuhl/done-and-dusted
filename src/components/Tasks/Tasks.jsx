@@ -74,6 +74,8 @@ export default function Tasks({ homeName }) {
     setIsTaskDetailOpen(false);
   };
 
+  // console.log("user: ", user); // WOrks
+
   return (
     <div className="tasks-all">
       <div className="tasks-header">
@@ -94,6 +96,7 @@ export default function Tasks({ homeName }) {
           homeName={homeName}
           currentWeekISO={currentWeekISO}
           handleListItemClick={handleListItemClick}
+          selectedTask={selectedTask}
         />
 
         <h3 className="tasks-content__h3">Weekly</h3>

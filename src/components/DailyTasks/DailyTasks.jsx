@@ -1,6 +1,7 @@
 import "./DailyTasks.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import InitialIcon from "../InitialIcon/InitialIcon";
 
 export default function DailyTasks({
   homeName,
@@ -9,7 +10,6 @@ export default function DailyTasks({
 }) {
   const [dailyTasksUndone, setDailyTasksUndone] = useState([]);
   const [dailyTasksDone, setDailyTasksDone] = useState([]);
-
   const [error, setError] = useState(null);
 
   // Get undone tasks
@@ -48,7 +48,7 @@ export default function DailyTasks({
     <>
       <div className="daily-tasks-all">
         {dailyTasksUndone.length === 0 ? (
-          <p className="daily-tasks-all__text">No daily tasks found</p>
+          <p className="daily-tasks-all__text">No daily tasks</p>
         ) : (
           <>
             <div className="daily-tasks">
@@ -98,6 +98,9 @@ export default function DailyTasks({
                     </div>
                     <div className="daily-tasks__list-item-part">
                       {task.dueDate}
+                    </div>
+                    <div className="daily-tasks__icon" id="daily-tasks__icon">
+                      <InitialIcon username={task.doneBy} />
                     </div>
                   </li>
                 ))}

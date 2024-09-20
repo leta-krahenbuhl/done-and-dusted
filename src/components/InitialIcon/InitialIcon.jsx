@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function InitialIcon({ username }) {
   const [colour, setColour] = useState("");
-  const [data, setData] = useState();
+  // const [data, setData] = useState();
 
   // Get all user's colour
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function InitialIcon({ username }) {
       })
       .then((response) => {
         const userData = response.data[0]; // Access the first element of the array
-        setData(userData);
+        // setData(userData);
         setColour(userData.colour); // Set the colour state
       })
       .catch((err) => {

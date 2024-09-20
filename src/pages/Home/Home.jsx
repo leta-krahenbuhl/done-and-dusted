@@ -8,6 +8,7 @@ import axios from "axios"; // Import axios for making HTTP requests
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Tasks from "../../components/Tasks/Tasks";
+import MyHome from "../../components/MyHome/MyHome";
 
 export default function Home() {
   const [isAddHomeOpen, setIsAddHomeOpen] = useState(false);
@@ -95,7 +96,7 @@ export default function Home() {
             <h2>Week 2</h2>
           </TabPanel>
           <TabPanel>
-            <h2>Week 3</h2>
+            <MyHome homeName={homeName} />
           </TabPanel>
         </Tabs>
       </article>

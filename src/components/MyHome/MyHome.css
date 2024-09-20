@@ -1,0 +1,17 @@
+.home-all {
+  border-radius: 5px;
+}
+
+.my-home-content__h3 {
+  margin-top: 6rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.2rem;
+  font-size: 1.2rem;
+}
+.my-home-content__people-container {
+  display: flex;
+  gap: 1rem;
+  background-color: #9a9cd5;
+  padding: 1rem;
+  border-radius: 5px;
+}/*# sourceMappingURL=MyHome.css.map */
