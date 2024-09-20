@@ -8,10 +8,9 @@ export default function AddPeople({
   setIsAddPeopleOpen,
   handleCloseAddPeople,
 }) {
-  //   const [admins, setAdmins] = useState([]);
   const [newHabitant, setNewHabitant] = useState("");
 
-  // Edit task form submit
+  // Add habitant
   const handleAddPeople = async (event) => {
     event.preventDefault();
 
@@ -31,7 +30,7 @@ export default function AddPeople({
       if (response.status === 200) {
         alert(`${newHabitant} added to ${homeName} successfully.`);
         setIsAddPeopleOpen(false);
-        // window.location.reload();
+        window.location.reload();
       } else {
         alert(response.data.message);
       }

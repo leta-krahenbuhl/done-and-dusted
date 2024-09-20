@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import InitialIconByHabitant from "../InitialIconByHabitant/InitialIconByHabitant";
 import AddPeople from "../AddPeople/AddPeople";
+import DeletePeople from "../DeletePeople/DeletePeople";
 
 export default function MyHome({ homeName }) {
   const [isAddPeopleOpen, setIsAddPeopleOpen] = useState(false);
+  const [isDeletePeopleOpen, setIsDeletePeopleOpen] = useState(false);
 
   const [homeData, setHomeData] = useState(null);
   const [error, setError] = useState(null);
@@ -47,6 +49,16 @@ export default function MyHome({ homeName }) {
     setIsAddPeopleOpen(false);
   };
 
+  // Show AddPeople overlay
+  const handleDeletePeople = () => {
+    setIsDeletePeopleOpen(true);
+  };
+
+  // Close AddPeople overlay
+  const handleCloseDeletePeople = () => {
+    setIsDeletePeopleOpen(false);
+  };
+
   return (
     <div className="my-home-all">
       <div className="my-home-content">
@@ -59,9 +71,22 @@ export default function MyHome({ homeName }) {
             </div>
           ))}
         </div>
+        <button
+          className="my-home-content__button"
+          onClick={handleDeletePeople}
+        >
+          DELETE PEOPLE
+        </button>
         <button className="my-home-content__button" onClick={handleAddPeople}>
           ADD PEOPLE
         </button>
+
+        <DeletePeople
+          homeName={homeName}
+          isDeletePeopleOpen={isDeletePeopleOpen}
+          setIsDeletePeopleOpen={setIsDeletePeopleOpen}
+          handleCloseDeletePeople={handleCloseDeletePeople}
+        />
         <AddPeople
           homeName={homeName}
           isAddPeopleOpen={isAddPeopleOpen}
