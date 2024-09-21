@@ -28,20 +28,9 @@ export default function AddPeople({
         alert(`${newHabitant} added to ${homeName} successfully.`);
         setIsAddPeopleOpen(false);
         window.location.reload();
-      } else {
-        alert(response.data.message);
       }
     } catch (error) {
-      console.error("Error:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        alert(error.response.data.message);
-      } else {
-        alert(`An error occurred while editing ${newHabitant}.`);
-      }
+      alert(error.message);
     }
   };
 

@@ -2,6 +2,7 @@ import "./DailyTasks.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InitialIcon from "../InitialIcon/InitialIcon";
+import { fetchDailyTasksUndone } from "../../utils/axios";
 
 export default function DailyTasks({
   homeName,
@@ -14,22 +15,19 @@ export default function DailyTasks({
 
   const dailyTaskComponent = true;
 
-  // Get undone tasks
+  // Get daily undone tasks
   useEffect(() => {
-    axios
-      .get("/api/tasks/daily-undone", {
-        params: { homeName, currentWeekISO },
-      })
-      .then((response) => {
-        setDailyTasksUndone(response.data);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(err.response?.data?.message || "An error occurred");
-      });
+    fetchDailyTasksUndone(
+      homeName,
+      currentWeekISO,
+      setDailyTasksUndone,
+      setError
+    );
   }, [homeName, currentWeekISO]);
 
-  //Get done tasks
+  if (error) return <p>Error: {error}</p>;
+
+  //Get daily done tasks
   useEffect(() => {
     axios
       .get("/api/tasks/daily-done", {
