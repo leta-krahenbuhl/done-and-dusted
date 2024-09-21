@@ -20,4 +20,25 @@
     padding: 1rem;
     border-radius: 5px;
   }
+
+  &__person {
+    text-align: center;
+  }
+
+  &__button-container {
+    text-align: right;
+  }
+
+  &__person-name {
+    margin-top: 0.5rem;
+  }
+
+  &__button {
+    @include button2;
+    margin: 1rem 0 0 1rem;
+  }
+
+  &__button:hover {
+    @include button2-hover;
+  }
 }

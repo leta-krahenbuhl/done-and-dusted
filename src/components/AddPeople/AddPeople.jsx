@@ -53,23 +53,35 @@ export default function AddPeople({
   if (!isAddPeopleOpen) return null;
 
   return (
-    <div className="add-home-overlay" onClick={handleCloseAddPeople}>
+    <div className="add-people-overlay" onClick={handleCloseAddPeople}>
       <div
-        className="add-home-overlay__content"
+        className="add-people-overlay__content"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="add-home-overlay__button-close"
+          className="add-people-overlay__button-close"
           onClick={handleCloseAddPeople}
         >
           &times;
         </button>
-        <h1 className="add-home-overlay__h1">Add a new habitant</h1>
-        <form className="add-home-overlay-form" onSubmit={handleAddPeople}>
+        <h1 className="add-people-overlay__h1">Add a new habitant</h1>
+        <div className="add-people-overlay__text-container">
+          <p className="add-people-overlay__text">
+            To add a new person to your home they have to sign up first.
+          </p>
+          <p className="add-people-overlay__text">
+            Then, enter their username below to add them.
+          </p>
+        </div>
+        <form className="add-people-overlay-form" onSubmit={handleAddPeople}>
+          <label htmlFor="username" className="add-people-overlay-form__label">
+            Enter the username of the habitant you would like to add
+          </label>
           <input
+            id="username"
             type="text"
             placeholder="Username of person you'd like to add"
-            className="add-home-overlay-form__input"
+            className="add-people-overlay-form__input"
             value={newHabitant}
             onChange={(e) => setNewHabitant(e.target.value)}
             required
@@ -77,7 +89,7 @@ export default function AddPeople({
 
           <button
             type="submit"
-            className="add-home-overlay-form__button"
+            className="add-people-overlay-form__button"
             onClick={handleAddPeople}
           >
             Submit

@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center; /* Center items vertically */
-  height: 4rem;
+  height: 6rem;
   background-color: #6365b9;
-  padding: 1rem;
+  padding: 0 1rem 0 1rem;
 }
 .header__logo {
   height: 4rem;
@@ -20,6 +20,9 @@
   flex-direction: row; /* Place items side by side */
   align-items: center; /* Center items vertically */
   font-size: 1.5rem;
+}
+.header__greeting {
+  margin-right: 1rem;
 }
 .header__avatar {
   height: 4rem;

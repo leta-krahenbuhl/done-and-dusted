@@ -5,9 +5,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center; /* Center items vertically */
-  height: 4rem;
+  height: 6rem;
   background-color: $primary-purple1;
-  padding: 1rem;
+  padding: 0 1rem 0 1rem;
 
   &__logo {
     height: 4rem;
@@ -25,6 +25,10 @@
     flex-direction: row; /* Place items side by side */
     align-items: center; /* Center items vertically */
     font-size: 1.5rem;
+  }
+
+  &__greeting {
+    margin-right: 1rem;
   }
 
   &__avatar {

@@ -7,8 +7,18 @@
   align-items: center;
   font-size: 3.8rem;
   font-weight: 700;
-  border-radius: 50%; //
+  border-radius: 50%;
   height: 4.2rem;
   width: 4.2rem;
-  margin-left: 1rem;
+}
+
+.initial-icon-small {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
 }

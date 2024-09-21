@@ -71,16 +71,17 @@ export default function MyHome({ homeName }) {
             </div>
           ))}
         </div>
-        <button
-          className="my-home-content__button"
-          onClick={handleDeletePeople}
-        >
-          DELETE PEOPLE
-        </button>
-        <button className="my-home-content__button" onClick={handleAddPeople}>
-          ADD PEOPLE
-        </button>
-
+        <div className="my-home-content__button-container">
+          <button
+            className="my-home-content__button"
+            onClick={handleDeletePeople}
+          >
+            DELETE PEOPLE
+          </button>
+          <button className="my-home-content__button" onClick={handleAddPeople}>
+            ADD PEOPLE
+          </button>
+        </div>
         <DeletePeople
           homeName={homeName}
           isDeletePeopleOpen={isDeletePeopleOpen}

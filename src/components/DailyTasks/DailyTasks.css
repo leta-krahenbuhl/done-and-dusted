@@ -52,41 +52,4 @@
 .daily-tasks__list-item-part--title {
   font-weight: 700;
   font-size: 1rem;
-}
-
-.daily-tasks-done {
-  flex: 1;
-}
-.daily-tasks-done__column-headers-div {
-  display: flex;
-  width: 100%;
-  height: 1.5rem;
-  justify-content: space-between;
-}
-.daily-tasks-done__column-headers {
-  width: 30%;
-  margin-top: 0rem;
-  font-size: 0.8rem;
-}
-.daily-tasks-done__list {
-  list-style-type: none;
-  padding: 0; /* Optional: Remove default padding */
-  margin: 0; /* Optional: Remove default margin */
-}
-.daily-tasks-done__list-item {
-  display: flex;
-  justify-content: space-between;
-  background-color: #ffffff;
-  margin-bottom: 0.5rem;
-  border-radius: 5px;
-  padding: 0.5rem;
-}
-.daily-tasks-done__list-item-part {
-  width: 30%;
-  font-weight: 400;
-  font-size: 0.9rem;
-}
-.daily-tasks-done__list-item-part--title {
-  font-weight: 700;
-  font-size: 1rem;
 }/*# sourceMappingURL=DailyTasks.css.map */

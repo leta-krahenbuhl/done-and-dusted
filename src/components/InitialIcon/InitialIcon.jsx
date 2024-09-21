@@ -2,9 +2,8 @@ import "./InitialIcon.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function InitialIcon({ username }) {
+export default function InitialIcon({ username, dailyTaskComponent }) {
   const [colour, setColour] = useState("");
-  // const [data, setData] = useState();
 
   // Get all user's colour
   useEffect(() => {
@@ -15,7 +14,6 @@ export default function InitialIcon({ username }) {
       })
       .then((response) => {
         const userData = response.data[0]; // Access the first element of the array
-        // setData(userData);
         setColour(userData.colour); // Set the colour state
       })
       .catch((err) => {
@@ -28,7 +26,10 @@ export default function InitialIcon({ username }) {
   const userInitial = username ? username.charAt(0).toUpperCase() : "";
 
   return (
-    <div className="initial-icon" style={{ backgroundColor: colour || "pink" }}>
+    <div
+      className={dailyTaskComponent ? "initial-icon-small" : "initial-icon"}
+      style={{ backgroundColor: colour || "pink" }}
+    >
       {userInitial}
     </div>
   );

@@ -12,6 +12,8 @@ export default function DailyTasks({
   const [dailyTasksDone, setDailyTasksDone] = useState([]);
   const [error, setError] = useState(null);
 
+  const dailyTaskComponent = true;
+
   // Get undone tasks
   useEffect(() => {
     axios
@@ -77,7 +79,7 @@ export default function DailyTasks({
                 ))}
               </ul>
             </div>
-            <div className="daily-tasks-done">
+            <div className="daily-tasks">
               <div className="daily-tasks__column-headers-div">
                 <p className="daily-tasks__column-headers">Task</p>
                 <p className="daily-tasks__column-headers">Duration</p>
@@ -99,8 +101,11 @@ export default function DailyTasks({
                     <div className="daily-tasks__list-item-part">
                       {task.dueDate}
                     </div>
-                    <div className="daily-tasks__icon" id="daily-tasks__icon">
-                      <InitialIcon username={task.doneBy} />
+                    <div className="daily-tasks__icon">
+                      <InitialIcon
+                        username={task.doneBy}
+                        dailyTaskComponent={dailyTaskComponent}
+                      />
                     </div>
                   </li>
                 ))}

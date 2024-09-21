@@ -1,0 +1,81 @@
+.add-people-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.add-people-overlay__content {
+  position: relative;
+  background: white;
+  padding: 1rem;
+  border-radius: 5px;
+  width: 30rem;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add-people-overlay__button-close {
+  position: absolute;
+  width: 2.5rem;
+  color: #ffffff;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: #27267e;
+  font-size: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.add-people-overlay__button-close:hover {
+  background: #fab44b;
+}
+.add-people-overlay__h1 {
+  color: #27267e;
+  margin: 1 0 1 0;
+  padding: 3rem 0 0 0;
+}
+.add-people-overlay__text-container {
+  text-align: left;
+  width: 100%;
+}
+.add-people-overlay__text {
+  font-weight: 400;
+}
+
+.add-people-overlay-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.add-people-overlay-form__label {
+  margin: 1rem 0 0.5rem 0;
+}
+.add-people-overlay-form__input {
+  margin: 0rem 0 1rem 0;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.add-people-overlay-form__button {
+  color: #ffffff;
+  width: 210px;
+  height: 50px;
+  background-color: #27267e;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  width: 100%;
+}
+.add-people-overlay-form__button:hover {
+  background-color: #fab44b;
+  color: #ffffff;
+}/*# sourceMappingURL=AddPeople.css.map */

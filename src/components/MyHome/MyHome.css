@@ -14,4 +14,29 @@
   background-color: #9a9cd5;
   padding: 1rem;
   border-radius: 5px;
+}
+.my-home-content__person {
+  text-align: center;
+}
+.my-home-content__button-container {
+  text-align: right;
+}
+.my-home-content__person-name {
+  margin-top: 0.5rem;
+}
+.my-home-content__button {
+  color: #ffffff;
+  width: 210px;
+  height: 50px;
+  background-color: #27267e;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  margin: 1rem 0 0 1rem;
+}
+.my-home-content__button:hover {
+  background-color: #fab44b;
+  color: #ffffff;
 }/*# sourceMappingURL=MyHome.css.map */
