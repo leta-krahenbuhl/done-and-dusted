@@ -1,6 +1,6 @@
 import "./AddPeople.scss";
 import { useState } from "react";
-import axios from "axios";
+import { addHabitantToHome } from "../../utils/axios";
 
 export default function AddPeople({
   homeName,
@@ -10,7 +10,7 @@ export default function AddPeople({
 }) {
   const [newHabitant, setNewHabitant] = useState("");
 
-  // Add habitant
+  // Add habitant to home
   const handleAddPeople = async (event) => {
     event.preventDefault();
 
@@ -22,10 +22,7 @@ export default function AddPeople({
     }
 
     try {
-      const response = await axios.patch("/api/homes/add-habitant", {
-        newHabitant,
-        homeName,
-      });
+      const response = await addHabitantToHome(newHabitant, homeName);
 
       if (response.status === 200) {
         alert(`${newHabitant} added to ${homeName} successfully.`);
@@ -43,11 +40,9 @@ export default function AddPeople({
       ) {
         alert(error.response.data.message);
       } else {
-        alert(`An error occurred while editing ${taskName}.`);
+        alert(`An error occurred while editing ${newHabitant}.`);
       }
     }
-
-    setIsEdit(false);
   };
 
   if (!isAddPeopleOpen) return null;
@@ -87,11 +82,7 @@ export default function AddPeople({
             required
           />
 
-          <button
-            type="submit"
-            className="add-people-overlay-form__button"
-            onClick={handleAddPeople}
-          >
+          <button type="submit" className="add-people-overlay-form__button">
             Submit
           </button>
         </form>

@@ -1,27 +1,21 @@
 import "./WeeklyTasks.scss";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchWeeklyTasks } from "../../utils/axios";
 
-export default function WeeklyTasks({ homeName, currentWeekISO }) {
+export default function WeeklyTasks({
+  homeName,
+  currentWeekISO,
+  handleListItemClick,
+}) {
   const [weeklyTasks, setWeeklyTasks] = useState([]);
   const [error, setError] = useState(null);
 
-  // Get all tasks for this week and with repeat 'weekly'
+  // Fetch tasks for this week
   useEffect(() => {
-    // Fetch tasks
-    axios
-      .get("/api/tasks/weekly", {
-        params: { homeName, currentWeekISO },
-      })
-      .then((response) => {
-        setWeeklyTasks(response.data);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(err.response?.data?.message || "An error occurred");
-      });
+    fetchWeeklyTasks(homeName, currentWeekISO, setError, setWeeklyTasks);
   }, [homeName, currentWeekISO]);
 
+  // If there's an error, display it
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -33,17 +27,20 @@ export default function WeeklyTasks({ homeName, currentWeekISO }) {
           <div className="weekly-tasks__column-headers-div">
             <p className="weekly-tasks__column-headers">Task</p>
             <p className="weekly-tasks__column-headers">Duration</p>
-
             <p className="weekly-tasks__column-headers">Due</p>
           </div>
           <ul className="weekly-tasks__list">
             {weeklyTasks.map((task) => (
-              <li key={task.id} className="weekly-tasks__list-item">
+              <li
+                key={task.id}
+                className="weekly-tasks__list-item"
+                onClick={() => handleListItemClick(task)} // Use the passed handler for clicks
+              >
                 <div className="weekly-tasks__list-item-part weekly-tasks__list-item-part--title">
                   {task.taskName}
                 </div>
                 <div className="weekly-tasks__list-item-part">
-                  {task.minutes}mins
+                  {task.minutes} mins
                 </div>
                 <div className="weekly-tasks__list-item-part">
                   {task.dueDate}
@@ -56,9 +53,3 @@ export default function WeeklyTasks({ homeName, currentWeekISO }) {
     </div>
   );
 }
-
-//     // To check if tasks object empty
-//     if (Object.keys(tasks).length === 0) {
-//   }
-
-// If no tasks at all, render sth different?

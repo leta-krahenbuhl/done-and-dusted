@@ -11,8 +11,6 @@ export default function Tasks({ homeName }) {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
   const [isTaskDetailOpen, setIsTaskDetailOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-
-  // const [tasks, setTasks] = useState({});
   const [currentWeekStart, setCurrentWeekStart] = useState(
     getMonday(new Date())
   );
@@ -59,22 +57,14 @@ export default function Tasks({ homeName }) {
 
   // handle list item click
   const handleListItemClick = (task) => {
-    // console.log("handleListItemClick clicked"); // works
     setSelectedTask(task);
     setIsTaskDetailOpen(true);
   };
-
-  // console.log("selectedTask: ", selectedTask); // works
-
-  // console.log("task: ", selectedTask); //works
-  // console.log("isTaskDetailOpen: ", isTaskDetailOpen);  //works
 
   // close list item details
   const closeTaskDetail = () => {
     setIsTaskDetailOpen(false);
   };
-
-  // console.log("user: ", user); // WOrks
 
   return (
     <div className="tasks-all">
@@ -96,11 +86,14 @@ export default function Tasks({ homeName }) {
           homeName={homeName}
           currentWeekISO={currentWeekISO}
           handleListItemClick={handleListItemClick}
-          selectedTask={selectedTask}
         />
 
         <h3 className="tasks-content__h3">Weekly</h3>
-        <WeeklyTasks homeName={homeName} currentWeekISO={currentWeekISO} />
+        <WeeklyTasks
+          homeName={homeName}
+          currentWeekISO={currentWeekISO}
+          handleListItemClick={handleListItemClick}
+        />
 
         <h3 className="tasks-content__h3">Other</h3>
         <OtherTasks homeName={homeName} currentWeekISO={currentWeekISO} />

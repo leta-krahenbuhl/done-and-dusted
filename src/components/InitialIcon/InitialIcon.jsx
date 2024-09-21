@@ -9,7 +9,7 @@ export default function InitialIcon({ username, dailyTaskComponent }) {
   useEffect(() => {
     // Fetch user
     axios
-      .get("/api/users/colour", {
+      .get("/api/users/get-one", {
         params: { username },
       })
       .then((response) => {

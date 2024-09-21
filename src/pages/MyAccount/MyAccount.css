@@ -1,8 +1,27 @@
 .account {
-  background-color: #9a9cd5;
+  background-color: #7375c2;
+  color: #27267e;
+  font-weight: 700;
+  padding-top: 7rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: calc(100% - 6rem);
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+.account__bottom {
+  background-color: #ffffff;
+  color: #27267e;
+  font-weight: 400;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  width: 100%;
+}
+.account__text {
+  margin: 0rem;
+  font-size: 0.9rem;
 }/*# sourceMappingURL=MyAccount.css.map */

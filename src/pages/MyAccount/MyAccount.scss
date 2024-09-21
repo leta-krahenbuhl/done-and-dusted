@@ -2,13 +2,33 @@
 @use "../../styles/partials/mixins" as *;
 
 .account {
-  background-color: $primary-purple3;
+  background-color: $primary-purple4;
+  color: $primary-font1;
+  font-weight: 700;
+  padding-top: 7rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: calc(100% - 6rem);
+  padding-left: 5rem;
+  padding-right: 5rem;
 
-  &__top {
+  &__bottom {
+    background-color: $primary-white;
+    color: $primary-font1;
+    font-weight: 400;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+
+    width: 100%;
+  }
+
+  &__text {
+    margin: 0rem;
+    font-size: 0.9rem;
   }
 }
