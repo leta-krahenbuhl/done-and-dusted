@@ -161,3 +161,38 @@ export const fetchDailyTasksDone = async (
     }
   }
 };
+
+// Add task
+export const addTask = async (
+  taskName,
+  minutes,
+  repeat,
+  homeName,
+  dueDate,
+  currentWeekISO
+) => {
+  const done = false;
+  const doneBy = "not-done";
+
+  try {
+    const response = await axios.post("/api/tasks/add-one", {
+      taskName,
+      minutes,
+      repeat,
+      done,
+      homeName,
+      dueDate,
+      doneBy,
+      week: currentWeekISO,
+    });
+
+    if (response.status === 201) {
+      return response;
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error("An error occurred while creating the task");
+  }
+};

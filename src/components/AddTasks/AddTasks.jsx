@@ -1,5 +1,6 @@
 import "./AddTasks.scss";
 import { useState } from "react";
+import { addTask } from "../../utils/axios";
 
 export default function AddTasks({
   homeName,
@@ -13,6 +14,7 @@ export default function AddTasks({
   const [repeat, setRepeat] = useState("daily");
   const [dueDate, setDueDate] = useState();
 
+  // Add task
   const handleAddTask = async (e) => {
     e.preventDefault();
 
@@ -26,37 +28,25 @@ export default function AddTasks({
       return alert("Please choose a due date.");
     }
 
-    const done = false;
-    const doneBy = "not-done";
-
     try {
-      const response = await fetch("/api/tasks", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          taskName,
-          minutes,
-          repeat,
-          done,
-          homeName,
-          dueDate,
-          doneBy,
-          week: currentWeekISO,
-        }),
-      });
+      const response = await addTask(
+        taskName,
+        minutes,
+        repeat,
+        homeName,
+        dueDate,
+        currentWeekISO
+      );
 
-      const data = await response.json();
-      if (response.ok) {
-        // alert(`Task ${taskName} created successfully`);
+      if (response.status === 201) {
+        console.log("1");
+        alert(`Task '${taskName}' added to successfully.`);
+        console.log("2");
         setIsAddTaskOpen(false);
         window.location.reload();
-      } else {
-        alert(data.message);
       }
     } catch (error) {
-      console.error("Error:", error);
+      alert(error.message);
     }
   };
 
