@@ -196,3 +196,22 @@ export const addTask = async (
     throw new Error("An error occurred while creating the task");
   }
 };
+
+// Delete habitant
+export const deleteHabitant = async (habitantToDelete, homeName) => {
+  try {
+    const response = await axios.patch("/api/homes/delete-habitant", {
+      habitantToDelete,
+      homeName,
+    });
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error("An error occurred while deleting the habitant");
+  }
+};

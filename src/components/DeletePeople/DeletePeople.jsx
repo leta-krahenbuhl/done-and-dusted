@@ -1,6 +1,6 @@
 import "./DeletePeople.scss";
 import { useState } from "react";
-import axios from "axios";
+import { deleteHabitant } from "../../utils/axios";
 
 export default function DeletePeople({
   homeName,
@@ -22,32 +22,16 @@ export default function DeletePeople({
     }
 
     try {
-      const response = await axios.patch("/api/homes/delete-habitant", {
-        habitantToDelete,
-        homeName,
-      });
+      const response = await deleteHabitant(habitantToDelete, homeName);
 
       if (response.status === 200) {
         alert(`${habitantToDelete} deleted from ${homeName} successfully.`);
         setIsDeletePeopleOpen(false);
         window.location.reload();
-      } else {
-        alert(response.data.message);
       }
     } catch (error) {
-      console.error("Error:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        alert(error.response.data.message);
-      } else {
-        alert(`An error occurred while trying to delete ${habitantToDelete}.`);
-      }
+      alert(error.message);
     }
-
-    isDeletePeopleOpen(false);
   };
 
   if (!isDeletePeopleOpen) return null;

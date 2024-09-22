@@ -35,7 +35,7 @@ export default function DailyTasks({
   return (
     <>
       <div className="daily-tasks-all">
-        {dailyTasksUndone.length === 0 && dailyTasksDone === 0 ? (
+        {dailyTasksUndone.length === 0 && dailyTasksDone.length === 0 ? (
           <p className="daily-tasks-all__text">No daily tasks</p>
         ) : (
           <>
