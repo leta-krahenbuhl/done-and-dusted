@@ -130,3 +130,34 @@ export const fetchDailyTasksUndone = async (
     }
   }
 };
+
+// Get daily done tasks
+export const fetchDailyTasksDone = async (
+  homeName,
+  currentWeekISO,
+  setDailyTasksDone,
+  setError
+) => {
+  try {
+    const response = await axios.get("/api/tasks/daily-done", {
+      params: { homeName, currentWeekISO },
+    });
+
+    setDailyTasksDone(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch daily undone tasks."
+      );
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
