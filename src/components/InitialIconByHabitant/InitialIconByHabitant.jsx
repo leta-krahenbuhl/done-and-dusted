@@ -14,6 +14,10 @@ export default function InitialIconByHabitant({ habitant }) {
   // Get the initial of the username
   const userInitial = habitant ? habitant.charAt(0).toUpperCase() : "";
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <>
       <div
@@ -22,7 +26,6 @@ export default function InitialIconByHabitant({ habitant }) {
       >
         {userInitial}
       </div>
-      <div>{error ? <p>{error}</p> : <p>Colour: {colour}</p>}</div>
     </>
   );
 }

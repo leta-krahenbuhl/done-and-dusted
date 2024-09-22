@@ -62,7 +62,7 @@ export default function MyHome({ homeName }) {
   return (
     <div className="my-home-all">
       <div className="my-home-content">
-        <h3 className="my-home-content__h3">People</h3>
+        <h3 className="my-home-content__h3">Habitants</h3>
         <div className="my-home-content__people-container">
           {homeData.habitants.map((habitant, index) => (
             <div key={index} className="my-home-content__person">

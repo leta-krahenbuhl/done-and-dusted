@@ -45,7 +45,9 @@ export const handleAddHome = async (
   habitants,
   setError
 ) => {
-  getUsernameFromToken(setAdmins, setHabitants, admins, habitants);
+  const username = getUsernameFromToken();
+  setAdmins(admins.push(username));
+  setHabitants(habitants.push(username));
 
   if (!homeName) {
     return alert("Please enter a name for your home.");
