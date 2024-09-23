@@ -1,8 +1,8 @@
 import "./TaskDetail.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import { editTask } from "../../utils/axios";
+import { editTask, updateDone } from "../../utils/axios";
+import { getUsernameFromToken } from "../../utils/user";
 
 export default function TaskDetail({
   selectedTask,
@@ -61,15 +61,7 @@ export default function TaskDetail({
     const toggledDone = !selectedTask?.done;
     let doneBy = selectedTask.doneBy;
 
-    // Retrieve the token from local storage (to get username)
-    const token = localStorage.getItem("token");
-
-    // Decode the token to get the username
-    let username = "";
-    if (token) {
-      const decoded = jwtDecode(token);
-      username = decoded.username; // Access the username from the decoded token
-    }
+    const username = getUsernameFromToken();
 
     if (!selectedTask?.doneBy) {
       return alert(
@@ -85,12 +77,11 @@ export default function TaskDetail({
       doneBy = "not-done";
     }
 
+    const done = toggledDone;
+    const taskId = selectedTask?._id;
+
     try {
-      const response = await axios.patch("/api/tasks/update-done", {
-        done: toggledDone,
-        taskId: selectedTask?._id,
-        doneBy,
-      });
+      const response = await updateDone(done, taskId, doneBy);
 
       if (response.status === 200) {
         window.location.reload();

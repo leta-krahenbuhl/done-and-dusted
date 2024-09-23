@@ -162,6 +162,26 @@ export const editTask = async (taskName, minutes, repeat, dueDate, taskId) => {
   }
 };
 
+// Update done/undone property on task
+export const updateDone = async (done, taskId, doneBy) => {
+  try {
+    const response = await axios.patch("/api/tasks/update-done", {
+      done,
+      taskId,
+      doneBy,
+    });
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error("An error occurred while updating the task");
+  }
+};
+
 // Add home //TODO: first error msg in other comp?
 export const handleAddHome = async (
   homeName,
