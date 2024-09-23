@@ -18,6 +18,68 @@ export const fetchUserandColour = async (habitant, setColour, setError) => {
   }
 };
 
+// Get daily undone tasks
+export const fetchDailyTasksUndone = async (
+  homeName,
+  currentWeekISO,
+  setDailyTasksUndone,
+  setError
+) => {
+  try {
+    const response = await axios.get("/api/tasks/daily-undone", {
+      params: { homeName, currentWeekISO },
+    });
+
+    setDailyTasksUndone(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch daily undone tasks."
+      );
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
+// Get daily done tasks
+export const fetchDailyTasksDone = async (
+  homeName,
+  currentWeekISO,
+  setDailyTasksDone,
+  setError
+) => {
+  try {
+    const response = await axios.get("/api/tasks/daily-done", {
+      params: { homeName, currentWeekISO },
+    });
+
+    setDailyTasksDone(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch daily undone tasks."
+      );
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
 // Get weekly tasks
 export const fetchWeeklyTasks = async (
   homeName,
@@ -36,7 +98,71 @@ export const fetchWeeklyTasks = async (
   }
 };
 
-// Add home
+// Get other tasks
+export const fetchOtherTasks = async (
+  homeName,
+  currentWeekISO,
+  setError,
+  setOtherTasks
+) => {
+  try {
+    const response = await axios.get("/api/tasks/other", {
+      params: { homeName, currentWeekISO },
+    });
+
+    setOtherTasks(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(error.response.data.message || "Failed to fetch other tasks.");
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
+// Edit task
+export const editTask = async (taskName, minutes, repeat, dueDate, taskId) => {
+  try {
+    const response = await axios.patch("/api/tasks/edit", {
+      taskName,
+      minutes,
+      repeat,
+      dueDate,
+      taskId,
+    });
+
+    if (response.status !== 200) {
+      // Handle unexpected responses
+      throw new Error(response.data.message || "Failed to edit task.");
+    }
+  } catch (error) {
+    // Handle different error scenarios
+    console.error("Error while editing task:", error);
+    if (error.response) {
+      // Server responded with an error
+      throw new Error(
+        error.response.data.message || "An error occurred on the server."
+      );
+    } else if (error.request) {
+      // No response was received
+      throw new Error(
+        "No response from the server. Please check your network connection."
+      );
+    } else {
+      // Other errors
+      throw new Error("An unexpected error occurred while editing the task.");
+    }
+  }
+};
+
+// Add home //TODO: first error msg in other comp?
 export const handleAddHome = async (
   homeName,
   setAdmins,
@@ -98,68 +224,6 @@ export const addHabitantToHome = async (newHabitant, homeName) => {
       // Something else happened in setting up the request that triggered an error
       console.error("General Error:", error.message);
       throw new Error("An unexpected error occurred. Please try again.");
-    }
-  }
-};
-
-// Get daily undone tasks
-export const fetchDailyTasksUndone = async (
-  homeName,
-  currentWeekISO,
-  setDailyTasksUndone,
-  setError
-) => {
-  try {
-    const response = await axios.get("/api/tasks/daily-undone", {
-      params: { homeName, currentWeekISO },
-    });
-
-    setDailyTasksUndone(response.data);
-  } catch (error) {
-    if (error.response) {
-      console.error("Response Error:", error.response.data);
-      setError(
-        error.response.data.message || "Failed to fetch daily undone tasks."
-      );
-    } else if (error.request) {
-      console.error("No Response Error:", error.request);
-      setError(
-        "No response from the server. Please check your network or try again later."
-      );
-    } else {
-      console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
-    }
-  }
-};
-
-// Get daily done tasks
-export const fetchDailyTasksDone = async (
-  homeName,
-  currentWeekISO,
-  setDailyTasksDone,
-  setError
-) => {
-  try {
-    const response = await axios.get("/api/tasks/daily-done", {
-      params: { homeName, currentWeekISO },
-    });
-
-    setDailyTasksDone(response.data);
-  } catch (error) {
-    if (error.response) {
-      console.error("Response Error:", error.response.data);
-      setError(
-        error.response.data.message || "Failed to fetch daily undone tasks."
-      );
-    } else if (error.request) {
-      console.error("No Response Error:", error.request);
-      setError(
-        "No response from the server. Please check your network or try again later."
-      );
-    } else {
-      console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
     }
   }
 };

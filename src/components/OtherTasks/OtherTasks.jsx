@@ -1,6 +1,6 @@
 import "./OtherTasks.scss";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchOtherTasks } from "../../utils/axios";
 
 export default function OtherTasks({ homeName, currentWeekISO }) {
   const [otherTasks, setOtherTasks] = useState([]);
@@ -8,18 +8,7 @@ export default function OtherTasks({ homeName, currentWeekISO }) {
 
   // Get all tasks for this week and with repeat 'other'
   useEffect(() => {
-    // Fetch tasks
-    axios
-      .get("/api/tasks/other", {
-        params: { homeName, currentWeekISO },
-      })
-      .then((response) => {
-        setOtherTasks(response.data);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(err.response?.data?.message || "An error occurred");
-      });
+    fetchOtherTasks(homeName, currentWeekISO, setError, setOtherTasks);
   }, [homeName, currentWeekISO]);
 
   if (error) return <p>Error: {error}</p>;

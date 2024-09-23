@@ -2,6 +2,7 @@ import "./TaskDetail.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { editTask } from "../../utils/axios";
 
 export default function TaskDetail({
   selectedTask,
@@ -14,11 +15,8 @@ export default function TaskDetail({
   const [dueDate, setDueDate] = useState("");
   const [repeat, setRepeat] = useState("");
   const [taskId, setTaskId] = useState("");
-  //   const [done, setDone] = useState("");
 
-  //   console.log("selectedTask: ", selectedTask); // works
-
-  // Update state when entering edit mode
+  // Update states when entering edit mode
   const handleEditClick = () => {
     setTaskName(selectedTask?.taskName || "");
     setMinutes(selectedTask?.minutes || "");
@@ -32,45 +30,24 @@ export default function TaskDetail({
   const handleSubmitEditTask = async (event) => {
     event.preventDefault();
 
-    // Error handling
+    // Input validation
     if (!taskName) {
       return alert("Please enter a task description.");
     }
     if (!taskId) {
-      return alert("Developer error. No task id.");
+      return alert("Developer error. No task ID.");
     }
-    // console.log("taskId: ", taskId);
-    // console.log("selectedTask: ", selectedTask);
-    // console.log("repeat: ", repeat);
 
     try {
-      const response = await axios.patch("/api/tasks/edit", {
-        taskName,
-        minutes,
-        repeat,
-        dueDate,
-        taskId,
-      });
-
-      if (response.status === 200) {
-        window.location.reload();
-      } else {
-        alert(response.data.message);
-      }
+      await editTask(taskName, minutes, repeat, dueDate, taskId);
+      setIsEdit(false);
+      alert("Task updated successfully!"); // Provide feedback to the user
+      window.location.reload();
     } catch (error) {
-      console.error("Error:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        alert(error.response.data.message);
-      } else {
-        alert(`An error occurred while editing ${taskName}.`);
-      }
+      // User feedback for errors
+      console.error("Error updating task:", error);
+      alert(error.message || "An unexpected error occurred. Please try again.");
     }
-
-    setIsEdit(false);
   };
 
   // Cancel
@@ -79,7 +56,7 @@ export default function TaskDetail({
     setIsEdit(false);
   };
 
-  // Handle if task is done
+  // Handle marking as done / undone
   const handleDone = async () => {
     const toggledDone = !selectedTask?.done;
     let doneBy = selectedTask.doneBy;
@@ -139,7 +116,6 @@ export default function TaskDetail({
 
   // Delete task
   const handleDeleteTask = async () => {
-    console.log("click");
     const taskId = selectedTask?._id;
 
     // Error handling
