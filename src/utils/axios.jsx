@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUsernameFromToken } from "./user";
 
 // Get user and set user colour
-export const fetchUser = async (habitant, setColour, setError) => {
+export const fetchUserandColour = async (habitant, setColour, setError) => {
   const username = habitant;
 
   try {
@@ -215,5 +215,29 @@ export const deleteHabitant = async (habitantToDelete, homeName) => {
   } catch (error) {
     console.error("Error:", error);
     throw new Error("An error occurred while deleting the habitant");
+  }
+};
+
+// Fetch home data (to get inhabitants)
+export const fetchHomeData = async (homeName, setError, setHomeData) => {
+  try {
+    const response = await axios.get("/api/homes/get-current", {
+      params: { homeName },
+    });
+
+    setHomeData(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(error.response.data.message || "Failed to fetch home data.");
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
   }
 };

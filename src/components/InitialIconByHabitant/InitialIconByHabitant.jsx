@@ -1,6 +1,6 @@
 import "./InitialIconByHabitant.scss";
 import { useState, useEffect } from "react";
-import { fetchUser } from "../../utils/axios";
+import { fetchUserandColour } from "../../utils/axios";
 
 export default function InitialIconByHabitant({ habitant }) {
   const [colour, setColour] = useState("");
@@ -8,7 +8,7 @@ export default function InitialIconByHabitant({ habitant }) {
 
   // Get user's colour
   useEffect(() => {
-    fetchUser(habitant, setColour, setError);
+    fetchUserandColour(habitant, setColour, setError);
   }, []);
 
   // Get the initial of the username

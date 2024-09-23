@@ -2,20 +2,12 @@ import "./Header.scss";
 import logo from "../../assets/images/logo.svg";
 import avatarJane from "../../assets/images/avatar-jane.svg";
 import LogOut from "../LogOut/LogOut";
-import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import InitialIcon from "../InitialIcon/InitialIcon";
+import { getUsernameFromToken } from "../../utils/user";
 
-export default function Header({ user }) {
-  // Retrieve the token from local storage
-  const token = localStorage.getItem("token");
-
-  // Decode the token to get the username
-  let username = "";
-  if (token) {
-    const decoded = jwtDecode(token);
-    username = decoded.username; // Access the username from the decoded token
-  }
+export default function Header() {
+  const username = getUsernameFromToken();
 
   return (
     <div className="header">

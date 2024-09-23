@@ -1,32 +1,19 @@
 import "./MyHome.scss";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import InitialIconByHabitant from "../InitialIconByHabitant/InitialIconByHabitant";
 import AddPeople from "../AddPeople/AddPeople";
 import DeletePeople from "../DeletePeople/DeletePeople";
+import { fetchHomeData } from "../../utils/axios";
 
 export default function MyHome({ homeName }) {
   const [isAddPeopleOpen, setIsAddPeopleOpen] = useState(false);
   const [isDeletePeopleOpen, setIsDeletePeopleOpen] = useState(false);
-
   const [homeData, setHomeData] = useState(null);
   const [error, setError] = useState(null);
 
   // Fetch current home data (to get inhabitants)
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/homes/get-current", {
-          params: { homeName },
-        });
-        setHomeData(response.data);
-      } catch (err) {
-        console.error(err);
-        setError(err.response?.data?.message || "An error occurred");
-      }
-    };
-
-    fetchData();
+    fetchHomeData(homeName, setError, setHomeData);
   }, [homeName]); // Ensure it runs when homeName changes
 
   // Error handling
