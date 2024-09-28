@@ -32,8 +32,8 @@
 
   &__list {
     list-style-type: none;
-    padding: 0; /* Optional: Remove default padding */
-    margin: 0; /* Optional: Remove default margin */
+    padding: 0;
+    margin: 0;
   }
 
   &__list-item {
@@ -64,8 +64,4 @@
       font-size: 1rem;
     }
   }
-
-  // &__icon {
-  //   width: 7rem;
-  // }
 }

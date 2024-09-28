@@ -80,21 +80,65 @@ export const fetchDailyTasksDone = async (
   }
 };
 
-// Get weekly tasks
-export const fetchWeeklyTasks = async (
+// Get weekly undone tasks
+export const fetchWeeklyTasksUndone = async (
   homeName,
   currentWeekISO,
-  setError,
-  setWeeklyTasks
+  setWeeklyTasksUndone,
+  setError
 ) => {
   try {
-    const response = await axios.get("/api/tasks/weekly", {
+    const response = await axios.get("/api/tasks/weekly-undone", {
       params: { homeName, currentWeekISO },
     });
-    setWeeklyTasks(response.data);
-  } catch (err) {
-    console.error(err);
-    setError(err.response?.data?.message || "An error occurred");
+
+    setWeeklyTasksUndone(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch daily undone tasks."
+      );
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
+// Get weekly done tasks
+export const fetchWeeklyTasksDone = async (
+  homeName,
+  currentWeekISO,
+  setWeeklyTasksDone,
+  setError
+) => {
+  try {
+    const response = await axios.get("/api/tasks/weekly-done", {
+      params: { homeName, currentWeekISO },
+    });
+
+    setWeeklyTasksDone(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch daily undone tasks."
+      );
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
   }
 };
 

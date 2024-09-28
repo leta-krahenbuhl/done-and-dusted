@@ -2,7 +2,7 @@ import "./InitialIcon.scss";
 import { useState, useEffect } from "react";
 import { fetchUserandColour } from "../../utils/axios";
 
-export default function InitialIcon({ username, dailyTaskComponent }) {
+export default function InitialIcon({ username, inTaskComponent }) {
   const [colour, setColour] = useState("");
   const [error, setError] = useState(null);
 
@@ -30,7 +30,7 @@ export default function InitialIcon({ username, dailyTaskComponent }) {
 
   return (
     <div
-      className={dailyTaskComponent ? "initial-icon-small" : "initial-icon"}
+      className={inTaskComponent ? "initial-icon-small" : "initial-icon"}
       style={{ backgroundColor: colour || "pink" }}
     >
       {userInitial}

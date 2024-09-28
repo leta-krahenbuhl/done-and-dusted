@@ -2,6 +2,12 @@
 @use "../../styles/partials/mixins" as *;
 
 .weekly-tasks-all {
+  // background-color: $primary-purple3;
+  // padding: 1rem;
+  // border-radius: 5px;
+
+  display: flex;
+  gap: 1rem;
   background-color: $primary-purple3;
   padding: 1rem;
   border-radius: 5px;
@@ -13,6 +19,8 @@
 }
 
 .weekly-tasks {
+  flex: 1;
+
   &__column-headers-div {
     display: flex;
     width: 100%;
@@ -28,8 +36,8 @@
 
   &__list {
     list-style-type: none;
-    padding: 0; /* Optional: Remove default padding */
-    margin: 0; /* Optional: Remove default margin */
+    padding: 0;
+    margin: 0;
   }
 
   &__list-item {
@@ -39,6 +47,15 @@
     margin-bottom: 0.5rem;
     border-radius: 5px;
     padding: 0.5rem;
+
+    &--done {
+      background-color: $primary-done;
+    }
+  }
+
+  &__list-item:hover {
+    background-color: $primary-button2;
+    cursor: pointer;
   }
 
   &__list-item-part {
