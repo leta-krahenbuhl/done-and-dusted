@@ -1,4 +1,6 @@
 .other-tasks-all {
+  display: flex;
+  gap: 1rem;
   background-color: #9a9cd5;
   padding: 1rem;
   border-radius: 5px;
@@ -8,6 +10,9 @@
   font-size: 0.9rem;
 }
 
+.other-tasks {
+  flex: 1;
+}
 .other-tasks__column-headers-div {
   display: flex;
   width: 100%;
@@ -21,8 +26,8 @@
 }
 .other-tasks__list {
   list-style-type: none;
-  padding: 0; /* Optional: Remove default padding */
-  margin: 0; /* Optional: Remove default margin */
+  padding: 0;
+  margin: 0;
 }
 .other-tasks__list-item {
   display: flex;
@@ -31,6 +36,13 @@
   margin-bottom: 0.5rem;
   border-radius: 5px;
   padding: 0.5rem;
+}
+.other-tasks__list-item--done {
+  background-color: #a9e2e4;
+}
+.other-tasks__list-item:hover {
+  background-color: #fab44b;
+  cursor: pointer;
 }
 .other-tasks__list-item-part {
   width: 30%;

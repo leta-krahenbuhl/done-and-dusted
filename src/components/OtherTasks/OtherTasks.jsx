@@ -1,46 +1,103 @@
 import "./OtherTasks.scss";
 import { useState, useEffect } from "react";
-import { fetchOtherTasks } from "../../utils/axios";
+import { fetchOtherTasksDone, fetchOtherTasksUndone } from "../../utils/axios";
+import InitialIcon from "../InitialIcon/InitialIcon";
 
-export default function OtherTasks({ homeName, currentWeekISO }) {
-  const [otherTasks, setOtherTasks] = useState([]);
+export default function OtherTasks({
+  homeName,
+  currentWeekISO,
+  handleListItemClick,
+}) {
+  const [otherTasksDone, setOtherTasksDone] = useState([]);
+  const [otherTasksUndone, setOtherTasksUndone] = useState([]);
   const [error, setError] = useState(null);
 
-  // Get all tasks for this week and with repeat 'other'
+  // Sets class in InitialIcon to determine size
+  // If in task component it's small, otherwise (ie in header or myHOme) big
+  const inTaskComponent = true;
+
+  // Get tasks other: undone
   useEffect(() => {
-    fetchOtherTasks(homeName, currentWeekISO, setError, setOtherTasks);
+    fetchOtherTasksUndone(
+      homeName,
+      currentWeekISO,
+      setOtherTasksUndone,
+      setError
+    );
+  }, [homeName, currentWeekISO]);
+
+  // Get tasks other: done
+  useEffect(() => {
+    fetchOtherTasksDone(homeName, currentWeekISO, setOtherTasksDone, setError);
   }, [homeName, currentWeekISO]);
 
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="other-tasks-all">
-      {otherTasks.length === 0 ? (
-        <p className="other-tasks-all__text">No other tasks found</p>
+      {otherTasksUndone.length === 0 && otherTasksDone.length === 0 ? (
+        <p className="other-tasks-all__text">No other tasks</p>
       ) : (
-        <div className="other-tasks">
-          <div className="other-tasks__column-headers-div">
-            <p className="other-tasks__column-headers">Task</p>
-            <p className="other-tasks__column-headers">Duration</p>
-
-            <p className="other-tasks__column-headers">Due</p>
+        <>
+          <div className="other-tasks">
+            <div className="other-tasks__column-headers-div">
+              <p className="other-tasks__column-headers">Task</p>
+              <p className="other-tasks__column-headers">Duration</p>
+              <p className="other-tasks__column-headers">Due</p>
+            </div>
+            <ul className="other-tasks__list">
+              {otherTasksUndone.map((task) => (
+                <li
+                  key={task.id}
+                  className="other-tasks__list-item"
+                  onClick={() => handleListItemClick(task)}
+                >
+                  <div className="other-tasks__list-item-part other-tasks__list-item-part--title">
+                    {task.taskName}
+                  </div>
+                  <div className="other-tasks__list-item-part">
+                    {task.minutes}mins
+                  </div>
+                  <div className="other-tasks__list-item-part">
+                    {task.dueDate}
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="other-tasks__list">
-            {otherTasks.map((task) => (
-              <li key={task.id} className="other-tasks__list-item">
-                <div className="other-tasks__list-item-part other-tasks__list-item-part--title">
-                  {task.taskName}
-                </div>
-                <div className="other-tasks__list-item-part">
-                  {task.minutes}mins
-                </div>
-                <div className="other-tasks__list-item-part">
-                  {task.dueDate}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+          <div className="other-tasks">
+            <div className="other-tasks__column-headers-div">
+              <p className="other-tasks__column-headers">Task</p>
+              <p className="other-tasks__column-headers">Duration</p>
+              <p className="other-tasks__column-headers">Due</p>
+            </div>
+            <ul className="other-tasks__list">
+              {otherTasksDone.map((task) => (
+                <li
+                  key={task.id}
+                  className="other-tasks__list-item other-tasks__list-item--done"
+                  onClick={() => handleListItemClick(task)}
+                >
+                  <div className="other-tasks__list-item-part other-tasks__list-item-part--title">
+                    {task.taskName}
+                  </div>
+                  <div className="other-tasks__list-item-part">
+                    {task.minutes} mins
+                  </div>
+                  <div className="other-tasks__list-item-part">
+                    {task.dueDate}
+                  </div>
+                  <div className="other-tasks__icon">
+                    <InitialIcon
+                      username={task.doneBy}
+                      inTaskComponent={inTaskComponent}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
       )}
     </div>
   );

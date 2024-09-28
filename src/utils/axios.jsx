@@ -171,6 +171,68 @@ export const fetchOtherTasks = async (
   }
 };
 
+// Get tasks: other, undone
+export const fetchOtherTasksUndone = async (
+  homeName,
+  currentWeekISO,
+  setOtherTasksUndone,
+  setError
+) => {
+  try {
+    const response = await axios.get("/api/tasks/other-undone", {
+      params: { homeName, currentWeekISO },
+    });
+
+    setOtherTasksUndone(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch daily undone tasks."
+      );
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
+// Get tasks: other, done
+export const fetchOtherTasksDone = async (
+  homeName,
+  currentWeekISO,
+  setOtherTasksDone,
+  setError
+) => {
+  try {
+    const response = await axios.get("/api/tasks/other-done", {
+      params: { homeName, currentWeekISO },
+    });
+
+    setOtherTasksDone(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch daily undone tasks."
+      );
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
 // Edit task
 export const editTask = async (taskName, minutes, repeat, dueDate, taskId) => {
   try {

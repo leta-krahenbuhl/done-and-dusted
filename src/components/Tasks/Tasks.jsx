@@ -96,7 +96,11 @@ export default function Tasks({ homeName }) {
         />
 
         <h3 className="tasks-content__h3">Other</h3>
-        <OtherTasks homeName={homeName} currentWeekISO={currentWeekISO} />
+        <OtherTasks
+          homeName={homeName}
+          currentWeekISO={currentWeekISO}
+          handleListItemClick={handleListItemClick}
+        />
         <div className="tasks-content__button-div">
           <button className="tasks-content__button" onClick={handleAddTask}>
             ADD TASK
