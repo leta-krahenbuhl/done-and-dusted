@@ -6,7 +6,7 @@ export default function InitialIcon({ username, dailyTaskComponent }) {
   const [colour, setColour] = useState("");
   const [error, setError] = useState(null);
 
-  // // Get user's colour
+  // Get user and set user colour
   useEffect(() => {
     const fetchColour = async () => {
       const habitant = username;
@@ -14,11 +14,12 @@ export default function InitialIcon({ username, dailyTaskComponent }) {
       setError(null);
 
       try {
-        await fetchUserandColour(habitant, setColour, setError);
+        await fetchUserandColour(habitant, setColour);
       } catch (error) {
-        alert(error.message);
+        setError(error.message);
       }
     };
+
     fetchColour();
   }, [username]);
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUsernameFromToken } from "./user";
 
 // Get user and set user colour
-export const fetchUserandColour = async (habitant, setColour, setError) => {
+export const fetchUserandColour = async (habitant, setColour) => {
   const username = habitant;
 
   try {
@@ -13,8 +13,8 @@ export const fetchUserandColour = async (habitant, setColour, setError) => {
     const userData = response.data[0]; // Access the first element of the array
     setColour(userData.colour); // Set the colour state
   } catch (err) {
-    console.error(err);
-    setError(err.response?.data?.message || "An error occurred");
+    console.error("Error fetching user data:", err);
+    throw new Error(err.response?.data?.message || "Failed to fetch user data");
   }
 };
 
@@ -182,6 +182,24 @@ export const updateDone = async (done, taskId, doneBy) => {
   }
 };
 
+// Delete task
+export const deleteTask = async (taskId) => {
+  try {
+    const response = await axios.delete("/api/tasks/delete", {
+      data: { taskId },
+    });
+
+    if (response.status === 200) {
+      return response;
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error("An error occurred while deleting the task");
+  }
+};
+
 // Add home //TODO: first error msg in other comp?
 export const handleAddHome = async (
   homeName,
@@ -302,7 +320,7 @@ export const deleteHabitant = async (habitantToDelete, homeName) => {
   }
 };
 
-// Fetch home data (to get inhabitants)
+// Fetch home data with homeName (to get inhabitants)
 export const fetchHomeData = async (homeName, setError, setHomeData) => {
   try {
     const response = await axios.get("/api/homes/get-current", {
@@ -310,6 +328,30 @@ export const fetchHomeData = async (homeName, setError, setHomeData) => {
     });
 
     setHomeData(response.data);
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(error.response.data.message || "Failed to fetch home data.");
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
+// Find homeName with username as habitant
+export const fetchHomeName = async (username, setHomeName, setError) => {
+  try {
+    const response = await axios.get("/api/homes/user-home", {
+      params: { username },
+    });
+
+    setHomeName(response.data.homeName);
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);

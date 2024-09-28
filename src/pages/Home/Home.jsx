@@ -3,44 +3,35 @@ import cleaningWoman from "../../assets/images/cleaning-woman.svg";
 import { useState, useEffect } from "react";
 import AddHome from "../../components/AddHome/AddHome";
 import Header from "../../components/Header/Header";
-import { jwtDecode } from "jwt-decode"; // Import jwtDecode
-import axios from "axios"; // Import axios for making HTTP requests
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Tasks from "../../components/Tasks/Tasks";
 import MyHome from "../../components/MyHome/MyHome";
+import { getUsernameFromToken } from "../../utils/user";
+import { fetchHomeName } from "../../utils/axios";
 
 export default function Home() {
   const [isAddHomeOpen, setIsAddHomeOpen] = useState(false);
   const [homeName, setHomeName] = useState(null);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState("");
+  const [username, setUsername] = useState("");
 
-  // Check if user has home and get it
+  // set username
   useEffect(() => {
-    //should this be outside of the useEffect?
-    const token = localStorage.getItem("token");
-    const { username } = jwtDecode(token);
-    setUser(username);
-
-    if (token) {
-      // Fetch home data
-      axios
-        .get("/api/homes/user-home", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
-          },
-        })
-        .then((response) => {
-          setHomeName(response.data.homeName);
-        })
-        .catch((err) => {
-          console.error(err);
-          setError(err.response?.data?.message || "An error occurred");
-          console.error("error", error);
-        });
-    }
+    const getUsername = getUsernameFromToken();
+    setUsername(getUsername);
   }, []);
+
+  // Find homeName with username as habitant
+  useEffect(() => {
+    if (username) {
+      fetchHomeName(username, setHomeName, setError);
+    }
+  }, [username]);
+
+  if (!username) {
+    return <p>Loading username...</p>;
+  }
 
   const handleAddHome = () => {
     setIsAddHomeOpen(true);
@@ -50,11 +41,13 @@ export default function Home() {
     setIsAddHomeOpen(false);
   };
 
+  if (error) return <p>Error: {error}</p>;
+
   // If user doesn't have a home yet
   if (!homeName) {
     return (
       <div className="home-none-all">
-        <Header user={user} />
+        <Header user={username} />
         <article className="home-none">
           <img src={cleaningWoman} alt="logo" className="home-none__image" />
           <div className="home-none__text-container">

@@ -1,7 +1,6 @@
 import "./TaskDetail.scss";
 import { useState } from "react";
-import axios from "axios";
-import { editTask, updateDone } from "../../utils/axios";
+import { editTask, updateDone, deleteTask } from "../../utils/axios";
 import { getUsernameFromToken } from "../../utils/user";
 
 export default function TaskDetail({
@@ -113,12 +112,9 @@ export default function TaskDetail({
     if (!taskId) {
       return alert("Developer error. No task id.");
     }
-    console.log("taskId: ", taskId); // this works fine!
 
     try {
-      const response = await axios.delete("/api/tasks/delete", {
-        data: { taskId },
-      });
+      const response = await deleteTask(taskId);
 
       if (response.status === 200) {
         setIsEdit(false);
