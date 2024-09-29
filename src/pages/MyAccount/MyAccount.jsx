@@ -1,35 +1,60 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import "./MyAccount.scss";
-import { jwtDecode } from "jwt-decode";
+import { getUsernameFromToken } from "../../utils/user";
+import { fetchUser, fetchHomeName } from "../../utils/axios";
 
 export default function MyAccount() {
-  const [user, setUser] = useState();
+  const [username, setUsername] = useState("");
+  const [userDetails, setUserDetails] = useState([]);
+  const [homeName, setHomeName] = useState("");
+  const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   // Fetch user
-  //   axios
-  //     .get("/api/tasks/weekly", {
-  //       params: { homeName, currentWeekISO },
-  //     })
-  //     .then((response) => {
-  //       setWeeklyTasks(response.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       setError(err.response?.data?.message || "An error occurred");
-  //     });
-  // }, [homeName, currentWeekISO]);
+  // get username
+  useEffect(() => {
+    const user = getUsernameFromToken();
+    setUsername(user);
+  }, []);
 
-  // Below two paragraphs are in Header.jsx too. Simplify?
-  // Retrieve the token from local storage
-  const token = localStorage.getItem("token");
+  // get user's details (to get pw, to map through for name)
+  useEffect(() => {
+    if (username) {
+      const fetchUserData = async () => {
+        try {
+          const userData = await fetchUser(username);
+          console.log("userData: ", userData);
+          setUserDetails(userData);
+        } catch (err) {
+          console.error("Error fetching user data:", err);
+        }
+      };
 
-  // Decode the token to get the username
-  let username = "";
-  if (token) {
-    const decoded = jwtDecode(token);
-    username = decoded.username; // Access the username from the decoded token
+      fetchUserData();
+    }
+  }, [username]);
+
+  if (!userDetails) {
+    return <div>Loading...</div>;
+  }
+
+  // Get homeName (using the username)
+  useEffect(() => {
+    if (username) {
+      const fetchHomeNameWithUsername = async () => {
+        try {
+          await fetchHomeName(username, setHomeName, setError);
+          // console.log("userData: ", userData);
+        } catch (err) {
+          console.error("Error fetching user data:", err);
+        }
+      };
+
+      fetchHomeNameWithUsername();
+    }
+  }, [username]);
+
+  if (error) {
+    return <div>{error}</div>;
   }
 
   return (
@@ -39,7 +64,30 @@ export default function MyAccount() {
         <div className="account__top">
           <div className="account__name">{username}'s Account</div>
         </div>
-        <div className="account__bottom">Info</div>
+        <div className="account__bottom">
+          {userDetails.map((userdetail) => (
+            <ul className="account__list" key={userdetail.id}>
+              <li className="account__list-item">
+                <div className="account__list-item-title">NAME:</div>
+                <div className="account__list-item-part account__list-item-part--title">
+                  {userdetail.username}
+                </div>
+              </li>
+              <li className="account__list-item">
+                <div className="account__list-item-title">PASSWORD:</div>
+                <div className="account__list-item-part account__list-item-part--title">
+                  ********
+                </div>
+              </li>
+              <li className="account__list-item">
+                <div className="account__list-item-title">LIVES AT:</div>
+                <div className="account__list-item-part account__list-item-part--title">
+                  {homeName}
+                </div>
+              </li>
+            </ul>
+          ))}
+        </div>
       </article>
     </div>
   );

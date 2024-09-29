@@ -21,7 +21,11 @@
   border-radius: 5px;
   width: 100%;
 }
-.account__text {
-  margin: 0rem;
-  font-size: 0.9rem;
+.account__list-item {
+  display: flex;
+  list-style: none;
+}
+.account__list-item-title {
+  width: 6rem;
+  font-weight: 700;
 }/*# sourceMappingURL=MyAccount.css.map */

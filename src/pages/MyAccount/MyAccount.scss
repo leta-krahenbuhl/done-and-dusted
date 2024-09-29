@@ -23,12 +23,16 @@
     gap: 1rem;
     padding: 1rem;
     border-radius: 5px;
-
     width: 100%;
   }
 
-  &__text {
-    margin: 0rem;
-    font-size: 0.9rem;
+  &__list-item {
+    display: flex;
+    list-style: none;
+  }
+
+  &__list-item-title {
+    width: 6rem;
+    font-weight: 700;
   }
 }

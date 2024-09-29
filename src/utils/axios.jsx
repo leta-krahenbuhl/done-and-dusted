@@ -18,7 +18,25 @@ export const fetchUserandColour = async (habitant, setColour) => {
   }
 };
 
-// Get daily undone tasks
+// Get a user (with username)
+export const fetchUser = async (user) => {
+  const username = user;
+  // console.log("user from axios: ", username); // works!
+
+  try {
+    const response = await axios.get("/api/users/get-one", {
+      params: { username },
+    });
+
+    // console.log("response from axios: ", response.data); // works!
+    return response.data;
+  } catch (err) {
+    console.error("Error fetching user data:", err);
+    throw new Error(err.response?.data?.message || "Failed to fetch user data");
+  }
+};
+
+// Get tasks: daily, undone
 export const fetchDailyTasksUndone = async (
   homeName,
   currentWeekISO,
@@ -49,7 +67,7 @@ export const fetchDailyTasksUndone = async (
   }
 };
 
-// Get daily done tasks
+// Get tasks: daily, done
 export const fetchDailyTasksDone = async (
   homeName,
   currentWeekISO,
@@ -80,7 +98,7 @@ export const fetchDailyTasksDone = async (
   }
 };
 
-// Get weekly undone tasks
+// Get tasks: weekly, undone
 export const fetchWeeklyTasksUndone = async (
   homeName,
   currentWeekISO,
@@ -111,7 +129,7 @@ export const fetchWeeklyTasksUndone = async (
   }
 };
 
-// Get weekly done tasks
+// Get tasks: weekly, done
 export const fetchWeeklyTasksDone = async (
   homeName,
   currentWeekISO,
@@ -130,35 +148,6 @@ export const fetchWeeklyTasksDone = async (
       setError(
         error.response.data.message || "Failed to fetch daily undone tasks."
       );
-    } else if (error.request) {
-      console.error("No Response Error:", error.request);
-      setError(
-        "No response from the server. Please check your network or try again later."
-      );
-    } else {
-      console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
-    }
-  }
-};
-
-// Get other tasks
-export const fetchOtherTasks = async (
-  homeName,
-  currentWeekISO,
-  setError,
-  setOtherTasks
-) => {
-  try {
-    const response = await axios.get("/api/tasks/other", {
-      params: { homeName, currentWeekISO },
-    });
-
-    setOtherTasks(response.data);
-  } catch (error) {
-    if (error.response) {
-      console.error("Response Error:", error.response.data);
-      setError(error.response.data.message || "Failed to fetch other tasks.");
     } else if (error.request) {
       console.error("No Response Error:", error.request);
       setError(
@@ -268,7 +257,7 @@ export const editTask = async (taskName, minutes, repeat, dueDate, taskId) => {
   }
 };
 
-// Update done/undone property on task
+// Update task: done/undone property
 export const updateDone = async (done, taskId, doneBy) => {
   try {
     const response = await axios.patch("/api/tasks/update-done", {
@@ -303,6 +292,41 @@ export const deleteTask = async (taskId) => {
   } catch (error) {
     console.error("Error:", error);
     throw new Error("An error occurred while deleting the task");
+  }
+};
+
+// Add task
+export const addTask = async (
+  taskName,
+  minutes,
+  repeat,
+  homeName,
+  dueDate,
+  currentWeekISO
+) => {
+  const done = false;
+  const doneBy = "not-done";
+
+  try {
+    const response = await axios.post("/api/tasks/add-one", {
+      taskName,
+      minutes,
+      repeat,
+      done,
+      homeName,
+      dueDate,
+      doneBy,
+      week: currentWeekISO,
+    });
+
+    if (response.status === 201) {
+      return response;
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error("An error occurred while creating the task");
   }
 };
 
@@ -372,41 +396,6 @@ export const addHabitantToHome = async (newHabitant, homeName) => {
   }
 };
 
-// Add task
-export const addTask = async (
-  taskName,
-  minutes,
-  repeat,
-  homeName,
-  dueDate,
-  currentWeekISO
-) => {
-  const done = false;
-  const doneBy = "not-done";
-
-  try {
-    const response = await axios.post("/api/tasks/add-one", {
-      taskName,
-      minutes,
-      repeat,
-      done,
-      homeName,
-      dueDate,
-      doneBy,
-      week: currentWeekISO,
-    });
-
-    if (response.status === 201) {
-      return response;
-    } else {
-      throw new Error(response.data.message);
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    throw new Error("An error occurred while creating the task");
-  }
-};
-
 // Delete habitant
 export const deleteHabitant = async (habitantToDelete, homeName) => {
   try {
@@ -458,6 +447,7 @@ export const fetchHomeName = async (username, setHomeName, setError) => {
     });
 
     setHomeName(response.data.homeName);
+    console.log("response.data.homeName:", response.data.homeName);
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
