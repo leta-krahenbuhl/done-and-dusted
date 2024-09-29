@@ -5,11 +5,14 @@
   padding-top: 7rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100% - 6rem);
+  min-height: calc(100vh - 6rem);
   padding-left: 5rem;
   padding-right: 5rem;
+  align-items: center;
+}
+.account__h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 .account__bottom {
   background-color: #ffffff;
@@ -28,4 +31,44 @@
 .account__list-item-title {
   width: 6rem;
   font-weight: 700;
+}
+.account__bottom-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.account__link {
+  color: #ffffff;
+  width: 210px;
+  height: 50px;
+  background-color: #27267e;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 0.7rem;
+}
+.account__link:hover {
+  background-color: #fab44b;
+  color: #ffffff;
+}
+.account__button {
+  color: #ffffff;
+  width: 210px;
+  height: 50px;
+  background-color: #27267e;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  text-align: center;
+  margin-top: 1rem;
+}
+.account__button:hover {
+  background-color: #fab44b;
+  color: #ffffff;
 }/*# sourceMappingURL=MyAccount.css.map */

@@ -6,14 +6,17 @@
   color: $primary-font1;
   font-weight: 700;
   padding-top: 7rem;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100% - 6rem);
+  min-height: calc(100vh - 6rem);
   padding-left: 5rem;
   padding-right: 5rem;
+  align-items: center;
+
+  &__h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
 
   &__bottom {
     background-color: $primary-white;
@@ -34,5 +37,32 @@
   &__list-item-title {
     width: 6rem;
     font-weight: 700;
+  }
+
+  &__bottom-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__link {
+    @include button2;
+    text-align: center;
+    margin-top: 1rem;
+    padding-top: 0.7rem;
+  }
+
+  &__link:hover {
+    @include button2-hover;
+  }
+
+  &__button {
+    @include button2;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  &__button:hover {
+    @include button2-hover;
   }
 }

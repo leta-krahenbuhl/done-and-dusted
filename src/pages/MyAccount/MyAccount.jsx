@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import "./MyAccount.scss";
 import { getUsernameFromToken } from "../../utils/user";
 import { fetchUser, fetchHomeName } from "../../utils/axios";
+import { Link } from "react-router-dom";
 
 export default function MyAccount() {
   const [username, setUsername] = useState("");
@@ -57,12 +58,16 @@ export default function MyAccount() {
     return <div>{error}</div>;
   }
 
+  const handleClickEdit = () => {
+    console.log("click");
+  };
+
   return (
     <div className="account-all">
       <Header />
       <article className="account">
         <div className="account__top">
-          <div className="account__name">{username}'s Account</div>
+          <div className="account__h1">{username}'s Account</div>
         </div>
         <div className="account__bottom">
           {userDetails.map((userdetail) => (
@@ -87,6 +92,14 @@ export default function MyAccount() {
               </li>
             </ul>
           ))}
+        </div>
+        <div className="account__bottom-container">
+          <Link to="/home">
+            <p className="account__link">BACK TO DASHBOARD</p>
+          </Link>
+          <button className="account__button" onClick={handleClickEdit}>
+            EDIT
+          </button>
         </div>
       </article>
     </div>
