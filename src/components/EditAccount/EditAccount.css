@@ -26,6 +26,40 @@
   flex-direction: column;
   align-items: center;
 }
+.edit-acccount-overlay__h2 {
+  text-align: center;
+  color: #27267e;
+  margin: 0;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.edit-acccount-overlay__remove-home {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.edit-acccount-overlay__remove-home-text {
+  font-weight: 700;
+  margin-top: 1rem;
+}
+.edit-acccount-overlay__button-remove {
+  width: 210px;
+  height: 50px;
+  background-color: #fab44b;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Afacad", Helvetica, sans-serif;
+  margin-bottom: 1rem;
+}
+.edit-acccount-overlay__button-remove:hover {
+  background-color: #27267e;
+  color: #ffffff;
+}
 .edit-acccount-overlay__text-container {
   width: 100%;
   text-align: left;
@@ -35,15 +69,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-.edit-acccount-overlay-form__h2 {
-  text-align: center;
-  color: #27267e;
-  margin: 0;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
-  font-size: 2rem;
-  text-transform: uppercase;
 }
 .edit-acccount-overlay-form__input {
   margin-bottom: 0.8rem;
@@ -61,7 +86,6 @@
   font-size: 1.2rem;
   font-weight: 700;
   font-family: "Afacad", Helvetica, sans-serif;
-  width: 100%;
 }
 .edit-acccount-overlay-form__button:hover {
   background-color: #fab44b;
@@ -78,8 +102,6 @@
   font-weight: 700;
   font-family: "Afacad", Helvetica, sans-serif;
   margin-bottom: 1rem;
-  background-color: #a9e2e4;
-  color: #27267e;
 }
 .edit-acccount-overlay-form__button-submit:hover {
   background-color: #fab44b;

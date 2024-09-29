@@ -75,6 +75,12 @@ export default function MyAccount() {
         <div className="account__bottom">
           <ul className="account__list">
             <li className="account__list-item">
+              <div className="account__list-item-title">LIVES AT:</div>
+              <div className="account__list-item-part account__list-item-part--title">
+                {homeName}
+              </div>
+            </li>
+            <li className="account__list-item">
               <div className="account__list-item-title">NAME:</div>
               <div className="account__list-item-part account__list-item-part--title">
                 {userDetails[0]?.username}
@@ -84,12 +90,6 @@ export default function MyAccount() {
               <div className="account__list-item-title">PASSWORD:</div>
               <div className="account__list-item-part account__list-item-part--title">
                 ********
-              </div>
-            </li>
-            <li className="account__list-item">
-              <div className="account__list-item-title">LIVES AT:</div>
-              <div className="account__list-item-part account__list-item-part--title">
-                {homeName}
               </div>
             </li>
           </ul>
