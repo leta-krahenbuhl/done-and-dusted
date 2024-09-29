@@ -4,12 +4,14 @@ import "./MyAccount.scss";
 import { getUsernameFromToken } from "../../utils/user";
 import { fetchUser, fetchHomeName } from "../../utils/axios";
 import { Link } from "react-router-dom";
+import EditAccount from "../../components/EditAccount/EditAccount";
 
 export default function MyAccount() {
   const [username, setUsername] = useState("");
   const [userDetails, setUserDetails] = useState([]);
   const [homeName, setHomeName] = useState("");
   const [error, setError] = useState(null);
+  const [isEditAccountOpen, setIsEditAccountOpen] = useState(false);
 
   // get username
   useEffect(() => {
@@ -23,7 +25,6 @@ export default function MyAccount() {
       const fetchUserData = async () => {
         try {
           const userData = await fetchUser(username);
-          console.log("userData: ", userData);
           setUserDetails(userData);
         } catch (err) {
           console.error("Error fetching user data:", err);
@@ -59,8 +60,10 @@ export default function MyAccount() {
   }
 
   const handleClickEdit = () => {
-    console.log("click");
+    setIsEditAccountOpen(true);
   };
+
+  // console.log("username in MyAccount: ", username);
 
   return (
     <div className="account-all">
@@ -70,28 +73,26 @@ export default function MyAccount() {
           <div className="account__h1">{username}'s Account</div>
         </div>
         <div className="account__bottom">
-          {userDetails.map((userdetail) => (
-            <ul className="account__list" key={userdetail.id}>
-              <li className="account__list-item">
-                <div className="account__list-item-title">NAME:</div>
-                <div className="account__list-item-part account__list-item-part--title">
-                  {userdetail.username}
-                </div>
-              </li>
-              <li className="account__list-item">
-                <div className="account__list-item-title">PASSWORD:</div>
-                <div className="account__list-item-part account__list-item-part--title">
-                  ********
-                </div>
-              </li>
-              <li className="account__list-item">
-                <div className="account__list-item-title">LIVES AT:</div>
-                <div className="account__list-item-part account__list-item-part--title">
-                  {homeName}
-                </div>
-              </li>
-            </ul>
-          ))}
+          <ul className="account__list">
+            <li className="account__list-item">
+              <div className="account__list-item-title">NAME:</div>
+              <div className="account__list-item-part account__list-item-part--title">
+                {userDetails[0]?.username}
+              </div>
+            </li>
+            <li className="account__list-item">
+              <div className="account__list-item-title">PASSWORD:</div>
+              <div className="account__list-item-part account__list-item-part--title">
+                ********
+              </div>
+            </li>
+            <li className="account__list-item">
+              <div className="account__list-item-title">LIVES AT:</div>
+              <div className="account__list-item-part account__list-item-part--title">
+                {homeName}
+              </div>
+            </li>
+          </ul>
         </div>
         <div className="account__bottom-container">
           <Link to="/home">
@@ -102,6 +103,13 @@ export default function MyAccount() {
           </button>
         </div>
       </article>
+      <EditAccount
+        username={userDetails[0]?.username}
+        setIsEditAccountOpen={setIsEditAccountOpen}
+        isEditAccountOpen={isEditAccountOpen}
+        password={userDetails[0]?.password}
+        homeName={homeName}
+      />
     </div>
   );
 }

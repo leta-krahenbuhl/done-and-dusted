@@ -447,7 +447,6 @@ export const fetchHomeName = async (username, setHomeName, setError) => {
     });
 
     setHomeName(response.data.homeName);
-    console.log("response.data.homeName:", response.data.homeName);
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
