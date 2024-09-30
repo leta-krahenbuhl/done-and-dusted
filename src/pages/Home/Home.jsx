@@ -66,7 +66,7 @@ export default function Home() {
               started, or ask a home admin to add you on theirs.
             </p>
             <button className="home-none__button" onClick={handleAddHome}>
-              ADD A HOME
+              CREATE NEW HOME
             </button>
           </div>
         </article>

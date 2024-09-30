@@ -36,7 +36,7 @@ export default function AddHome({ isAddHomeOpen, handleCloseAddHome }) {
         >
           &times;
         </button>
-        <h1 className="add-home-overlay__h1">Add a Home</h1>
+        <h1 className="add-home-overlay__h1">Create New Home</h1>
         <form className="add-home-overlay-form" onSubmit={onSubmit}>
           <input
             type="text"

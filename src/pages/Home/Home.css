@@ -36,6 +36,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   font-family: "Afacad", Helvetica, sans-serif;
+  margin-top: 2rem;
 }
 .home-none__button:hover {
   background-color: #27267e;

@@ -17,6 +17,7 @@ export default function MyAccount() {
   useEffect(() => {
     const user = getUsernameFromToken();
     setUsername(user);
+    // console.log("user: ", user);  // works!
   }, []);
 
   // get user's details (to get pw, to map through for name)
@@ -42,10 +43,15 @@ export default function MyAccount() {
   // Get homeName (using the username)
   useEffect(() => {
     if (username) {
+      // console.log("here"); // works!
       const fetchHomeNameWithUsername = async () => {
         try {
-          await fetchHomeName(username, setHomeName, setError);
-          // console.log("userData: ", userData);
+          const nameOfHome = await fetchHomeName(
+            username,
+            setHomeName,
+            setError
+          );
+          setHomeName(nameOfHome);
         } catch (err) {
           console.error("Error fetching user data:", err);
         }
@@ -63,8 +69,6 @@ export default function MyAccount() {
     setIsEditAccountOpen(true);
   };
 
-  // console.log("username in MyAccount: ", username);
-
   return (
     <div className="account-all">
       <Header />
@@ -77,7 +81,7 @@ export default function MyAccount() {
             <li className="account__list-item">
               <div className="account__list-item-title">LIVES AT:</div>
               <div className="account__list-item-part account__list-item-part--title">
-                {homeName}
+                {homeName ? homeName : "Not part of a home yet."}
               </div>
             </li>
             <li className="account__list-item">

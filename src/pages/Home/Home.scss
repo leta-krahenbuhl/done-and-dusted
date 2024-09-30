@@ -36,6 +36,7 @@
   &__button {
     justify-self: right;
     @include button1;
+    margin-top: 2rem;
   }
 
   &__button:hover {

@@ -1,3 +1,4 @@
+import { deleteHabitant } from "../../utils/axios";
 import "./EditAccount.scss";
 import { useEffect, useState } from "react";
 // import { editTask, updateDone, deleteTask } from "../../utils/axios";
@@ -28,8 +29,24 @@ export default function EditAccount({
     console.log("click");
   };
 
+  // Remove home from user
   const handleRemoveHome = () => {
-    console.log("click remove");
+    const userConfirmed = window.confirm(
+      "Are you sure? If you're the only habitant of this home, the home and all data associated with it will be deleted, and you will not be able to re-join it."
+    );
+    if (userConfirmed) {
+      const deleteHome = async () => {
+        const habitantToDelete = username;
+        try {
+          await deleteHabitant(habitantToDelete, homeName);
+        } catch (err) {
+          console.error("Error deleting home:", err);
+        }
+      };
+      deleteHome();
+    } else {
+      return;
+    }
   };
 
   if (!isEditAccountOpen) return null;
@@ -44,14 +61,18 @@ export default function EditAccount({
 
         <div className="edit-acccount-overlay__remove-home">
           <div className="edit-acccount-overlay__remove-home-text ">
-            {`Lives at: ${homeName}`}
+            {homeName ? `Lives at: ${homeName}` : "No home yet"}
           </div>
-          <button
-            className="edit-acccount-overlay__button-remove"
-            onClick={handleRemoveHome}
-          >
-            REMOVE HOME
-          </button>
+          {homeName ? (
+            <button
+              className="edit-acccount-overlay__button-remove"
+              onClick={handleRemoveHome}
+            >
+              REMOVE HOME
+            </button>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="edit-acccount-overlay__text-container"></div>
