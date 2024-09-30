@@ -463,3 +463,29 @@ export const fetchHomeName = async (username, setError) => {
     }
   }
 };
+
+// Update username / password
+// export const updateUsernamePassword = async (
+//   username,
+//   usernameNew,
+//   passwordNew
+// ) => {
+//   try {
+//     // Prepare the payload dynamically based on what's provided
+//     const payload = {};
+//     if (username) payload.username = username; // Only add if provided
+//     if (usernameNew) payload.usernameNew = usernameNew; // Only add if provided
+//     if (passwordNew) payload.password = passwordNew; // Only add if provided
+
+//     const response = await axios.patch("/api/users/update", payload);
+
+//     if (response.status === 201) {
+//       return response;
+//     } else {
+//       throw new Error(response.data.message);
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//     throw new Error("An error occurred while updating the user");
+//   }
+// };

@@ -1,8 +1,6 @@
-import { deleteHabitant } from "../../utils/axios";
+import { deleteHabitant, updateUsernamePassword } from "../../utils/axios";
 import "./EditAccount.scss";
 import { useEffect, useState } from "react";
-// import { editTask, updateDone, deleteTask } from "../../utils/axios";
-// import { getUsernameFromToken } from "../../utils/user";
 
 export default function EditAccount({
   isEditAccountOpen,
@@ -24,10 +22,19 @@ export default function EditAccount({
     setIsEditAccountOpen(false);
   };
 
-  const handleSubmitEditAccount = (e) => {
-    e.preventDefault();
-    console.log("click");
-  };
+  // handle submit edit user/account
+  //   const handleSubmitEditAccount = (e) => {
+  //     e.preventDefault();
+
+  //     const updateUser = async () => {
+  //       try {
+  //         await updateUsernamePassword(username, usernameNew, passwordNew);
+  //       } catch (err) {
+  //         console.error("Error updating user:", err);
+  //       }
+  //     };
+  //     updateUser();
+  //   };
 
   // Remove home from user
   const handleRemoveHome = () => {
@@ -89,65 +96,27 @@ export default function EditAccount({
             className="edit-acccount-overlay-form__input"
             value={usernameNew}
             onChange={(e) => setUsernameNew(e.target.value)}
-            required
           />
 
-          <label for="password">Password</label>
+          <label for="password-new">New Password (optional)</label>
           <input
-            id="password"
+            id="password-new"
             type="text"
-            placeholder="Password"
-            className="edit-acccount-overlay-form__input"
-            value={password}
-            onChange={(e) => setPasswordNew(e.target.value)}
-            required
-          />
-
-          <label for="password">Password New</label>
-          <input
-            id="password"
-            type="text"
-            placeholder="Password"
+            placeholder="New password"
             className="edit-acccount-overlay-form__input"
             value={passwordNew}
             onChange={(e) => setPasswordNew(e.target.value)}
-            required
           />
 
-          <label for="password">Verify Password New</label>
+          <label for="password-new-verify">Verify New Password</label>
           <input
-            id="password"
+            id="password-new-verify"
             type="text"
-            placeholder="Password"
+            placeholder="Verify new password"
             className="edit-acccount-overlay-form__input"
             value={passwordNewVerify}
             onChange={(e) => setPasswordNew(e.target.value)}
-            required
           />
-
-          {/* 
-          <label for="due-date">Due</label>
-          <input
-            id="due-date"
-            type="date"
-            className="edit-acccount-overlay-form__input"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-            required
-          />
-
-          <label for="repeat">Repeat</label>
-          <select
-            id="repeat"
-            name="repeat"
-            className="add-task-overlay-form__input"
-            value={repeat}
-            onChange={(e) => setRepeat(e.target.value)}
-          >
-            <option value="daily">daily</option>
-            <option value="weekly">weekly</option>
-            <option value="other">other</option>
-          </select> */}
           <div className="edit-acccount-overlay-form__button-container">
             <button
               className="edit-acccount-overlay-form__button"
