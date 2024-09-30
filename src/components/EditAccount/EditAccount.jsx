@@ -1,4 +1,4 @@
-import { deleteHabitant, updateUsernamePassword } from "../../utils/axios";
+import { deleteHabitant } from "../../utils/axios";
 import "./EditAccount.scss";
 import { useEffect, useState } from "react";
 
@@ -21,20 +21,6 @@ export default function EditAccount({
   const closeEditAccount = () => {
     setIsEditAccountOpen(false);
   };
-
-  // handle submit edit user/account
-  //   const handleSubmitEditAccount = (e) => {
-  //     e.preventDefault();
-
-  //     const updateUser = async () => {
-  //       try {
-  //         await updateUsernamePassword(username, usernameNew, passwordNew);
-  //       } catch (err) {
-  //         console.error("Error updating user:", err);
-  //       }
-  //     };
-  //     updateUser();
-  //   };
 
   // Remove home from user
   const handleRemoveHome = () => {
@@ -66,6 +52,14 @@ export default function EditAccount({
       >
         <h2 className="edit-acccount-overlay__h2">{`EDIT: ${username}'s Account`}</h2>
 
+        <div className="edit-acccount-overlay__text-container">
+          <p>
+            Here you can remove yourself from a home, even if you're the last
+            habitant left. Doing so will delete the home and all data associated
+            with it, so no one will be able to re-join that home.
+          </p>
+        </div>
+
         <div className="edit-acccount-overlay__remove-home">
           <div className="edit-acccount-overlay__remove-home-text ">
             {homeName ? `Lives at: ${homeName}` : "No home yet"}
@@ -82,56 +76,12 @@ export default function EditAccount({
           )}
         </div>
 
-        <div className="edit-acccount-overlay__text-container"></div>
-
-        <form
-          onSubmit={handleSubmitEditAccount}
-          className="edit-acccount-overlay-form"
+        <button
+          className="edit-acccount-overlay-form__button"
+          onClick={closeEditAccount}
         >
-          <label for="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            placeholder="Username"
-            className="edit-acccount-overlay-form__input"
-            value={usernameNew}
-            onChange={(e) => setUsernameNew(e.target.value)}
-          />
-
-          <label for="password-new">New Password (optional)</label>
-          <input
-            id="password-new"
-            type="text"
-            placeholder="New password"
-            className="edit-acccount-overlay-form__input"
-            value={passwordNew}
-            onChange={(e) => setPasswordNew(e.target.value)}
-          />
-
-          <label for="password-new-verify">Verify New Password</label>
-          <input
-            id="password-new-verify"
-            type="text"
-            placeholder="Verify new password"
-            className="edit-acccount-overlay-form__input"
-            value={passwordNewVerify}
-            onChange={(e) => setPasswordNew(e.target.value)}
-          />
-          <div className="edit-acccount-overlay-form__button-container">
-            <button
-              className="edit-acccount-overlay-form__button"
-              onClick={closeEditAccount}
-            >
-              CANCEL
-            </button>
-            <button
-              className="edit-acccount-overlay-form__button-submit"
-              type="submit"
-            >
-              SUBMIT
-            </button>
-          </div>
-        </form>
+          CANCEL
+        </button>
       </div>
     </div>
   );

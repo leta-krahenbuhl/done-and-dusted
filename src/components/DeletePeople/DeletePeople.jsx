@@ -49,6 +49,10 @@ export default function DeletePeople({
           &times;
         </button>
         <h1 className="add-home-overlay__h1">Delete a habitant</h1>
+        <p>
+          You can delete yourself, but you will loose access to this home and
+          its data.
+        </p>
         <form className="add-home-overlay-form" onSubmit={handleDeletePeople}>
           <input
             type="text"

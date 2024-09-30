@@ -62,8 +62,9 @@ export default function Home() {
           <div className="home-none__text-container">
             <h1 className="home-none__header">Welcome to Done&Dusted.</h1>
             <p className="home-none__text-big">
-              You're not part of a home yet. Set up your own home to get
-              started, or ask a home admin to add you on theirs.
+              You're not part of a home yet. Create your own home to get
+              started, or ask a habitant from another home to add you on theirs,
+              then refresh this page.
             </p>
             <button className="home-none__button" onClick={handleAddHome}>
               CREATE NEW HOME
