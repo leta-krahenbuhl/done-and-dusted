@@ -440,13 +440,14 @@ export const fetchHomeData = async (homeName, setError, setHomeData) => {
 };
 
 // Find homeName with username as habitant
-export const fetchHomeName = async (username, setHomeName, setError) => {
+export const fetchHomeName = async (username, setError) => {
   try {
     const response = await axios.get("/api/homes/user-home", {
       params: { username },
     });
 
-    setHomeName(response.data.homeName);
+    // return the name of the home:
+    return response.data.homeName;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);

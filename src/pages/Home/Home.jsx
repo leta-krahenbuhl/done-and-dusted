@@ -25,7 +25,16 @@ export default function Home() {
   // Find homeName with username as habitant
   useEffect(() => {
     if (username) {
-      fetchHomeName(username, setHomeName, setError);
+      const fetchHome = async () => {
+        try {
+          const homename = await fetchHomeName(username, setError);
+          console.log("homename: ", homename);
+          setHomeName(homename);
+        } catch {
+          console.error("Error fetching home data:", err);
+        }
+      };
+      fetchHome();
     }
   }, [username]);
 
