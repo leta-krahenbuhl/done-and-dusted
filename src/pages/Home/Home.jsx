@@ -96,7 +96,7 @@ export default function Home() {
             <Tasks homeName={homeName} />
           </TabPanel>
           <TabPanel>
-            <Scoreboard homeName={homeName} username={username} />
+            <Scoreboard homeName={homeName} />
           </TabPanel>
           <TabPanel>
             <MyHome homeName={homeName} />

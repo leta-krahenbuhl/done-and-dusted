@@ -1,34 +1,62 @@
-import { fetchHomeData, fetchTotalMinutes } from "../../utils/axios";
+import { fetchHomeData, fetchTasksForMinutes } from "../../utils/axios";
 import InitialIconByHabitant from "../InitialIconByHabitant/InitialIconByHabitant";
 import "./NumberStats.scss";
 import { useState, useEffect } from "react";
 
-export default function NumberStats({ username, homeName, currentWeekISO }) {
+export default function NumberStats({ homeName, currentWeekISO }) {
   const [error, setError] = useState(null);
   const [homeData, setHomeData] = useState(null);
-  const [totalMinutesUser1, setTotalMinutesUser1] = useState(0);
+  const [totalMinutesByHabitant, setTotalMinutesByHabitant] = useState({});
 
   // Fetch current home data (to get inhabitants)
   useEffect(() => {
     const getHomeData = async () => {
-      const data = await fetchHomeData(homeName, setError);
-      setHomeData(data);
+      try {
+        const data = await fetchHomeData(homeName, setError);
+        setHomeData(data);
+      } catch (err) {
+        setError(err.message);
+      }
     };
     getHomeData();
   }, [homeName]);
 
-  // Get all done tasks of user from current WC and add up all minutes
+  // Get minutes per habitant
   useEffect(() => {
-    const getTotalMinutes = async () => {
-      const data = await fetchTotalMinutes(username, currentWeekISO);
-      console.log("data in frontend: ", data); // works
-    };
-    getTotalMinutes();
-  }, [currentWeekISO]);
+    if (homeData) {
+      const fetchTasksForHabitants = async () => {
+        const tasksPromises = homeData.habitants.map(async (habitant) => {
+          try {
+            const data = await fetchTasksForMinutes(habitant, currentWeekISO);
+            const totalMinutes = data.reduce(
+              (acc, task) => acc + (task.minutes || 0),
+              0
+            );
+            return { habitant, totalMinutes };
+          } catch (err) {
+            setError(err.message);
+            return { habitant, totalMinutes: 0 }; // Return 0 on error
+          }
+        });
+
+        const results = await Promise.all(tasksPromises);
+        const totalMinutesObject = results.reduce(
+          (acc, { habitant, totalMinutes }) => {
+            acc[habitant] = totalMinutes;
+            return acc;
+          },
+          {}
+        );
+
+        setTotalMinutesByHabitant(totalMinutesObject);
+      };
+
+      fetchTasksForHabitants();
+    }
+  }, [homeData, currentWeekISO]);
 
   if (error) return <p>Error: {error}</p>;
 
-  // Show loading message while loading homeData
   if (!homeData) {
     return <div>Loading...</div>;
   }
@@ -37,15 +65,18 @@ export default function NumberStats({ username, homeName, currentWeekISO }) {
     <div className="number-stats-all">
       <div className="number-stats">
         {homeData.habitants.map((habitant, index) => (
-          <div className="number-stats__icon-and-name">
+          <div key={index} className="number-stats__icon-and-name">
             <div className="number-stats__pair">
-              <div key={index} className="number-stats__icon">
+              <div className="number-stats__icon">
                 <InitialIconByHabitant habitant={habitant} />
               </div>
               <p className="number-stats__name">{habitant}</p>
             </div>
             <div className="number-stats__numbers">
-              <div className="number-stats__number">Total time: 4h 45mins</div>
+              <div className="number-stats__number">
+                Total time: {Math.floor(totalMinutesByHabitant[habitant] / 60)}h{" "}
+                {totalMinutesByHabitant[habitant] % 60}mins
+              </div>
             </div>
           </div>
         ))}

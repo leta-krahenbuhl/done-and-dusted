@@ -464,13 +464,13 @@ export const fetchHomeName = async (username, setError) => {
 };
 
 // Fetch total minutes of user
-export const fetchTotalMinutes = async (username, currentWeekISO) => {
+export const fetchTasksForMinutes = async (habitant, currentWeekISO) => {
   try {
     // console.log("username: ", username); // works
     // console.log("currentWeekISO: ", currentWeekISO); // works
 
     const response = await axios.get("/api/users/minutes", {
-      params: { username, currentWeekISO },
+      params: { username: habitant, currentWeekISO },
     });
 
     const tasks = response.data;

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import NumberStats from "../NumberStats/NumberStats";
 
-export default function Scoreboard({ homeName, username }) {
+export default function Scoreboard({ homeName }) {
   const [currentWeekStart, setCurrentWeekStart] = useState(
     getMonday(new Date())
   );
@@ -61,7 +61,6 @@ export default function Scoreboard({ homeName, username }) {
               <NumberStats
                 homeName={homeName}
                 currentWeekISO={currentWeekISO}
-                username={username}
               />
             </div>
             <div className="scoreboard__stats">stats</div>
