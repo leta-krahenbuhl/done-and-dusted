@@ -1,0 +1,19 @@
+.number-stats-all {
+  flex-direction: column;
+  height: 100%;
+}
+
+.number-stats__icon-and-name {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.number-stats__pair {
+  text-align: center;
+}
+.number-stats__numbers {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=NumberStats.css.map */

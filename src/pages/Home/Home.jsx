@@ -9,6 +9,7 @@ import Tasks from "../../components/Tasks/Tasks";
 import MyHome from "../../components/MyHome/MyHome";
 import { getUsernameFromToken } from "../../utils/user";
 import { fetchHomeName } from "../../utils/axios";
+import Scoreboard from "../../components/Scoreboard/Scoreboard";
 
 export default function Home() {
   const [isAddHomeOpen, setIsAddHomeOpen] = useState(false);
@@ -28,7 +29,6 @@ export default function Home() {
       const fetchHome = async () => {
         try {
           const homename = await fetchHomeName(username, setError);
-          console.log("homename: ", homename);
           setHomeName(homename);
         } catch {
           console.error("Error fetching home data:", err);
@@ -96,7 +96,7 @@ export default function Home() {
             <Tasks homeName={homeName} />
           </TabPanel>
           <TabPanel>
-            <h2>Week 2</h2>
+            <Scoreboard homeName={homeName} username={username} />
           </TabPanel>
           <TabPanel>
             <MyHome homeName={homeName} />

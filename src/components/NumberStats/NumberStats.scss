@@ -1,0 +1,25 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.number-stats-all {
+  flex-direction: column;
+  height: 100%;
+}
+
+.number-stats {
+  &__icon-and-name {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  &__pair {
+    text-align: center;
+  }
+
+  &__numbers {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  }
+}

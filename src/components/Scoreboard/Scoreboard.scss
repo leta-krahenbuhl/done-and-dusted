@@ -1,0 +1,33 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.scoreboard-all {
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+}
+
+.scoreboard {
+  background-color: $primary-purple3;
+  border-radius: 5px;
+  padding: 1rem;
+
+  &__habs-and-stats {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__habitants {
+    flex: 1;
+  }
+
+  &__stats {
+    flex: 1;
+  }
+}

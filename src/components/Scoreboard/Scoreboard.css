@@ -1,0 +1,26 @@
+.scoreboard-all {
+  flex-direction: column;
+  height: 100%;
+}
+.scoreboard-all__header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.scoreboard {
+  background-color: #9a9cd5;
+  border-radius: 5px;
+  padding: 1rem;
+}
+.scoreboard__habs-and-stats {
+  display: flex;
+  justify-content: space-between;
+}
+.scoreboard__habitants {
+  flex: 1;
+}
+.scoreboard__stats {
+  flex: 1;
+}/*# sourceMappingURL=Scoreboard.css.map */

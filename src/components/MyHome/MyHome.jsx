@@ -13,8 +13,12 @@ export default function MyHome({ homeName }) {
 
   // Fetch current home data (to get inhabitants)
   useEffect(() => {
-    fetchHomeData(homeName, setError, setHomeData);
-  }, [homeName]); // Ensure it runs when homeName changes
+    const getHomeData = async () => {
+      const data = await fetchHomeData(homeName, setError);
+      setHomeData(data);
+    };
+    getHomeData();
+  }, [homeName]);
 
   // Error handling
   if (error) {
@@ -36,12 +40,12 @@ export default function MyHome({ homeName }) {
     setIsAddPeopleOpen(false);
   };
 
-  // Show AddPeople overlay
+  // Show DeletePeople overlay
   const handleDeletePeople = () => {
     setIsDeletePeopleOpen(true);
   };
 
-  // Close AddPeople overlay
+  // Close DeletePeople overlay
   const handleCloseDeletePeople = () => {
     setIsDeletePeopleOpen(false);
   };

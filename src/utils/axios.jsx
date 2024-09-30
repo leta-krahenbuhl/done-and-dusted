@@ -416,13 +416,12 @@ export const deleteHabitant = async (habitantToDelete, homeName) => {
 };
 
 // Fetch home data with homeName (to get inhabitants)
-export const fetchHomeData = async (homeName, setError, setHomeData) => {
+export const fetchHomeData = async (homeName, setError) => {
   try {
     const response = await axios.get("/api/homes/get-current", {
       params: { homeName },
     });
-
-    setHomeData(response.data);
+    return response.data;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
@@ -452,6 +451,36 @@ export const fetchHomeName = async (username, setError) => {
     if (error.response) {
       console.error("Response Error:", error.response.data);
       setError(error.response.data.message || "Failed to fetch home data.");
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
+// Fetch total minutes of user
+export const fetchTotalMinutes = async (username, currentWeekISO) => {
+  try {
+    // console.log("username: ", username); // works
+    // console.log("currentWeekISO: ", currentWeekISO); // works
+
+    const response = await axios.get("/api/users/minutes", {
+      params: { username, currentWeekISO },
+    });
+
+    const tasks = response.data;
+    return tasks;
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch tasks (to get minutes)."
+      );
     } else if (error.request) {
       console.error("No Response Error:", error.request);
       setError(
