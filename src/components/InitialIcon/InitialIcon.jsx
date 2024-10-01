@@ -14,7 +14,8 @@ export default function InitialIcon({ username, inTaskComponent }) {
       setError(null);
 
       try {
-        await fetchUserandColour(habitant, setColour);
+        const userColour = await fetchUserandColour(habitant);
+        setColour(userColour);
       } catch (error) {
         setError(error.message);
       }

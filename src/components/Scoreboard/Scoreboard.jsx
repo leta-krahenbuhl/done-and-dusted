@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import NumberStats from "../NumberStats/NumberStats";
 import WeekSlider from "../WeekSlider/WeekSlider";
 import { fetchHomeData, fetchTasksForMinutes } from "../../utils/axios";
+import Stats from "../Stats/Stats";
 
 export default function Scoreboard({ homeName }) {
   const [currentWeekISO, setCurrentWeekISO] = useState("");
   const [homeData, setHomeData] = useState(null);
   const [totalMinutesByHabitant, setTotalMinutesByHabitant] = useState({});
   const [error, setError] = useState(null);
+  const [colour, setColour] = useState("");
 
   // set currentWeekISO
   const setCurrentWeek = (currentWeekISO) => {
@@ -83,7 +85,12 @@ export default function Scoreboard({ homeName }) {
                 totalMinutesByHabitant={totalMinutesByHabitant}
               />
             </div>
-            <div className="scoreboard__stats">stats</div>
+            <div className="scoreboard__stats">
+              <Stats
+                totalMinutesByHabitant={totalMinutesByHabitant}
+                homeName={homeName}
+              />
+            </div>
           </div>
         </div>
       </article>

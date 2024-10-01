@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUsernameFromToken } from "./user";
 
 // Get user and set user colour
-export const fetchUserandColour = async (habitant, setColour) => {
+export const fetchUserandColour = async (habitant) => {
   const username = habitant;
 
   try {
@@ -10,8 +10,8 @@ export const fetchUserandColour = async (habitant, setColour) => {
       params: { username },
     });
 
-    const userData = response.data[0]; // Access the first element of the array
-    setColour(userData.colour); // Set the colour state
+    const userData = response.data[0];
+    return userData.colour;
   } catch (err) {
     console.error("Error fetching user data:", err);
     throw new Error(err.response?.data?.message || "Failed to fetch user data");
