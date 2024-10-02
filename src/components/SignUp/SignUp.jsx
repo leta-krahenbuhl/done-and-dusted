@@ -77,13 +77,13 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
             value={colour}
             onChange={(e) => setColour(e.target.value)}
           >
-            <option value="lightpink">Pink</option>
-            <option value="darkseagreen">Green</option>
-            <option value="gold">Yellow</option>
-            <option value="aquamarine">Turquoise</option>
-            <option value="cornflowerblue">Blue</option>
-            <option value="tomato">Orange</option>
-            <option value="lightgrey">Grey</option>
+            <option value="lightpink">lightpink</option>
+            <option value="darkseagreen">darkseagreen</option>
+            <option value="gold">gold</option>
+            <option value="aquamarine">aquamarine</option>
+            <option value="cornflowerblue">cornflowerblue</option>
+            <option value="tomato">tomato</option>
+            <option value="lightgrey">lightgrey</option>
           </select>
           <input
             type="password"

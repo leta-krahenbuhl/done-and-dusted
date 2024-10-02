@@ -96,6 +96,12 @@ export default function MyAccount() {
                 ********
               </div>
             </li>
+            <li className="account__list-item">
+              <div className="account__list-item-title">COLOUR:</div>
+              <div className="account__list-item-part account__list-item-part--title">
+                {userDetails[0]?.colour}
+              </div>
+            </li>
           </ul>
         </div>
         <div className="account__bottom-container">
@@ -113,6 +119,7 @@ export default function MyAccount() {
         isEditAccountOpen={isEditAccountOpen}
         password={userDetails[0]?.password}
         homeName={homeName}
+        colour={userDetails[0]?.colour}
       />
     </div>
   );

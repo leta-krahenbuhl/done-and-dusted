@@ -1,4 +1,4 @@
-import { deleteHabitant } from "../../utils/axios";
+import { deleteHabitant, updateUser } from "../../utils/axios";
 import "./EditAccount.scss";
 import { useEffect, useState } from "react";
 
@@ -6,17 +6,19 @@ export default function EditAccount({
   isEditAccountOpen,
   setIsEditAccountOpen,
   username,
-  password,
+  // password,
   homeName,
+  colour,
 }) {
-  const [usernameNew, setUsernameNew] = useState("");
-  const [passwordNew, setPasswordNew] = useState("");
-  const [passwordNewVerify, setPasswordNewVerify] = useState("");
+  // const [usernameNew, setUsernameNew] = useState("");
+  // const [passwordNew, setPasswordNew] = useState("");
+  // const [passwordNewVerify, setPasswordNewVerify] = useState("");
+  const [colourNew, setColourNew] = useState("");
 
   // Update states
   useEffect(() => {
-    setUsernameNew(username);
-  }, [username, password]);
+    setColourNew(colour);
+  }, [colour]);
 
   const closeEditAccount = () => {
     setIsEditAccountOpen(false);
@@ -40,6 +42,14 @@ export default function EditAccount({
     } else {
       return;
     }
+  };
+
+  // submit form (aka colour change)
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log("in on submit function");
+    await updateUser(username, colourNew);
+    // window.location.reload();
   };
 
   if (!isEditAccountOpen) return null;
@@ -75,6 +85,28 @@ export default function EditAccount({
             ""
           )}
         </div>
+
+        <form className="add-home-overlay-form" onSubmit={onSubmit}>
+          <label for="colour">Colour</label>
+          <select
+            id="colour"
+            name="colour"
+            className="add-task-overlay-form__input"
+            value={colourNew}
+            onChange={(e) => setColourNew(e.target.value)}
+          >
+            <option value="lightpink">lightpink</option>
+            <option value="darkseagreen">darkseagreen</option>
+            <option value="gold">gold</option>
+            <option value="aquamarine">aquamarine</option>
+            <option value="cornflowerblue">cornflowerblue</option>
+            <option value="tomato">tomato</option>
+            <option value="lightgrey">lightgrey</option>
+          </select>
+          <button type="submit" className="add-home-overlay-form__button">
+            Submit
+          </button>
+        </form>
 
         <button
           className="edit-acccount-overlay-form__button"

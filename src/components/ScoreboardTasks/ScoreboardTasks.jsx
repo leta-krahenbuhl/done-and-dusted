@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchHomeData, fetchTasksDoneByUser } from "../../utils/axios";
 import "./ScoreboardTasks.scss";
+import InitialIcon from "../InitialIcon/InitialIcon";
 
 export default function ScoreboardTasks({ homeName, currentWeekISO }) {
   const [habitants, setHabitants] = useState([]);
@@ -50,6 +51,8 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
   if (habitants.length === 0 || Object.keys(taskArrays).length === 0)
     return <p>Loading... </p>;
 
+  const inTaskComponent = true;
+
   return (
     <div className="scoreboard-tasks-all">
       <div className="scoreboard-tasks-all__title">
@@ -61,7 +64,12 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
 
           return (
             <div className="scoreboard-tasks-user" key={index}>
-              <div className="scoreboard-tasks-user__icon">{habitant}</div>
+              <div className="scoreboard-tasks-user__icon">
+                <InitialIcon
+                  username={habitant}
+                  inTaskComponent={inTaskComponent}
+                />
+              </div>
               <div className="scoreboard-tasks-user-tasks">
                 {tasks.length > 0 ? (
                   <ul className="scoreboard-tasks-user-tasks__list">

@@ -6,10 +6,19 @@
     display: flex;
     gap: 1rem;
   }
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .scoreboard-tasks-user {
   flex: 1;
+
+  &__icon {
+    margin-bottom: 1rem;
+  }
 }
 
 .scoreboard-tasks-user-tasks {

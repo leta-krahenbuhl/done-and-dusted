@@ -522,3 +522,24 @@ export const fetchTasksForMinutes = async (habitant, currentWeekISO) => {
     }
   }
 };
+
+// Update username / password
+export const updateUser = async (username, colourNew) => {
+  console.log("hello from axios!");
+
+  try {
+    // Prepare the payload dynamically based on what's provided
+    const payload = {};
+    if (username) payload.username = username; // Only add if provided
+    if (colourNew) payload.colourNew = colourNew; // Only add if provided
+    const response = await axios.patch("/api/users/update", payload);
+    if (response.status === 204) {
+      return response;
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error("An error occurred while updating the user");
+  }
+};
