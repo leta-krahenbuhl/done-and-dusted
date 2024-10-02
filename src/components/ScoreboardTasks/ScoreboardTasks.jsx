@@ -3,8 +3,8 @@ import { fetchHomeData, fetchTasksDoneByUser } from "../../utils/axios";
 import "./ScoreboardTasks.scss";
 
 export default function ScoreboardTasks({ homeName, currentWeekISO }) {
-  const [habitants, setHabitants] = useState("");
-  const [taskArrays, setTaskArrays] = useState("");
+  const [habitants, setHabitants] = useState([]);
+  const [taskArrays, setTaskArrays] = useState({});
   const [error, setError] = useState(null);
 
   // Get habitants of home
@@ -21,24 +21,22 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
     getHabitants();
   }, [homeName]);
 
-  // Get all done tasks of user
+  // Get all done tasks for each habitant
   useEffect(() => {
-    if (habitants) {
+    if (habitants.length > 0) {
       const getTasksDoneByUser = async () => {
         try {
-          // map through habitants and get all done tasks for each habitant
-          const tasksByUserPromises = habitants.map(async (habitant) => {
+          // Create an object where keys are habitants and values are their task arrays
+          const tasksByUser = {};
+          for (const habitant of habitants) {
             const data = await fetchTasksDoneByUser(
               habitant,
               currentWeekISO,
               setError
             );
-            return data; // returns the data, not a promise anymore
-          });
-
-          // Resolve all promises
-          const resolvedTaskArrays = await Promise.all(tasksByUserPromises);
-          setTaskArrays(resolvedTaskArrays);
+            tasksByUser[habitant] = data; // Assign the tasks to the habitant name
+          }
+          setTaskArrays(tasksByUser); // Store the result in state as an object
         } catch (err) {
           setError(err.message);
         }
@@ -49,28 +47,50 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
   }, [habitants, currentWeekISO]);
 
   if (error) return <p>Error: {error}</p>;
-  if (!taskArrays) return <p>Loading... </p>;
+  if (habitants.length === 0 || Object.keys(taskArrays).length === 0)
+    return <p>Loading... </p>;
 
   return (
     <div className="scoreboard-tasks-all">
-      {taskArrays.map((allTasksOfAHabitant, index) => {
-        return (
-          <div className="scoreboard-tasks-user" key={index}>
-            <div className="scoreboard-tasks-user__icon">
-              {allTasksOfAHabitant[0].doneBy}
+      <div className="scoreboard-tasks-all__title">
+        All completed tasks by habitant
+      </div>
+      <div className="scoreboard-tasks-all__content">
+        {habitants.map((habitant, index) => {
+          const tasks = taskArrays[habitant] || []; // Get the tasks for this habitant, default to empty array
+
+          return (
+            <div className="scoreboard-tasks-user" key={index}>
+              <div className="scoreboard-tasks-user__icon">{habitant}</div>
+              <div className="scoreboard-tasks-user-tasks">
+                {tasks.length > 0 ? (
+                  <ul className="scoreboard-tasks-user-tasks__list">
+                    {tasks.map((task) => (
+                      <li
+                        key={task._id}
+                        className="scoreboard-tasks-user-tasks__list-item"
+                        onClick={() => handleListItemClick(task)}
+                      >
+                        <div className="scoreboard-tasks-user-tasks__list-item-part scoreboard-tasks-user-tasks__list-item-part--title">
+                          {task.taskName}
+                        </div>
+                        <div className="scoreboard-tasks-user-tasks__list-item-part">
+                          {task.minutes} mins
+                        </div>
+                        <div className="scoreboard-tasks-user-tasks__list-item-part">
+                          {task.dueDate}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No tasks completed</p>
+                )}
+              </div>
             </div>
-            <div className="scoreboard-tasks-user__tasks">
-              {allTasksOfAHabitant.map((task) => {
-                return (
-                  <div className="test-container" key={task._id}>
-                    {task.taskName}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

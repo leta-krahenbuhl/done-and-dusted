@@ -2,9 +2,40 @@
 @use "../../styles/partials/mixins" as *;
 
 .scoreboard-tasks-all {
-  display: flex;
+  &__content {
+    display: flex;
+    gap: 1rem;
+  }
 }
 
 .scoreboard-tasks-user {
   flex: 1;
+}
+
+.scoreboard-tasks-user-tasks {
+  &__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__list-item {
+    background-color: $primary-done;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+
+    &__list-item-part {
+      width: 30%;
+      font-weight: 400;
+      font-size: 0.9rem;
+
+      &--title {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+    }
+  }
 }

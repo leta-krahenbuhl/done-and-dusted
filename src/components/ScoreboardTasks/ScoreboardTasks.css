@@ -1,7 +1,31 @@
-.scoreboard-tasks-all {
+.scoreboard-tasks-all__content {
   display: flex;
+  gap: 1rem;
 }
 
 .scoreboard-tasks-user {
   flex: 1;
+}
+
+.scoreboard-tasks-user-tasks__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.scoreboard-tasks-user-tasks__list-item {
+  background-color: #a9e2e4;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+.scoreboard-tasks-user-tasks__list-item__list-item-part {
+  width: 30%;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+.scoreboard-tasks-user-tasks__list-item__list-item-part--title {
+  font-weight: 700;
+  font-size: 1rem;
 }/*# sourceMappingURL=ScoreboardTasks.css.map */
