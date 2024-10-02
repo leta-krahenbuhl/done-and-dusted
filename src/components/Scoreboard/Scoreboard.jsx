@@ -4,13 +4,14 @@ import NumberStats from "../NumberStats/NumberStats";
 import WeekSlider from "../WeekSlider/WeekSlider";
 import { fetchHomeData, fetchTasksForMinutes } from "../../utils/axios";
 import Stats from "../Stats/Stats";
+import ScoreboardTasks from "../ScoreboardTasks/ScoreboardTasks";
 
 export default function Scoreboard({ homeName }) {
   const [currentWeekISO, setCurrentWeekISO] = useState("");
   const [homeData, setHomeData] = useState(null);
   const [totalMinutesByHabitant, setTotalMinutesByHabitant] = useState({});
   const [error, setError] = useState(null);
-  const [colour, setColour] = useState("");
+  //   const [colour, setColour] = useState("");
 
   // set currentWeekISO
   const setCurrentWeek = (currentWeekISO) => {
@@ -93,6 +94,9 @@ export default function Scoreboard({ homeName }) {
             </div>
           </div>
         </div>
+      </article>
+      <article className="scoreboard-tasklist">
+        <ScoreboardTasks homeName={homeName} currentWeekISO={currentWeekISO} />
       </article>
     </div>
   );

@@ -1,0 +1,10 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.scoreboard-tasks-all {
+  display: flex;
+}
+
+.scoreboard-tasks-user {
+  flex: 1;
+}

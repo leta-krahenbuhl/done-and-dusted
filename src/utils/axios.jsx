@@ -222,6 +222,36 @@ export const fetchOtherTasksDone = async (
   }
 };
 
+// Get tasks: all done tasks of a user for a certain week
+export const fetchTasksDoneByUser = async (
+  username,
+  currentWeekISO,
+  setError
+) => {
+  try {
+    const response = await axios.get("/api/tasks/done-by-user", {
+      params: { username, currentWeekISO },
+    });
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error("Response Error:", error.response.data);
+      setError(
+        error.response.data.message || "Failed to fetch tasks for user."
+      );
+    } else if (error.request) {
+      console.error("No Response Error:", error.request);
+      setError(
+        "No response from the server. Please check your network or try again later."
+      );
+    } else {
+      console.error("General Error:", error.message);
+      setError("An unexpected error occurred. Please try again.");
+    }
+  }
+};
+
 // Edit task
 export const editTask = async (taskName, minutes, repeat, dueDate, taskId) => {
   try {

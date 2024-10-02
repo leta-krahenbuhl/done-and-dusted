@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["Scoreboard.scss","../../styles/partials/_variables.scss"],"names":[],"mappings":"AAGA;EACE;EACA;;AAEA;EACE;EACA;EACA;EACA;;;AAIJ;EACE,kBCdgB;EDehB;EACA;;AAEA;EACE;EACA;;AAGF;EACE;;AAGF;EACE","file":"Scoreboard.css"}
+{"version":3,"sourceRoot":"","sources":["Scoreboard.scss","../../styles/partials/_variables.scss"],"names":[],"mappings":"AAGA;EACE;EACA;;AAEA;EACE;EACA;EACA;EACA;;;AAIJ;EACE,kBCdgB;EDehB;EACA;;AAEA;EACE;EACA;;AAGF;EACE;;AAGF;EACE;;;AAIJ;EACE,kBCjCgB;EDkChB;EACA;EACA","file":"Scoreboard.css"}
