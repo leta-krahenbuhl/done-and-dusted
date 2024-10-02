@@ -49,7 +49,7 @@ export default function EditAccount({
     e.preventDefault();
     console.log("in on submit function");
     await updateUser(username, colourNew);
-    // window.location.reload();
+    window.location.reload();
   };
 
   if (!isEditAccountOpen) return null;
@@ -86,12 +86,14 @@ export default function EditAccount({
           )}
         </div>
 
-        <form className="add-home-overlay-form" onSubmit={onSubmit}>
-          <label for="colour">Colour</label>
+        <form className="edit-acccount-overlay-form" onSubmit={onSubmit}>
+          <label className="edit-acccount-overlay-form__label" for="colour">
+            Edit colour:
+          </label>
           <select
             id="colour"
             name="colour"
-            className="add-task-overlay-form__input"
+            className="edit-acccount-overlay-form__input"
             value={colourNew}
             onChange={(e) => setColourNew(e.target.value)}
           >
@@ -103,17 +105,21 @@ export default function EditAccount({
             <option value="tomato">tomato</option>
             <option value="lightgrey">lightgrey</option>
           </select>
-          <button type="submit" className="add-home-overlay-form__button">
-            Submit
-          </button>
+          <div className="edit-acccount-overlay-form__button-container">
+            <button
+              className="edit-acccount-overlay-form__button"
+              onClick={closeEditAccount}
+            >
+              CANCEL
+            </button>
+            <button
+              type="submit"
+              className="edit-acccount-overlay-form__button"
+            >
+              SUBMIT
+            </button>
+          </div>
         </form>
-
-        <button
-          className="edit-acccount-overlay-form__button"
-          onClick={closeEditAccount}
-        >
-          CANCEL
-        </button>
       </div>
     </div>
   );
