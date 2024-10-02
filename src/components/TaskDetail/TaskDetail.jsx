@@ -40,7 +40,6 @@ export default function TaskDetail({
     try {
       await editTask(taskName, minutes, repeat, dueDate, taskId);
       setIsEdit(false);
-      alert("Task updated successfully!"); // Provide feedback to the user
       window.location.reload();
     } catch (error) {
       // User feedback for errors
@@ -110,13 +109,13 @@ export default function TaskDetail({
 
     // Error handling
     if (!taskId) {
-      return alert("Developer error. No task id.");
+      return alert("No task id");
     }
 
     try {
       const response = await deleteTask(taskId);
 
-      if (response.status === 200) {
+      if (response.status === 204) {
         setIsEdit(false);
         window.location.reload();
       } else {
@@ -215,7 +214,7 @@ export default function TaskDetail({
               EDIT: {selectedTask?.taskName}
             </h2>
 
-            <label for="task-description">Task description</label>
+            <label htmlFor="task-description">Task description</label>
             <input
               id="task-description"
               type="text"
@@ -226,7 +225,7 @@ export default function TaskDetail({
               required
             />
 
-            <label for="minutes">Time</label>
+            <label htmlFor="minutes">Time</label>
             <select
               id="minutes"
               name="minutes"
@@ -243,7 +242,7 @@ export default function TaskDetail({
               <option value="60">1h</option>
             </select>
 
-            <label for="due-date">Due</label>
+            <label htmlFor="due-date">Due</label>
             <input
               id="due-date"
               type="date"
@@ -253,7 +252,7 @@ export default function TaskDetail({
               required
             />
 
-            <label for="repeat">Repeat</label>
+            <label htmlFor="repeat">Repeat</label>
             <select
               id="repeat"
               name="repeat"

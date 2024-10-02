@@ -49,6 +49,7 @@ export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
         <h1 className="login-overlay__h1">Log In</h1>
         <form className="login-overlay-form" onSubmit={handleLogin}>
           <input
+            id="username"
             type="text"
             placeholder="Username"
             className="login-overlay-form__input"
@@ -57,6 +58,7 @@ export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
             required
           />
           <input
+            id="password"
             type="password"
             placeholder="Password"
             className="login-overlay-form__input"

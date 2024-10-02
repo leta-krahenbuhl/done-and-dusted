@@ -49,7 +49,7 @@ export default function DailyTasks({
             <ul className="daily-tasks__list">
               {dailyTasksUndone.map((task) => (
                 <li
-                  key={task.id}
+                  key={task._id}
                   className="daily-tasks__list-item"
                   onClick={() => handleListItemClick(task)}
                 >
@@ -75,7 +75,7 @@ export default function DailyTasks({
             <ul className="daily-tasks__list">
               {dailyTasksDone.map((task) => (
                 <li
-                  key={task.id}
+                  key={task._id}
                   className="daily-tasks__list-item daily-tasks__list-item--done"
                   onClick={() => handleListItemClick(task)}
                 >

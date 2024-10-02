@@ -38,6 +38,7 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
       const data = await response.json();
       if (response.ok) {
         alert("User created successfully");
+        window.location.reload();
       } else {
         alert(data.message);
       }

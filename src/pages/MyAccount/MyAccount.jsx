@@ -17,7 +17,6 @@ export default function MyAccount() {
   useEffect(() => {
     const user = getUsernameFromToken();
     setUsername(user);
-    // console.log("user: ", user);  // works!
   }, []);
 
   // get user's details (to get pw, to map through for name)
@@ -43,7 +42,6 @@ export default function MyAccount() {
   // Get homeName (using the username)
   useEffect(() => {
     if (username) {
-      // console.log("here"); // works!
       const fetchHomeNameWithUsername = async () => {
         try {
           const nameOfHome = await fetchHomeName(

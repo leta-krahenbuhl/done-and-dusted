@@ -62,7 +62,7 @@ export default function WeeklyTasks({
             <ul className="weekly-tasks__list">
               {weeklyTasksUndone.map((task) => (
                 <li
-                  key={task.id}
+                  key={task._id}
                   className="weekly-tasks__list-item"
                   onClick={() => handleListItemClick(task)}
                 >
@@ -88,7 +88,7 @@ export default function WeeklyTasks({
             <ul className="weekly-tasks__list">
               {weeklyTasksDone.map((task) => (
                 <li
-                  key={task.id}
+                  key={task._id}
                   className="weekly-tasks__list-item weekly-tasks__list-item--done"
                   onClick={() => handleListItemClick(task)}
                 >

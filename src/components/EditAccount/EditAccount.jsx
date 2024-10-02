@@ -10,9 +10,6 @@ export default function EditAccount({
   homeName,
   colour,
 }) {
-  // const [usernameNew, setUsernameNew] = useState("");
-  // const [passwordNew, setPasswordNew] = useState("");
-  // const [passwordNewVerify, setPasswordNewVerify] = useState("");
   const [colourNew, setColourNew] = useState("");
 
   // Update states
@@ -34,6 +31,8 @@ export default function EditAccount({
         const habitantToDelete = username;
         try {
           await deleteHabitant(habitantToDelete, homeName);
+          setIsEditAccountOpen(false);
+          window.location.reload();
         } catch (err) {
           console.error("Error deleting home:", err);
         }
@@ -87,7 +86,7 @@ export default function EditAccount({
         </div>
 
         <form className="edit-acccount-overlay-form" onSubmit={onSubmit}>
-          <label className="edit-acccount-overlay-form__label" for="colour">
+          <label className="edit-acccount-overlay-form__label" htmlFor="colour">
             Edit colour:
           </label>
           <select

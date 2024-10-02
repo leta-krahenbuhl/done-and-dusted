@@ -309,12 +309,21 @@ export const updateDone = async (done, taskId, doneBy) => {
 
 // Delete task
 export const deleteTask = async (taskId) => {
+  // Ask for confirmation
+  const userConfirmed = window.confirm(
+    "Are you sure you want to delete this task? This action cannot be undone."
+  );
+
+  if (!userConfirmed) {
+    return;
+  }
+
   try {
     const response = await axios.delete("/api/tasks/delete", {
       data: { taskId },
     });
 
-    if (response.status === 200) {
+    if (response.status === 204) {
       return response;
     } else {
       throw new Error(response.data.message);

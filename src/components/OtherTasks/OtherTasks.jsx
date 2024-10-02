@@ -48,7 +48,7 @@ export default function OtherTasks({
             <ul className="other-tasks__list">
               {otherTasksUndone.map((task) => (
                 <li
-                  key={task.id}
+                  key={task._id}
                   className="other-tasks__list-item"
                   onClick={() => handleListItemClick(task)}
                 >
@@ -74,7 +74,7 @@ export default function OtherTasks({
             <ul className="other-tasks__list">
               {otherTasksDone.map((task) => (
                 <li
-                  key={task.id}
+                  key={task._id}
                   className="other-tasks__list-item other-tasks__list-item--done"
                   onClick={() => handleListItemClick(task)}
                 >

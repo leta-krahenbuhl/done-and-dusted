@@ -12,7 +12,7 @@ export default function AddTasks({
   const [taskName, setTaskName] = useState("");
   const [minutes, setMinutes] = useState(5);
   const [repeat, setRepeat] = useState("daily");
-  const [dueDate, setDueDate] = useState();
+  const [dueDate, setDueDate] = useState("");
 
   // Add task
   const handleAddTask = async (e) => {
@@ -73,7 +73,7 @@ export default function AddTasks({
             required
           />
 
-          <label for="minutes">How much time does this task take?</label>
+          <label htmlFor="minutes">How much time does this task take?</label>
           <select
             id="minutes"
             name="minutes"
@@ -90,7 +90,7 @@ export default function AddTasks({
             <option value="60">1h</option>
           </select>
 
-          <label for="repeat">How often is this task due?</label>
+          <label htmlFor="repeat">How often is this task due?</label>
           <select
             id="repeat"
             name="repeat"

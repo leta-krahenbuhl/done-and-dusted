@@ -60,82 +60,10 @@
     @include button1-hover;
   }
 
-  //   &__button-close {
-  //     position: absolute;
-  //     width: 2.5rem;
-  //     color: $primary-white;
-  //     top: 1rem;
-  //     right: 1rem;
-  //     border: none;
-  //     background: $primary-font1;
-  //     font-size: 2rem;
-  //     border-radius: 5px;
-  //     cursor: pointer;
-  //   }
-
-  //   &__button-close:hover {
-  //     background: $primary-button2;
-  //   }
-
   &__text-container {
     width: 100%;
     text-align: left;
   }
-
-  //   &__h2 {
-  //     text-align: center;
-  //     color: $primary-font1;
-  //     margin: 0;
-  //     padding-top: 1rem;
-  //     padding-bottom: 2rem;
-  //     font-size: 2rem;
-  //     text-transform: uppercase;
-  //   }
-
-  //   &__attribute-container {
-  //     display: flex;
-  //     justify-content: space-between;
-  //     gap: 2rem;
-  //   }
-
-  //   &__task-attribute-legend {
-  //     margin-top: 0rem;
-  //     margin-bottom: 0.5rem;
-  //     width: 2rem;
-  //   }
-
-  //   &__task-attribute {
-  //     margin-top: 0rem;
-  //     margin-bottom: 0.5rem;
-  //     flex: 1;
-  //     font-weight: 400;
-  //   }
-
-  //   &__buttons {
-  //     display: flex;
-  //     flex-direction: column;
-  //   }
-
-  //   &__button-container {
-  //     display: flex;
-  //     gap: 1rem;
-  //   }
-
-  //   &__button {
-  //     @include button2;
-  //     margin-bottom: 1rem;
-
-  //     &--done {
-  //       background-color: $primary-done;
-  //       color: $primary-font1;
-  //       width: 100%;
-  //       margin-top: 2rem;
-  //     }
-  //   }
-
-  //   &__button:hover {
-  //     @include button2-hover;
-  //   }
 }
 
 .edit-acccount-overlay-form {
