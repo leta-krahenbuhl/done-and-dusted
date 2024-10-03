@@ -33,7 +33,7 @@ export default function InitialIconByHabitant({ habitant }) {
     <>
       <div
         className="initial-icon"
-        style={{ backgroundColor: colour || "pink" }}
+        style={{ backgroundColor: colour || "lightpink" }}
       >
         {userInitial}
       </div>

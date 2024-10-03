@@ -16,6 +16,7 @@ export default function Home() {
   const [homeName, setHomeName] = useState(null);
   const [error, setError] = useState(null);
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(true); // NEW: Loading state
 
   // set username
   useEffect(() => {
@@ -26,17 +27,24 @@ export default function Home() {
   // Find homeName with username as habitant
   useEffect(() => {
     if (username) {
-      const fetchHome = async () => {
+      const getHomeName = async () => {
         try {
-          const homename = await fetchHomeName(username, setError);
-          setHomeName(homename);
-        } catch {
-          console.error("Error fetching home data:", err);
+          const data = await fetchHomeName(username); // No setError needed here
+          setHomeName(data);
+        } catch (err) {
+          setError(err.message); // Handle the error locally in the component
+        } finally {
+          setLoading(false); // Mark loading as complete after fetch attempt
         }
       };
-      fetchHome();
+      getHomeName();
     }
   }, [username]);
+
+  // Show loading message while data is being fetched
+  if (loading) {
+    return <p>Loading home data...</p>; // Loading state
+  }
 
   if (!username) {
     return <p>Loading username...</p>;
@@ -50,7 +58,7 @@ export default function Home() {
     setIsAddHomeOpen(false);
   };
 
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <p className="home-error"> Error: {error}</p>;
 
   // If user doesn't have a home yet
   if (!homeName) {

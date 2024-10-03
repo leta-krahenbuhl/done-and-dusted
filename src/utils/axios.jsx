@@ -26,7 +26,10 @@ export const signUp = async (username, password, colour) => {
     // Handle specific error messages
     if (error.response) {
       // Server responded with a status code other than 200 range
-      throw new Error(error.response.data.message || "Error signing up");
+      throw new Error(
+        error.response.data.message ||
+          "Error signing up. Server may be offline."
+      );
     } else if (error.request) {
       // Request was made but no response received
       throw new Error("No response from server");
@@ -111,63 +114,55 @@ export const fetchUser = async (user) => {
 };
 
 // Get tasks: daily, undone
-export const fetchDailyTasksUndone = async (
-  homeName,
-  currentWeekISO,
-  setDailyTasksUndone,
-  setError
-) => {
+export const fetchDailyTasksUndone = async (homeName, currentWeekISO) => {
   try {
     const response = await axios.get("/api/tasks/daily-undone", {
       params: { homeName, currentWeekISO },
     });
 
-    setDailyTasksUndone(response.data);
+    return response.data;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
-      setError(
-        error.response.data.message || "Failed to fetch daily undone tasks."
+      throw new Error(
+        error.response.data.message ||
+          "Failed to fetch daily tasks. Server may be offline."
       );
     } else if (error.request) {
       console.error("No Response Error:", error.request);
-      setError(
+      throw new Error(
         "No response from the server. Please check your network or try again later."
       );
     } else {
       console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
+      throw new Error("An unexpected error occurred. Please try again.");
     }
   }
 };
 
 // Get tasks: daily, done
-export const fetchDailyTasksDone = async (
-  homeName,
-  currentWeekISO,
-  setDailyTasksDone,
-  setError
-) => {
+export const fetchDailyTasksDone = async (homeName, currentWeekISO) => {
   try {
     const response = await axios.get("/api/tasks/daily-done", {
       params: { homeName, currentWeekISO },
     });
 
-    setDailyTasksDone(response.data);
+    return response.data;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
-      setError(
-        error.response.data.message || "Failed to fetch daily undone tasks."
+      throw new Error(
+        error.response.data.message ||
+          "Failed to fetch daily tasks. Server may be offline."
       );
     } else if (error.request) {
       console.error("No Response Error:", error.request);
-      setError(
+      throw new Error(
         "No response from the server. Please check your network or try again later."
       );
     } else {
       console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
+      throw new Error("An unexpected error occurred. Please try again.");
     }
   }
 };
@@ -552,26 +547,29 @@ export const fetchHomeData = async (homeName, setError) => {
 };
 
 // Find homeName with username as habitant
-export const fetchHomeName = async (username, setError) => {
+export const fetchHomeName = async (username) => {
   try {
     const response = await axios.get("/api/homes/user-home", {
       params: { username },
     });
 
-    // return the name of the home:
-    return response.data.homeName;
+    // Return the name of the home, or null if user is not part of a home
+    return response.data.homeName || null;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
-      setError(error.response.data.message || "Failed to fetch home data.");
+      throw new Error(
+        error.response.data.message ||
+          "Failed to fetch home data. Server may be offline."
+      );
     } else if (error.request) {
       console.error("No Response Error:", error.request);
-      setError(
+      throw new Error(
         "No response from the server. Please check your network or try again later."
       );
     } else {
       console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
+      throw new Error("An unexpected error occurred. Please try again.");
     }
   }
 };
@@ -608,8 +606,6 @@ export const fetchTasksForMinutes = async (habitant, currentWeekISO) => {
 
 // Update username / password
 export const updateUser = async (username, colourNew) => {
-  console.log("hello from axios!");
-
   try {
     // Prepare the payload dynamically based on what's provided
     const payload = {};

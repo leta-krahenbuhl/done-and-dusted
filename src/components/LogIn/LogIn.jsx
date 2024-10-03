@@ -6,7 +6,7 @@ import { logIn } from "../../utils/axios";
 export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 

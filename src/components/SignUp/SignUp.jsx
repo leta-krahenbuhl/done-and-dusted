@@ -1,10 +1,10 @@
 import { signUp } from "../../utils/axios";
 import "./SignUp.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
   const [username, setUsername] = useState("");
-  const [colour, setColour] = useState("pink");
+  const [colour, setColour] = useState("lightpink"); // use the first colour in the select input
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);

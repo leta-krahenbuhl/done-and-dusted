@@ -19,17 +19,30 @@ export default function DailyTasks({
 
   // Get daily undone tasks
   useEffect(() => {
-    fetchDailyTasksUndone(
-      homeName,
-      currentWeekISO,
-      setDailyTasksUndone,
-      setError
-    );
+    const getDailyTasksUndone = async () => {
+      try {
+        const data = await fetchDailyTasksUndone(homeName, currentWeekISO);
+
+        setDailyTasksUndone(data);
+      } catch (err) {
+        setError(err.message); // Handle the error locally in the component
+      }
+    };
+    getDailyTasksUndone();
   }, [homeName, currentWeekISO]);
 
   //Get daily done tasks
   useEffect(() => {
-    fetchDailyTasksDone(homeName, currentWeekISO, setDailyTasksDone, setError);
+    const getDailyTasksDone = async () => {
+      try {
+        const data = await fetchDailyTasksDone(homeName, currentWeekISO);
+
+        setDailyTasksDone(data);
+      } catch (err) {
+        setError(err.message); // Handle the error locally in the component
+      }
+    };
+    getDailyTasksDone();
   }, [homeName, currentWeekISO]);
 
   if (error) return <p>Error: {error}</p>;

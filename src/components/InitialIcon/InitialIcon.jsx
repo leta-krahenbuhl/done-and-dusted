@@ -32,7 +32,7 @@ export default function InitialIcon({ username, inTaskComponent }) {
   return (
     <div
       className={inTaskComponent ? "initial-icon-small" : "initial-icon"}
-      style={{ backgroundColor: colour || "pink" }}
+      style={{ backgroundColor: colour || "lightpink" }}
     >
       {userInitial}
     </div>
