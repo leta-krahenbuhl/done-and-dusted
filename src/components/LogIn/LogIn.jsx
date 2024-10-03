@@ -1,34 +1,37 @@
 import "./LogIn.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { logIn } from "../../utils/axios";
 
 export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  // const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
 
-      const data = await response.json();
-      if (response.ok) {
-        // Store the token in local storage or state
-        localStorage.setItem("token", data.token);
-        navigate("/home");
-      } else {
-        alert(data.message);
-      }
+    setError(null);
+
+    if (!username) {
+      return alert("Please enter your username.");
+    }
+
+    if (!password) {
+      return alert("Please enter your password.");
+    }
+
+    try {
+      const data = await logIn(username, password);
+      localStorage.setItem("token", data.token);
+
+      navigate("/home");
     } catch (error) {
-      console.error("Error:", error);
+      // Show a user-friendly message
+      alert(error.message);
+      // setError(error.message);
     }
   };
 

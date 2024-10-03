@@ -12,6 +12,15 @@
   justify-content: center;
   width: 100%;
   font-size: 1.2rem;
+  margin-top: 1.5rem;
+}
+.landing-main__h1 {
+  color: #27267e;
+  font-size: 2rem;
+}
+.landing-main__text {
+  margin-bottom: 1rem;
+  line-height: 1.7rem;
 }
 .landing-main__illustration {
   height: 20rem;
@@ -19,7 +28,6 @@
 }
 .landing-main__text-and-buttons {
   padding-top: 2rem;
-  padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
   align-items: normal;
@@ -31,6 +39,7 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  margin-top: 2rem;
 }
 .landing-main__button {
   flex: 1;

@@ -1,6 +1,80 @@
 import axios from "axios";
 import { getUsernameFromToken } from "./user";
 
+// SignUp
+export const signUp = async (username, password, colour) => {
+  try {
+    const response = await axios.post(
+      "/api/signup",
+      {
+        username,
+        password,
+        colour,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.error("Error during sign up:", error);
+
+    // Handle specific error messages
+    if (error.response) {
+      // Server responded with a status code other than 200 range
+      throw new Error(error.response.data.message || "Error signing up");
+    } else if (error.request) {
+      // Request was made but no response received
+      throw new Error("No response from server");
+    } else {
+      // Something else happened while setting up the request
+      throw new Error("Error: " + error.message);
+    }
+  }
+};
+
+// Log In
+export const logIn = async (username, password) => {
+  try {
+    const response = await axios.post(
+      "/api/login",
+      {
+        username,
+        password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.error("Error during log in:", error);
+
+    // Handle specific error messages
+    if (error.response) {
+      // Server responded with a status code other than 200 range
+      throw new Error(
+        error.response.data.message ||
+          "Error logging in. Server may be offline."
+      );
+    } else if (error.request) {
+      // Request was made but no response received
+      throw new Error("No response from server");
+    } else {
+      // Something else happened while setting up the request
+      throw new Error("Error: " + error.message);
+    }
+  }
+};
+
 // Get user and set user colour
 export const fetchUserandColour = async (habitant) => {
   const username = habitant;

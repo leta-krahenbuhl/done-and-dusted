@@ -9,12 +9,27 @@
   min-height: 100vh;
 }
 
+.landing-header {
+  // margin-top: 2rem;
+}
+
 .landing-main {
   margin-top: -2rem;
   display: flex;
   justify-content: center;
   width: 100%;
   font-size: 1.2rem;
+  margin-top: 1.5rem;
+
+  &__h1 {
+    color: $primary-font1;
+    font-size: 2rem;
+  }
+
+  &__text {
+    margin-bottom: 1rem;
+    line-height: 1.7rem;
+  }
 
   &__illustration {
     height: 20rem;
@@ -23,7 +38,6 @@
 
   &__text-and-buttons {
     padding-top: 2rem;
-    padding-bottom: 3rem;
 
     display: flex;
     flex-direction: column;
@@ -37,6 +51,7 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    margin-top: 2rem;
   }
 
   &__button {

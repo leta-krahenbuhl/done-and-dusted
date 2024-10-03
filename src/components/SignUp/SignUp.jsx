@@ -1,3 +1,4 @@
+import { signUp } from "../../utils/axios";
 import "./SignUp.scss";
 import { useState } from "react";
 
@@ -6,9 +7,12 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
   const [colour, setColour] = useState("pink");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    setError("");
 
     if (password !== confirmPassword) {
       return alert("Passwords do not match.");
@@ -27,23 +31,14 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
     }
 
     try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password, colour }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        alert("User created successfully");
-        window.location.reload();
-      } else {
-        alert(data.message);
-      }
+      const response = await signUp(username, password, colour);
+      alert(
+        "User created successfully. Please log in to get started.",
+        response.message
+      );
+      handleCloseSignUp(false);
     } catch (error) {
-      console.error("Error:", error);
+      setError(error.message);
     }
   };
 
@@ -110,6 +105,9 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
             Submit
           </button>
         </form>
+        <div className="signup-overlay__feedback">
+          {error && <div style={{ color: "red" }}>{error}</div>}
+        </div>
       </div>
     </div>
   );

@@ -37,12 +37,15 @@ export default function Landing() {
           className="landing-main__illustration"
         />
         <div className="landing-main__text-and-buttons">
+          <h1 className="landing-main__h1">Where Housework Meets Game Time</h1>
           <p className="landing-main__text">
-            Tired of arguing over who did the dishes last or whose turn it is to
-            vacuum? With Done & Dusted, sharing chores becomes a friendly
-            competition that everyone in the house can enjoy! Who will be the
-            ultimate chore champion in your house? Step up, clean up, and show
-            everyone who's boss!
+            Transform mundane chores into a thrilling competition for the whole
+            house. Get ready to hit the 'done' button and get that dopamine!
+          </p>
+          <p className="landing-main__text">
+            Done&Dusted is an interactive way to tackle your to-do list and see
+            how you stack up against your friends or family with the weekly
+            scoreboard. Who's gonna be the weekly champion?
           </p>
           <div className="landing-main__buttons">
             <button className="landing-main__button" onClick={handleClickLogIn}>

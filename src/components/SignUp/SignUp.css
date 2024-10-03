@@ -42,6 +42,9 @@
   padding-top: 1rem;
   padding-bottom: 2rem;
 }
+.signup-overlay__feedback {
+  margin-top: 1rem;
+}
 
 .signup-overlay-form {
   display: flex;
