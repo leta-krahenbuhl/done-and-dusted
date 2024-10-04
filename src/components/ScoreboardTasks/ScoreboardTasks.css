@@ -1,17 +1,28 @@
 .scoreboard-tasks-all__content {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
+}
+@media (min-width: 600px) {
+  .scoreboard-tasks-all__content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .scoreboard-tasks-all__content {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 .scoreboard-tasks-all__title {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
 }
 
 .scoreboard-tasks-user {
   flex: 1;
+  margin-top: 1rem;
 }
 .scoreboard-tasks-user__icon {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .scoreboard-tasks-user-tasks__list {
@@ -27,12 +38,11 @@
   border-radius: 5px;
   padding: 0.5rem;
 }
-.scoreboard-tasks-user-tasks__list-item__list-item-part {
-  width: 30%;
+.scoreboard-tasks-user-tasks__list-item-part {
   font-weight: 400;
   font-size: 0.9rem;
 }
-.scoreboard-tasks-user-tasks__list-item__list-item-part--title {
+.scoreboard-tasks-user-tasks__list-item-part--title {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }/*# sourceMappingURL=ScoreboardTasks.css.map */

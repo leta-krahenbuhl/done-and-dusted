@@ -77,7 +77,6 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
                       <li
                         key={task._id}
                         className="scoreboard-tasks-user-tasks__list-item"
-                        onClick={() => handleListItemClick(task)}
                       >
                         <div className="scoreboard-tasks-user-tasks__list-item-part scoreboard-tasks-user-tasks__list-item-part--title">
                           {task.taskName}

@@ -39,7 +39,6 @@ export default function AddTasks({
       );
 
       if (response.status === 201) {
-        alert(`Task '${taskName}' added to successfully.`);
         setIsAddTaskOpen(false);
         window.location.reload();
       }

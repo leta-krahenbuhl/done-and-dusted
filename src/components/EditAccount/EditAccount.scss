@@ -1,6 +1,63 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
+.edit-acccount-overlay-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid $primary-font1;
+
+  &__label {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  &__input {
+    margin-bottom: 0.8rem;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  &__button-container-form {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+  }
+
+  &__button {
+    @include button2;
+    // flex: 1;
+  }
+
+  &__space {
+    width: 250px;
+    flex: 1;
+    border-radius: 5px;
+  }
+
+  &__button:hover {
+    @include button2-hover;
+  }
+
+  &__button-submit {
+    @include button2;
+    margin-bottom: 1rem;
+    // background-color: $primary-done;
+    // color: $primary-font1;
+  }
+
+  &__button-submit:hover {
+    @include button2-hover;
+  }
+
+  &__button-container {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
 .edit-acccount-overlay {
   position: fixed;
   top: 0;
@@ -40,12 +97,42 @@
     text-transform: uppercase;
   }
 
-  &__remove-home {
+  &__remove-home-container {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    justify-content: space-between;
     margin-bottom: 2rem;
+    margin-top: 2rem;
   }
+
+  &__no-home-container {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid $primary-font1;
+    display: flex;
+    justify-content: end;
+  }
+
+  &__bold {
+    font-weight: 700;
+  }
+
+  &__line {
+    border-bottom: 2px solid $primary-font1;
+  }
+
+  &__width-set {
+    width: 10rem;
+  }
+
+  &__text {
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid $primary-font1;
+  }
+
   &__remove-home-text {
     font-weight: 700;
     margin-top: 1rem;
@@ -54,6 +141,7 @@
   &__button-remove {
     @include button1;
     margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 
   &__button-remove:hover {
@@ -64,51 +152,20 @@
     width: 100%;
     text-align: left;
   }
-}
-
-.edit-acccount-overlay-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  &__label {
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  &__input {
-    margin-bottom: 0.8rem;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-
-  &__button-container {
-    display: flex;
-    margin-top: 1rem;
-  }
-
-  &__button {
-    @include button2;
-  }
-
-  &__button:hover {
-    @include button2-hover;
-  }
-
-  &__button-submit {
-    @include button2;
-    margin-bottom: 1rem;
-    // background-color: $primary-done;
-    // color: $primary-font1;
-  }
-
-  &__button-submit:hover {
-    @include button2-hover;
-  }
 
   &__button-container {
     display: flex;
     gap: 1rem;
+    justify-content: end;
+  }
+
+  &__button {
+    @include button2;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__button:hover {
+    @include button2-hover;
   }
 }

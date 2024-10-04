@@ -505,10 +505,10 @@ export const addHabitantToHome = async (newHabitant, homeName) => {
 };
 
 // Delete habitant
-export const deleteHabitant = async (habitantToDelete, homeName) => {
+export const deleteHabitant = async (username, homeName) => {
   try {
     const response = await axios.patch("/api/homes/delete-habitant", {
-      habitantToDelete,
+      username,
       homeName,
     });
 

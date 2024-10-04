@@ -24,13 +24,12 @@ export default function EditAccount({
   // Remove home from user
   const handleRemoveHome = () => {
     const userConfirmed = window.confirm(
-      "Are you sure? If you're the only habitant of this home, the home and all data associated with it will be deleted, and you will not be able to re-join it."
+      "Are you sure? If you're the only habitant of this home, you will not be able to re-join it."
     );
     if (userConfirmed) {
       const deleteHome = async () => {
-        const habitantToDelete = username;
         try {
-          await deleteHabitant(habitantToDelete, homeName);
+          await deleteHabitant(username, homeName);
           setIsEditAccountOpen(false);
           window.location.reload();
         } catch (err) {
@@ -59,31 +58,7 @@ export default function EditAccount({
         className="edit-acccount-overlay__content"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="edit-acccount-overlay__h2">{`EDIT: ${username}'s Account`}</h2>
-
-        <div className="edit-acccount-overlay__text-container">
-          <p>
-            Here you can remove yourself from a home, even if you're the last
-            habitant left. Doing so will delete the home and all data associated
-            with it, so no one will be able to re-join that home.
-          </p>
-        </div>
-
-        <div className="edit-acccount-overlay__remove-home">
-          <div className="edit-acccount-overlay__remove-home-text ">
-            {homeName ? `Lives at: ${homeName}` : "No home yet"}
-          </div>
-          {homeName ? (
-            <button
-              className="edit-acccount-overlay__button-remove"
-              onClick={handleRemoveHome}
-            >
-              REMOVE HOME
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
+        <h2 className="edit-acccount-overlay__h2">{`EDIT ${username}'s Account`}</h2>
 
         <form className="edit-acccount-overlay-form" onSubmit={onSubmit}>
           <label className="edit-acccount-overlay-form__label" htmlFor="colour">
@@ -104,13 +79,7 @@ export default function EditAccount({
             <option value="tomato">tomato</option>
             <option value="lightgrey">lightgrey</option>
           </select>
-          <div className="edit-acccount-overlay-form__button-container">
-            <button
-              className="edit-acccount-overlay-form__button"
-              onClick={closeEditAccount}
-            >
-              CANCEL
-            </button>
+          <div className="edit-acccount-overlay-form__button-container-form">
             <button
               type="submit"
               className="edit-acccount-overlay-form__button"
@@ -119,6 +88,53 @@ export default function EditAccount({
             </button>
           </div>
         </form>
+
+        <div className="edit-acccount-overlay__remove-home-container">
+          <div className="edit-acccount-overlay__bold">
+            {homeName ? (
+              `Lives at: ${homeName}`
+            ) : (
+              <div>
+                <div className="edit-acccount-overlay__bold">No home yet</div>
+
+                <div className="edit-acccount-overlay__no-home-container">
+                  <button
+                    className="edit-acccount-overlay__button"
+                    onClick={closeEditAccount}
+                  >
+                    CANCEL
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+          {homeName ? (
+            <div>
+              <div className="edit-acccount-overlay__button-container">
+                <button
+                  className="edit-acccount-overlay__button"
+                  onClick={handleRemoveHome}
+                >
+                  LEAVE THIS HOME
+                </button>
+              </div>
+              <p className="edit-acccount-overlay__text">
+                (If you're the last habitant, you will NOT be able to re-join
+                this home)
+              </p>
+              <div className="edit-acccount-overlay__button-container">
+                <button
+                  className="edit-acccount-overlay__button"
+                  onClick={closeEditAccount}
+                >
+                  CANCEL
+                </button>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

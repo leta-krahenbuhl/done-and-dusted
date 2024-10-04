@@ -29,7 +29,7 @@ export default function Home() {
     if (username) {
       const getHomeName = async () => {
         try {
-          const data = await fetchHomeName(username); // No setError needed here
+          const data = await fetchHomeName(username);
           setHomeName(data);
         } catch (err) {
           setError(err.message); // Handle the error locally in the component
