@@ -76,7 +76,7 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
             <option value="lightpink">lightpink</option>
             <option value="darkseagreen">darkseagreen</option>
             <option value="gold">gold</option>
-            <option value="aquamarine">aquamarine</option>
+            <option value="teal">teal</option>
             <option value="cornflowerblue">cornflowerblue</option>
             <option value="tomato">tomato</option>
             <option value="lightgrey">lightgrey</option>

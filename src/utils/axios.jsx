@@ -168,125 +168,109 @@ export const fetchDailyTasksDone = async (homeName, currentWeekISO) => {
 };
 
 // Get tasks: weekly, undone
-export const fetchWeeklyTasksUndone = async (
-  homeName,
-  currentWeekISO,
-  setWeeklyTasksUndone,
-  setError
-) => {
+export const fetchWeeklyTasksUndone = async (homeName, currentWeekISO) => {
   try {
     const response = await axios.get("/api/tasks/weekly-undone", {
       params: { homeName, currentWeekISO },
     });
 
-    setWeeklyTasksUndone(response.data);
+    return response.data;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
-      setError(
-        error.response.data.message || "Failed to fetch daily undone tasks."
+      throw new Error(
+        error.response.data.message ||
+          "Failed to fetch weekly tasks. Server may be offline."
       );
     } else if (error.request) {
       console.error("No Response Error:", error.request);
-      setError(
+      throw new Error(
         "No response from the server. Please check your network or try again later."
       );
     } else {
       console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
+      throw new Error("An unexpected error occurred. Please try again.");
     }
   }
 };
 
 // Get tasks: weekly, done
-export const fetchWeeklyTasksDone = async (
-  homeName,
-  currentWeekISO,
-  setWeeklyTasksDone,
-  setError
-) => {
+export const fetchWeeklyTasksDone = async (homeName, currentWeekISO) => {
   try {
     const response = await axios.get("/api/tasks/weekly-done", {
       params: { homeName, currentWeekISO },
     });
 
-    setWeeklyTasksDone(response.data);
+    return response.data;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
-      setError(
-        error.response.data.message || "Failed to fetch daily undone tasks."
+      throw new Error(
+        error.response.data.message ||
+          "Failed to fetch weekly tasks. Server may be offline."
       );
     } else if (error.request) {
       console.error("No Response Error:", error.request);
-      setError(
+      throw new Error(
         "No response from the server. Please check your network or try again later."
       );
     } else {
       console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
+      throw new Error("An unexpected error occurred. Please try again.");
     }
   }
 };
 
 // Get tasks: other, undone
-export const fetchOtherTasksUndone = async (
-  homeName,
-  currentWeekISO,
-  setOtherTasksUndone,
-  setError
-) => {
+export const fetchOtherTasksUndone = async (homeName, currentWeekISO) => {
   try {
     const response = await axios.get("/api/tasks/other-undone", {
       params: { homeName, currentWeekISO },
     });
 
-    setOtherTasksUndone(response.data);
+    return response.data;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
-      setError(
-        error.response.data.message || "Failed to fetch daily undone tasks."
+      throw new Error(
+        error.response.data.message ||
+          "Failed to fetch other tasks. Server may be offline."
       );
     } else if (error.request) {
       console.error("No Response Error:", error.request);
-      setError(
+      throw new Error(
         "No response from the server. Please check your network or try again later."
       );
     } else {
       console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
+      throw new Error("An unexpected error occurred. Please try again.");
     }
   }
 };
 
 // Get tasks: other, done
-export const fetchOtherTasksDone = async (
-  homeName,
-  currentWeekISO,
-  setOtherTasksDone,
-  setError
-) => {
+export const fetchOtherTasksDone = async (homeName, currentWeekISO) => {
   try {
     const response = await axios.get("/api/tasks/other-done", {
       params: { homeName, currentWeekISO },
     });
 
-    setOtherTasksDone(response.data);
+    return response.data;
   } catch (error) {
     if (error.response) {
       console.error("Response Error:", error.response.data);
-      setError(
-        error.response.data.message || "Failed to fetch daily undone tasks."
+      throw new Error(
+        error.response.data.message ||
+          "Failed to fetch other tasks. Server may be offline."
       );
     } else if (error.request) {
       console.error("No Response Error:", error.request);
-      setError(
+      throw new Error(
         "No response from the server. Please check your network or try again later."
       );
     } else {
       console.error("General Error:", error.message);
-      setError("An unexpected error occurred. Please try again.");
+      throw new Error("An unexpected error occurred. Please try again.");
     }
   }
 };

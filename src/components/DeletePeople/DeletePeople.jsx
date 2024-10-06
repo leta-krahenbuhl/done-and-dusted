@@ -37,33 +37,36 @@ export default function DeletePeople({
   if (!isDeletePeopleOpen) return null;
 
   return (
-    <div className="add-home-overlay" onClick={handleCloseDeletePeople}>
+    <div className="delete-people-overlay" onClick={handleCloseDeletePeople}>
       <div
-        className="add-home-overlay__content"
+        className="delete-people-overlay__content"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="add-home-overlay__button-close"
+          className="delete-people-overlay__button-close"
           onClick={handleCloseDeletePeople}
         >
           &times;
         </button>
-        <h1 className="add-home-overlay__h1">Delete a habitant</h1>
+        <h1 className="delete-people-overlay__h1">Delete a habitant</h1>
         <p>
           You can delete yourself, but you will loose access to this home and
           its data.
         </p>
-        <form className="add-home-overlay-form" onSubmit={handleDeletePeople}>
+        <form
+          className="delete-people-overlay-form"
+          onSubmit={handleDeletePeople}
+        >
           <input
             type="text"
             placeholder="Username of person to delete"
-            className="add-home-overlay-form__input"
+            className="delete-people-overlay-form__input"
             value={habitantToDelete}
             onChange={(e) => setHabitantToDelete(e.target.value)}
             required
           />
 
-          <button type="submit" className="add-home-overlay-form__button">
+          <button type="submit" className="delete-people-overlay-form__button">
             Delete
           </button>
         </form>

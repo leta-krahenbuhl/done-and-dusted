@@ -18,17 +18,30 @@ export default function OtherTasks({
 
   // Get tasks other: undone
   useEffect(() => {
-    fetchOtherTasksUndone(
-      homeName,
-      currentWeekISO,
-      setOtherTasksUndone,
-      setError
-    );
+    const getOtherTasks = async () => {
+      try {
+        const data = await fetchOtherTasksUndone(homeName, currentWeekISO);
+
+        setOtherTasksUndone(data);
+      } catch (err) {
+        setError(err.message); // Handle the error locally in the component
+      }
+    };
+    getOtherTasks();
   }, [homeName, currentWeekISO]);
 
   // Get tasks other: done
   useEffect(() => {
-    fetchOtherTasksDone(homeName, currentWeekISO, setOtherTasksDone, setError);
+    const getOtherTasksDone = async () => {
+      try {
+        const data = await fetchOtherTasksDone(homeName, currentWeekISO);
+
+        setOtherTasksDone(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    getOtherTasksDone();
   }, [homeName, currentWeekISO]);
 
   if (error) return <p>Error: {error}</p>;

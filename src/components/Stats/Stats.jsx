@@ -65,6 +65,15 @@ export default function Stats({ totalMinutesByHabitant, homeName }) {
     })
   );
 
+  const totalMinutes = Object.values(totalMinutesByHabitant).reduce(
+    (acc, minutes) => acc + minutes,
+    0
+  );
+
+  if (totalMinutes === 0) {
+    return <p>No tasks completed</p>;
+  }
+
   return (
     <div className="stats">
       <PieChart series={[{ data: pieChartData }]} width={400} height={200} />

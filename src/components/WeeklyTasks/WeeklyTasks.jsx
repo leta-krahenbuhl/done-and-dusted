@@ -16,34 +16,37 @@ export default function WeeklyTasks({
 
   const [error, setError] = useState(null);
 
-  // Sets class in InitialIcon to determine size
+  // Sets class in InitialIcon to determine icon size
   // If in task component it's small, otherwise (ie in header or myHOme) big
   const inTaskComponent = true;
 
   // Get weekly undone tasks
   useEffect(() => {
-    fetchWeeklyTasksUndone(
-      homeName,
-      currentWeekISO,
-      setWeeklyTasksUndone,
-      setError
-    );
+    const getWeeklyTasksUndone = async () => {
+      try {
+        const data = await fetchWeeklyTasksUndone(homeName, currentWeekISO);
+
+        setWeeklyTasksUndone(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    getWeeklyTasksUndone();
   }, [homeName, currentWeekISO]);
 
   // Get weekly done tasks
   useEffect(() => {
-    fetchWeeklyTasksDone(
-      homeName,
-      currentWeekISO,
-      setWeeklyTasksDone,
-      setError
-    );
-  }, [homeName, currentWeekISO]);
+    const getWeeklyTasksDone = async () => {
+      try {
+        const data = await fetchWeeklyTasksDone(homeName, currentWeekISO);
 
-  // Fetch tasks for this week
-  // useEffect(() => {
-  //   fetchWeeklyTasks(homeName, currentWeekISO, setError, setWeeklyTasks);
-  // }, [homeName, currentWeekISO]);
+        setWeeklyTasksDone(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    getWeeklyTasksDone();
+  }, [homeName, currentWeekISO]);
 
   if (error) return <p>Error: {error}</p>;
 
