@@ -71,7 +71,7 @@ export default function Stats({ totalMinutesByHabitant, homeName }) {
   );
 
   if (totalMinutes === 0) {
-    return <p>No tasks completed</p>;
+    return <p className="stats-no-task-msg"></p>;
   }
 
   return (

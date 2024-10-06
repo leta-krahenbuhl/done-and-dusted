@@ -1,1 +1,8 @@
-/*# sourceMappingURL=Stats.css.map */
+.stats-no-task-msg {
+  justify-content: flex-start;
+  margin-top: 1.7rem;
+}
+
+.stats {
+  margin: auto 0;
+}/*# sourceMappingURL=Stats.css.map */

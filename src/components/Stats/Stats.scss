@@ -1,0 +1,11 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.stats-no-task-msg {
+  justify-content: flex-start;
+  margin-top: 1.7rem;
+}
+
+.stats {
+  margin: auto 0;
+}

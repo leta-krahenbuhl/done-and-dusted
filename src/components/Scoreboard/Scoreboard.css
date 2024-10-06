@@ -10,6 +10,15 @@
 }
 
 .scoreboard {
+  padding: 1rem 1rem 0 1rem;
+}
+.scoreboard__stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.scoreboard {
   background-color: #9a9cd5;
   border-radius: 5px;
   padding: 1rem;
