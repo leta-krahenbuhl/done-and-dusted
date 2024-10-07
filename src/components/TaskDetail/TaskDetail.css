@@ -47,7 +47,7 @@
 .task-detail-overlay__h2 {
   text-align: center;
   color: #27267e;
-  margin: 0;
+  margin: 3rem 0 0 0;
   padding-top: 1rem;
   padding-bottom: 2rem;
   font-size: 2rem;
@@ -87,7 +87,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   font-family: "Afacad", Helvetica, sans-serif;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 .task-detail-overlay__button--done {
   background-color: #a9e2e4;
@@ -108,7 +108,7 @@
 .task-detail-overlay-form__h2 {
   text-align: center;
   color: #27267e;
-  margin: 0;
+  margin: 3rem 0 0 0;
   padding-top: 1rem;
   padding-bottom: 2rem;
   font-size: 2rem;
@@ -131,6 +131,7 @@
   font-weight: 700;
   font-family: "Afacad", Helvetica, sans-serif;
   width: 100%;
+  margin-top: 0rem;
 }
 .task-detail-overlay-form__button:hover {
   background-color: #fab44b;
@@ -146,7 +147,8 @@
   font-size: 1.2rem;
   font-weight: 700;
   font-family: "Afacad", Helvetica, sans-serif;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
+  margin-top: 1rem;
   background-color: #a9e2e4;
   color: #27267e;
 }

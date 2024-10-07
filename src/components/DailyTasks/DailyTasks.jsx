@@ -55,7 +55,9 @@ export default function DailyTasks({
         <>
           <div className="daily-tasks">
             <div className="daily-tasks__column-headers-div">
-              <p className="daily-tasks__column-headers">Task</p>
+              <p className="daily-tasks__column-headers daily-tasks__column-headers--taskname">
+                Task
+              </p>
               <p className="daily-tasks__column-headers">Duration</p>
               <p className="daily-tasks__column-headers">Due</p>
             </div>
@@ -81,9 +83,13 @@ export default function DailyTasks({
           </div>
           <div className="daily-tasks">
             <div className="daily-tasks__column-headers-div">
-              <p className="daily-tasks__column-headers">Task</p>
+              <p className="daily-tasks__column-headers daily-tasks__column-headers--taskname-done">
+                Task
+              </p>
               <p className="daily-tasks__column-headers">Duration</p>
-              <p className="daily-tasks__column-headers">Due</p>
+              <p className="daily-tasks__column-headers daily-tasks__column-headers--due-done">
+                Due
+              </p>
             </div>
             <ul className="daily-tasks__list">
               {dailyTasksDone.map((task) => (

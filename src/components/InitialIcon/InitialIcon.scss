@@ -10,17 +10,18 @@
   border-radius: 50%;
   height: 4.2rem;
   width: 4.2rem;
+  color: $primary-font1;
 }
 
 .initial-icon-small {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   border-radius: 50%;
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1.2rem;
+  width: 1.2rem;
 }
 
 // initial 'C' isn't centred in cricle, adjustment below

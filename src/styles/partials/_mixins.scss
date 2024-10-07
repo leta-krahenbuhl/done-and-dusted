@@ -32,3 +32,108 @@
   background-color: $primary-button2;
   color: $primary-white;
 }
+
+@mixin tasks-all {
+  display: flex;
+  gap: 1rem;
+  background-color: $primary-purple3;
+  padding: 1rem;
+  border-radius: 5px;
+  max-height: 60vh;
+  overflow-y: scroll;
+
+  &__text {
+    margin: 0rem;
+    font-size: 0.9rem;
+  }
+
+  /* Scrollbar styling for WebKit browsers */
+  &::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $primary-purple3; /* Color of the scrollbar track */
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary-purple4; /* Color of the scrollbar thumb */
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: darken(
+      $primary-purple1,
+      10%
+    ); /* Darker color when hovered */
+  }
+}
+
+@mixin tasks {
+  flex: 1;
+
+  &__column-headers-div {
+    display: flex;
+    width: 100%;
+    height: 1.5rem;
+    justify-content: space-between;
+  }
+
+  &__column-headers {
+    width: 30%;
+    margin-top: 0rem;
+    font-size: 0.8rem;
+
+    &--taskname {
+      width: 70%;
+    }
+
+    &--taskname-done {
+      width: 72%;
+    }
+
+    &--due-done {
+      width: 40%;
+    }
+  }
+
+  &__list {
+    list-style-type: none;
+    padding: 0 0 1rem 0;
+    margin: 0;
+  }
+
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary-white;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    padding: 0.3rem 0.3rem 0.3rem 0.5rem;
+    height: 1.7rem;
+    line-height: 1rem;
+    align-items: center;
+
+    &--done {
+      background-color: $primary-done;
+    }
+  }
+
+  &__list-item:hover {
+    background-color: $primary-button2;
+    cursor: pointer;
+  }
+
+  &__list-item-part {
+    width: 30%;
+    font-weight: 400;
+    font-size: 0.9rem;
+
+    &--title {
+      font-weight: 700;
+      font-size: 1rem;
+      width: 70%;
+    }
+  }
+}

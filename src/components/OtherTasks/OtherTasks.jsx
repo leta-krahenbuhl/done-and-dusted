@@ -54,7 +54,9 @@ export default function OtherTasks({
         <>
           <div className="other-tasks">
             <div className="other-tasks__column-headers-div">
-              <p className="other-tasks__column-headers">Task</p>
+              <p className="other-tasks__column-headers other-tasks__column-headers--taskname">
+                Task
+              </p>
               <p className="other-tasks__column-headers">Duration</p>
               <p className="other-tasks__column-headers">Due</p>
             </div>
@@ -80,9 +82,13 @@ export default function OtherTasks({
           </div>
           <div className="other-tasks">
             <div className="other-tasks__column-headers-div">
-              <p className="other-tasks__column-headers">Task</p>
+              <p className="other-tasks__column-headers other-tasks__column-headers--taskname-done">
+                Task
+              </p>
               <p className="other-tasks__column-headers">Duration</p>
-              <p className="other-tasks__column-headers">Due</p>
+              <p className="other-tasks__column-headers other-tasks__column-headers--due-done">
+                Due
+              </p>
             </div>
             <ul className="other-tasks__list">
               {otherTasksDone.map((task) => (

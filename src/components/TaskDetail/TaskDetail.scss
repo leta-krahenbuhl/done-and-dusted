@@ -54,7 +54,7 @@
   &__h2 {
     text-align: center;
     color: $primary-font1;
-    margin: 0;
+    margin: 3rem 0 0 0;
     padding-top: 1rem;
     padding-bottom: 2rem;
     font-size: 2rem;
@@ -92,7 +92,7 @@
 
   &__button {
     @include button2;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 
     &--done {
       background-color: $primary-done;
@@ -115,7 +115,7 @@
   &__h2 {
     text-align: center;
     color: $primary-font1;
-    margin: 0;
+    margin: 3rem 0 0 0;
     padding-top: 1rem;
     padding-bottom: 2rem;
     font-size: 2rem;
@@ -132,6 +132,7 @@
   &__button {
     @include button2;
     width: 100%;
+    margin-top: 0rem;
   }
 
   &__button:hover {
@@ -140,7 +141,8 @@
 
   &__button-submit {
     @include button2;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
+    margin-top: 1rem;
     background-color: $primary-done;
     color: $primary-font1;
   }

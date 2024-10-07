@@ -58,7 +58,9 @@ export default function WeeklyTasks({
         <>
           <div className="weekly-tasks">
             <div className="weekly-tasks__column-headers-div">
-              <p className="weekly-tasks__column-headers">Task</p>
+              <p className="weekly-tasks__column-headers weekly-tasks__column-headers--taskname">
+                Task
+              </p>
               <p className="weekly-tasks__column-headers">Duration</p>
               <p className="weekly-tasks__column-headers">Due</p>
             </div>
@@ -84,9 +86,13 @@ export default function WeeklyTasks({
           </div>
           <div className="weekly-tasks">
             <div className="weekly-tasks__column-headers-div">
-              <p className="weekly-tasks__column-headers">Task</p>
+              <p className="weekly-tasks__column-headers weekly-tasks__column-headers--taskname-done">
+                Task
+              </p>
               <p className="weekly-tasks__column-headers">Duration</p>
-              <p className="weekly-tasks__column-headers">Due</p>
+              <p className="weekly-tasks__column-headers weekly-tasks__column-headers--due-done">
+                Due
+              </p>
             </div>
             <ul className="weekly-tasks__list">
               {weeklyTasksDone.map((task) => (

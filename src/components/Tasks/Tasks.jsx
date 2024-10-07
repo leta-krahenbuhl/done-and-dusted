@@ -58,22 +58,26 @@ export default function Tasks({ homeName }) {
       <div className="tasks-content">
         <div className="tasks-content__headers">
           <h3 className="tasks-content__h3">Daily</h3>
-          <h3 className="tasks-content__h3">Done</h3>
+          <h3 className="tasks-content__h3">Done (daily)</h3>
         </div>
         <DailyTasks
           homeName={homeName}
           currentWeekISO={currentWeekISO}
           handleListItemClick={handleListItemClick}
         />
-
-        <h3 className="tasks-content__h3">Weekly</h3>
+        <div className="tasks-content__headers">
+          <h3 className="tasks-content__h3">Weekly</h3>
+          <h3 className="tasks-content__h3">Done (weekly)</h3>
+        </div>
         <WeeklyTasks
           homeName={homeName}
           currentWeekISO={currentWeekISO}
           handleListItemClick={handleListItemClick}
         />
-
-        <h3 className="tasks-content__h3">Other</h3>
+        <div className="tasks-content__headers">
+          <h3 className="tasks-content__h3">Other</h3>
+          <h3 className="tasks-content__h3">Done (other)</h3>
+        </div>
         <OtherTasks
           homeName={homeName}
           currentWeekISO={currentWeekISO}

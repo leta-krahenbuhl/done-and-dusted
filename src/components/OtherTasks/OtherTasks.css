@@ -4,10 +4,27 @@
   background-color: #9a9cd5;
   padding: 1rem;
   border-radius: 5px;
+  max-height: 60vh;
+  overflow-y: scroll;
+  /* Scrollbar styling for WebKit browsers */
 }
 .other-tasks-all__text {
   margin: 0rem;
   font-size: 0.9rem;
+}
+.other-tasks-all::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+.other-tasks-all::-webkit-scrollbar-track {
+  background: #9a9cd5; /* Color of the scrollbar track */
+  border-radius: 5px;
+}
+.other-tasks-all::-webkit-scrollbar-thumb {
+  background-color: #7375c2; /* Color of the scrollbar thumb */
+  border-radius: 5px;
+}
+.other-tasks-all::-webkit-scrollbar-thumb:hover {
+  background-color: #484aa1; /* Darker color when hovered */
 }
 
 .other-tasks {
@@ -24,9 +41,18 @@
   margin-top: 0rem;
   font-size: 0.8rem;
 }
+.other-tasks__column-headers--taskname {
+  width: 70%;
+}
+.other-tasks__column-headers--taskname-done {
+  width: 72%;
+}
+.other-tasks__column-headers--due-done {
+  width: 40%;
+}
 .other-tasks__list {
   list-style-type: none;
-  padding: 0;
+  padding: 0 0 1rem 0;
   margin: 0;
 }
 .other-tasks__list-item {
@@ -35,7 +61,10 @@
   background-color: #ffffff;
   margin-bottom: 0.5rem;
   border-radius: 5px;
-  padding: 0.5rem;
+  padding: 0.3rem 0.3rem 0.3rem 0.5rem;
+  height: 1.7rem;
+  line-height: 1rem;
+  align-items: center;
 }
 .other-tasks__list-item--done {
   background-color: #a9e2e4;
@@ -52,4 +81,5 @@
 .other-tasks__list-item-part--title {
   font-weight: 700;
   font-size: 1rem;
+  width: 70%;
 }/*# sourceMappingURL=OtherTasks.css.map */
