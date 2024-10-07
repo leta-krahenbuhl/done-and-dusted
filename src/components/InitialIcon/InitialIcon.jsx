@@ -34,7 +34,9 @@ export default function InitialIcon({ username, inTaskComponent }) {
       className={inTaskComponent ? "initial-icon-small" : "initial-icon"}
       style={{ backgroundColor: colour || "lightpink" }}
     >
-      {userInitial}
+      <div className={userInitial === "C" ? "initial-icon-c" : ""}>
+        {userInitial}
+      </div>
     </div>
   );
 }
