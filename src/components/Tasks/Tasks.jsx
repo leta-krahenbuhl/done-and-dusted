@@ -90,7 +90,6 @@ export default function Tasks({ homeName }) {
           isAddTaskOpen={isAddTaskOpen}
           setIsAddTaskOpen={setIsAddTaskOpen}
           handleCloseAddTask={handleCloseAddTask}
-          currentWeekISO={currentWeekISO}
         />
 
         <TaskDetail

@@ -394,7 +394,9 @@ export const addTask = async (
   repeat,
   homeName,
   dueDate,
-  currentWeekISO
+  currentWeekISO,
+  startDate,
+  endDate
 ) => {
   const done = false;
   const doneBy = "not-done";
@@ -409,6 +411,8 @@ export const addTask = async (
       dueDate,
       doneBy,
       week: currentWeekISO,
+      startDate,
+      endDate,
     });
 
     if (response.status === 201) {
