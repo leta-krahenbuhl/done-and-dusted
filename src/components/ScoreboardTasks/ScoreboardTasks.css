@@ -27,22 +27,27 @@
 
 .scoreboard-tasks-user-tasks__list {
   list-style-type: none;
-  padding: 0;
+  padding: 0 0 1rem 0;
   margin: 0;
 }
 .scoreboard-tasks-user-tasks__list-item {
-  background-color: #a9e2e4;
   display: flex;
   justify-content: space-between;
+  background-color: #a9e2e4;
   margin-bottom: 0.5rem;
   border-radius: 5px;
-  padding: 0.5rem;
+  padding: 0.3rem 0.3rem 0.3rem 0.5rem;
+  height: 1.7rem;
+  line-height: 1rem;
+  align-items: center;
 }
 .scoreboard-tasks-user-tasks__list-item-part {
+  width: 30%;
   font-weight: 400;
   font-size: 0.9rem;
 }
 .scoreboard-tasks-user-tasks__list-item-part--title {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  width: 70%;
 }/*# sourceMappingURL=ScoreboardTasks.css.map */
