@@ -1,11 +1,16 @@
 import axios from "axios";
 import { getUsernameFromToken } from "./user";
 
+// Set up the base URL based on an environment variable or default to the deployed backend
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/";
+
+console.log("BASE_URL: ", BASE_URL);
+
 // SignUp
 export const signUp = async (username, password, colour) => {
   try {
     const response = await axios.post(
-      "/api/signup",
+      `${BASE_URL}/api/signup`,
       {
         username,
         password,
@@ -44,7 +49,7 @@ export const signUp = async (username, password, colour) => {
 export const logIn = async (username, password) => {
   try {
     const response = await axios.post(
-      "/api/login",
+      `${BASE_URL}/api/login`,
       {
         username,
         password,
@@ -83,7 +88,7 @@ export const fetchUserandColour = async (habitant) => {
   const username = habitant;
 
   try {
-    const response = await axios.get("/api/users/get-one", {
+    const response = await axios.get(`${BASE_URL}/api/users/get-one`, {
       params: { username },
     });
 
@@ -101,7 +106,7 @@ export const fetchUser = async (user) => {
   // console.log("user from axios: ", username); // works!
 
   try {
-    const response = await axios.get("/api/users/get-one", {
+    const response = await axios.get(`${BASE_URL}/api/users/get-one`, {
       params: { username },
     });
 
@@ -116,7 +121,7 @@ export const fetchUser = async (user) => {
 // Get tasks: daily, undone
 export const fetchDailyTasksUndone = async (homeName, currentWeekISO) => {
   try {
-    const response = await axios.get("/api/tasks/daily-undone", {
+    const response = await axios.get(`${BASE_URL}/api/tasks/daily-undone`, {
       params: { homeName, currentWeekISO },
     });
 
@@ -143,7 +148,7 @@ export const fetchDailyTasksUndone = async (homeName, currentWeekISO) => {
 // Get tasks: daily, done
 export const fetchDailyTasksDone = async (homeName, currentWeekISO) => {
   try {
-    const response = await axios.get("/api/tasks/daily-done", {
+    const response = await axios.get(`${BASE_URL}/api/tasks/daily-done`, {
       params: { homeName, currentWeekISO },
     });
 
@@ -170,7 +175,7 @@ export const fetchDailyTasksDone = async (homeName, currentWeekISO) => {
 // Get tasks: weekly, undone
 export const fetchWeeklyTasksUndone = async (homeName, currentWeekISO) => {
   try {
-    const response = await axios.get("/api/tasks/weekly-undone", {
+    const response = await axios.get(`${BASE_URL}/api/tasks/weekly-undone`, {
       params: { homeName, currentWeekISO },
     });
 
@@ -197,7 +202,7 @@ export const fetchWeeklyTasksUndone = async (homeName, currentWeekISO) => {
 // Get tasks: weekly, done
 export const fetchWeeklyTasksDone = async (homeName, currentWeekISO) => {
   try {
-    const response = await axios.get("/api/tasks/weekly-done", {
+    const response = await axios.get(`${BASE_URL}/api/tasks/weekly-done`, {
       params: { homeName, currentWeekISO },
     });
 
@@ -224,7 +229,7 @@ export const fetchWeeklyTasksDone = async (homeName, currentWeekISO) => {
 // Get tasks: other, undone
 export const fetchOtherTasksUndone = async (homeName, currentWeekISO) => {
   try {
-    const response = await axios.get("/api/tasks/other-undone", {
+    const response = await axios.get(`${BASE_URL}/api/tasks/other-undone`, {
       params: { homeName, currentWeekISO },
     });
 
@@ -251,7 +256,7 @@ export const fetchOtherTasksUndone = async (homeName, currentWeekISO) => {
 // Get tasks: other, done
 export const fetchOtherTasksDone = async (homeName, currentWeekISO) => {
   try {
-    const response = await axios.get("/api/tasks/other-done", {
+    const response = await axios.get(`${BASE_URL}/api/tasks/other-done`, {
       params: { homeName, currentWeekISO },
     });
 
@@ -282,7 +287,7 @@ export const fetchTasksDoneByUser = async (
   setError
 ) => {
   try {
-    const response = await axios.get("/api/tasks/done-by-user", {
+    const response = await axios.get(`${BASE_URL}/api/tasks/done-by-user`, {
       params: { username, currentWeekISO },
     });
 
@@ -308,7 +313,7 @@ export const fetchTasksDoneByUser = async (
 // Edit task
 export const editTask = async (taskName, minutes, repeat, dueDate, taskId) => {
   try {
-    const response = await axios.patch("/api/tasks/edit", {
+    const response = await axios.patch(`${BASE_URL}/api/tasks/edit`, {
       taskName,
       minutes,
       repeat,
@@ -343,7 +348,7 @@ export const editTask = async (taskName, minutes, repeat, dueDate, taskId) => {
 // Update task: done/undone property
 export const updateDone = async (done, taskId, doneBy) => {
   try {
-    const response = await axios.patch("/api/tasks/update-done", {
+    const response = await axios.patch(`${BASE_URL}/api/tasks/update-done`, {
       done,
       taskId,
       doneBy,
@@ -372,7 +377,7 @@ export const deleteTask = async (taskId) => {
   }
 
   try {
-    const response = await axios.delete("/api/tasks/delete", {
+    const response = await axios.delete(`${BASE_URL}/api/tasks/delete`, {
       data: { taskId },
     });
 
@@ -402,7 +407,7 @@ export const addTask = async (
   const doneBy = "not-done";
 
   try {
-    const response = await axios.post("/api/tasks/add-one", {
+    const response = await axios.post(`${BASE_URL}/api/tasks/add-one`, {
       taskName,
       minutes,
       repeat,
@@ -444,7 +449,7 @@ export const handleAddHome = async (
   }
 
   try {
-    const response = await axios.post("/api/homes", {
+    const response = await axios.post(`${BASE_URL}/api/homes`, {
       homeName,
       habitants,
       admins,
@@ -464,7 +469,7 @@ export const handleAddHome = async (
 // Add habitant to home
 export const addHabitantToHome = async (newHabitant, homeName) => {
   try {
-    const response = await axios.patch("/api/homes/add-habitant", {
+    const response = await axios.patch(`${BASE_URL}/api/homes/add-habitant`, {
       newHabitant,
       homeName,
     });
@@ -495,10 +500,13 @@ export const addHabitantToHome = async (newHabitant, homeName) => {
 // Delete habitant
 export const deleteHabitant = async (username, homeName) => {
   try {
-    const response = await axios.patch("/api/homes/delete-habitant", {
-      username,
-      homeName,
-    });
+    const response = await axios.patch(
+      `${BASE_URL}/api/homes/delete-habitant`,
+      {
+        username,
+        homeName,
+      }
+    );
 
     if (response.status === 200) {
       return response;
@@ -514,7 +522,7 @@ export const deleteHabitant = async (username, homeName) => {
 // Fetch home data with homeName (to get inhabitants)
 export const fetchHomeData = async (homeName, setError) => {
   try {
-    const response = await axios.get("/api/homes/get-current", {
+    const response = await axios.get(`${BASE_URL}/api/homes/get-current`, {
       params: { homeName },
     });
     return response.data;
@@ -537,7 +545,7 @@ export const fetchHomeData = async (homeName, setError) => {
 // Find homeName with username as habitant
 export const fetchHomeName = async (username) => {
   try {
-    const response = await axios.get("/api/homes/user-home", {
+    const response = await axios.get(`${BASE_URL}/api/homes/user-home`, {
       params: { username },
     });
 
@@ -568,7 +576,7 @@ export const fetchTasksForMinutes = async (habitant, currentWeekISO) => {
     // console.log("username: ", username); // works
     // console.log("currentWeekISO: ", currentWeekISO); // works
 
-    const response = await axios.get("/api/users/minutes", {
+    const response = await axios.get(`${BASE_URL}/api/users/minutes`, {
       params: { username: habitant, currentWeekISO },
     });
 
@@ -599,7 +607,7 @@ export const updateUser = async (username, colourNew) => {
     const payload = {};
     if (username) payload.username = username; // Only add if provided
     if (colourNew) payload.colourNew = colourNew; // Only add if provided
-    const response = await axios.patch("/api/users/update", payload);
+    const response = await axios.patch(`${BASE_URL}/api/users/update`, payload);
     if (response.status === 204) {
       return response;
     } else {
