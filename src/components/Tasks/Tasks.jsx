@@ -19,6 +19,7 @@ export default function Tasks({ homeName }) {
   const [isTaskDetailOpen, setIsTaskDetailOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [currentWeekISO, setCurrentWeekISO] = useState("");
+  const [taskRefreshTrigger, setTaskRefreshTrigger] = useState(false);
 
   // Set currentWeekISO on initial render
   useEffect(() => {
@@ -26,6 +27,13 @@ export default function Tasks({ homeName }) {
     const initialWeekISO = initialWeekStart.toISOString().substring(0, 10);
     setCurrentWeekISO(initialWeekISO); // Set the currentWeekISO on the first render
   }, []);
+
+  // Function to refresh tasks without reloading the page
+  // Reloading page goes back to current week, which may not be
+  // where task was added/edited
+  const refreshTasks = () => {
+    setTaskRefreshTrigger((prev) => !prev); // Toggle state to trigger re-fetching tasks
+  };
 
   // Only render tasks when currentWeekISO has been set
   if (!currentWeekISO) {
@@ -64,6 +72,7 @@ export default function Tasks({ homeName }) {
           homeName={homeName}
           currentWeekISO={currentWeekISO}
           handleListItemClick={handleListItemClick}
+          taskRefreshTrigger={taskRefreshTrigger}
         />
         <div className="tasks-content__headers">
           <h3 className="tasks-content__h3">Weekly</h3>
@@ -73,6 +82,7 @@ export default function Tasks({ homeName }) {
           homeName={homeName}
           currentWeekISO={currentWeekISO}
           handleListItemClick={handleListItemClick}
+          taskRefreshTrigger={taskRefreshTrigger}
         />
         <div className="tasks-content__headers">
           <h3 className="tasks-content__h3">Other</h3>
@@ -82,6 +92,7 @@ export default function Tasks({ homeName }) {
           homeName={homeName}
           currentWeekISO={currentWeekISO}
           handleListItemClick={handleListItemClick}
+          taskRefreshTrigger={taskRefreshTrigger}
         />
         <div className="tasks-content__button-div">
           <button className="tasks-content__button" onClick={handleAddTask}>
@@ -94,13 +105,14 @@ export default function Tasks({ homeName }) {
           isAddTaskOpen={isAddTaskOpen}
           setIsAddTaskOpen={setIsAddTaskOpen}
           handleCloseAddTask={handleCloseAddTask}
+          refreshTasks={refreshTasks}
         />
 
         <TaskDetail
           isTaskDetailOpen={isTaskDetailOpen}
-          handleCloseAddTask={handleCloseAddTask}
           selectedTask={selectedTask}
           closeTaskDetail={closeTaskDetail}
+          refreshTasks={refreshTasks}
         />
       </div>
     </div>

@@ -8,6 +8,11 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
   const [taskArrays, setTaskArrays] = useState({});
   const [error, setError] = useState(null);
 
+  // Helper function to sort tasks by dueDate
+  const sortTasksByDueDate = (tasks) => {
+    return tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  };
+
   // Get habitants of home
   useEffect(() => {
     const getHabitants = async () => {
@@ -35,7 +40,7 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
               currentWeekISO,
               setError
             );
-            tasksByUser[habitant] = data; // Assign the tasks to the habitant name
+            tasksByUser[habitant] = sortTasksByDueDate(data); // Sort the tasks by dueDate
           }
           setTaskArrays(tasksByUser); // Store the result in state as an object
         } catch (err) {

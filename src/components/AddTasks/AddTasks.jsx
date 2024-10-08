@@ -16,6 +16,7 @@ export default function AddTasks({
   isAddTaskOpen,
   handleCloseAddTask,
   setIsAddTaskOpen,
+  refreshTasks,
 }) {
   const [taskName, setTaskName] = useState("");
   const [minutes, setMinutes] = useState(5);
@@ -65,7 +66,8 @@ export default function AddTasks({
 
         if (response.status === 201) {
           setIsAddTaskOpen(false);
-          window.location.reload();
+          refreshTasks();
+          // window.location.reload();
         }
       } catch (error) {
         alert(error.message);
@@ -75,7 +77,7 @@ export default function AddTasks({
 
     // If repeate "daily" or "weekly" (meaning both startDate and endDate are present)
     if (startDate && endDate) {
-      const tasks = [];
+      const tasks = []; // will be an array of dates, one for each task that needs to be created
       const currentDate = new Date(startDate);
       const lastDate = new Date(endDate);
 
@@ -83,7 +85,7 @@ export default function AddTasks({
       const dateDifferenceInDays =
         (lastDate - currentDate) / (1000 * 60 * 60 * 24);
 
-      // Check if the repeat type is daily and the task period doesn't exceed the 14-day limit
+      // Check if the repeat type is daily and the task period doesn't exceed 14-days
       // as I'm on a free MongoDB plan...
       if (repeat === "daily" && dateDifferenceInDays > 13) {
         return alert(
@@ -95,6 +97,13 @@ export default function AddTasks({
       if (repeat === "weekly" && dateDifferenceInDays > 27) {
         return alert(
           "Currently you cannot create more than 4 weekly tasks at once (to limit data usage). Please select a shorter date range."
+        );
+      }
+
+      // Check if the repeat type is weekly but the date range is less than 7 days
+      if (repeat === "weekly" && dateDifferenceInDays < 6) {
+        return alert(
+          "For a weekly task, the date range must be at least 7 days."
         );
       }
 
@@ -118,6 +127,7 @@ export default function AddTasks({
           currentDate.setDate(currentDate.getDate() + 7); // Move to the next week
         }
       }
+      // console.log("tasks: ", tasks);
 
       try {
         // Create each task with its respective dueDate and ISO week
@@ -139,7 +149,8 @@ export default function AddTasks({
           }
         }
         setIsAddTaskOpen(false);
-        window.location.reload();
+        refreshTasks();
+        // window.location.reload();
       } catch (error) {
         alert(error.message);
       }

@@ -76,7 +76,15 @@ export default function Stats({ totalMinutesByHabitant, homeName }) {
 
   return (
     <div className="stats">
-      <PieChart series={[{ data: pieChartData }]} width={400} height={200} />
+      <PieChart
+        series={[
+          {
+            data: pieChartData,
+          },
+        ]}
+        width={400}
+        height={200}
+      />
     </div>
   );
 }

@@ -1,49 +1,53 @@
 import "./DailyTasks.scss";
 import { useState, useEffect } from "react";
 import InitialIcon from "../InitialIcon/InitialIcon";
-import { fetchDailyTasksUndone } from "../../utils/axios";
-import { fetchDailyTasksDone } from "../../utils/axios";
+import { fetchDailyTasksUndone, fetchDailyTasksDone } from "../../utils/axios";
 
 export default function DailyTasks({
   homeName,
   currentWeekISO,
   handleListItemClick,
+  taskRefreshTrigger,
 }) {
   const [dailyTasksUndone, setDailyTasksUndone] = useState([]);
   const [dailyTasksDone, setDailyTasksDone] = useState([]);
   const [error, setError] = useState(null);
 
   // Sets class in InitialIcon to determine size
-  // If in task component it's small, otherwise (ie in header or myHOme) big
   const inTaskComponent = true;
+
+  // Helper function to sort tasks by dueDate
+  const sortTasksByDueDate = (tasks) => {
+    return tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  };
 
   // Get daily undone tasks
   useEffect(() => {
     const getDailyTasksUndone = async () => {
       try {
         const data = await fetchDailyTasksUndone(homeName, currentWeekISO);
-
-        setDailyTasksUndone(data);
+        const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
+        setDailyTasksUndone(sortedTasks);
       } catch (err) {
         setError(err.message); // Handle the error locally in the component
       }
     };
     getDailyTasksUndone();
-  }, [homeName, currentWeekISO]);
+  }, [homeName, currentWeekISO, taskRefreshTrigger]);
 
-  //Get daily done tasks
+  // Get daily done tasks
   useEffect(() => {
     const getDailyTasksDone = async () => {
       try {
         const data = await fetchDailyTasksDone(homeName, currentWeekISO);
-
-        setDailyTasksDone(data);
+        const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
+        setDailyTasksDone(sortedTasks);
       } catch (err) {
         setError(err.message); // Handle the error locally in the component
       }
     };
     getDailyTasksDone();
-  }, [homeName, currentWeekISO]);
+  }, [homeName, currentWeekISO, taskRefreshTrigger]);
 
   if (error) return <p>Error: {error}</p>;
 

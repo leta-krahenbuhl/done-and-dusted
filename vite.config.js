@@ -7,7 +7,7 @@ export default defineConfig({
   optimizeDeps: { exclude: ["fsevents"] },
   server: {
     proxy: {
-      "/api": "http://localhost:5001",
+      "/api": "http://localhost:8080",
     },
   },
 });

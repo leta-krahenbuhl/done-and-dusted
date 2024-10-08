@@ -7,42 +7,47 @@ export default function OtherTasks({
   homeName,
   currentWeekISO,
   handleListItemClick,
+  taskRefreshTrigger,
 }) {
   const [otherTasksDone, setOtherTasksDone] = useState([]);
   const [otherTasksUndone, setOtherTasksUndone] = useState([]);
   const [error, setError] = useState(null);
 
   // Sets class in InitialIcon to determine size
-  // If in task component it's small, otherwise (ie in header or myHOme) big
   const inTaskComponent = true;
+
+  // Helper function to sort tasks by dueDate
+  const sortTasksByDueDate = (tasks) => {
+    return tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  };
 
   // Get tasks other: undone
   useEffect(() => {
     const getOtherTasks = async () => {
       try {
         const data = await fetchOtherTasksUndone(homeName, currentWeekISO);
-
-        setOtherTasksUndone(data);
+        const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
+        setOtherTasksUndone(sortedTasks);
       } catch (err) {
         setError(err.message); // Handle the error locally in the component
       }
     };
     getOtherTasks();
-  }, [homeName, currentWeekISO]);
+  }, [homeName, currentWeekISO, taskRefreshTrigger]);
 
   // Get tasks other: done
   useEffect(() => {
     const getOtherTasksDone = async () => {
       try {
         const data = await fetchOtherTasksDone(homeName, currentWeekISO);
-
-        setOtherTasksDone(data);
+        const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
+        setOtherTasksDone(sortedTasks);
       } catch (err) {
         setError(err.message);
       }
     };
     getOtherTasksDone();
-  }, [homeName, currentWeekISO]);
+  }, [homeName, currentWeekISO, taskRefreshTrigger]);
 
   if (error) return <p>Error: {error}</p>;
 
@@ -71,7 +76,7 @@ export default function OtherTasks({
                     {task.taskName}
                   </div>
                   <div className="other-tasks__list-item-part">
-                    {task.minutes}mins
+                    {task.minutes} mins
                   </div>
                   <div className="other-tasks__list-item-part">
                     {task.dueDate}

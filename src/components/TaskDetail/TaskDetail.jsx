@@ -7,6 +7,7 @@ export default function TaskDetail({
   selectedTask,
   closeTaskDetail,
   isTaskDetailOpen,
+  refreshTasks,
 }) {
   const [isEdit, setIsEdit] = useState(false);
   const [taskName, setTaskName] = useState("");
@@ -40,7 +41,8 @@ export default function TaskDetail({
     try {
       await editTask(taskName, minutes, repeat, dueDate, taskId);
       setIsEdit(false);
-      window.location.reload();
+      refreshTasks();
+      closeTaskDetail();
     } catch (error) {
       // User feedback for errors
       console.error("Error updating task:", error);
@@ -82,7 +84,8 @@ export default function TaskDetail({
       const response = await updateDone(done, taskId, doneBy);
 
       if (response.status === 200) {
-        window.location.reload();
+        closeTaskDetail();
+        refreshTasks();
       } else {
         alert(response.data.message);
       }
@@ -98,8 +101,7 @@ export default function TaskDetail({
         alert(`An error occurred while trying to update this task.`);
       }
     }
-
-    // Code to handle form submission goes here
+    closeTaskDetail();
     setIsEdit(false);
   };
 
@@ -117,7 +119,8 @@ export default function TaskDetail({
 
       if (response.status === 204) {
         setIsEdit(false);
-        window.location.reload();
+        refreshTasks();
+        closeTaskDetail();
       } else {
         alert(response.data.message);
       }
