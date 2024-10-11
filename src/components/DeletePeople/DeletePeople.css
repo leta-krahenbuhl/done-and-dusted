@@ -42,6 +42,10 @@
   padding-top: 1rem;
   padding-bottom: 2rem;
 }
+.delete-people-overlay__text {
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
 
 .delete-people-overlay-form {
   display: flex;

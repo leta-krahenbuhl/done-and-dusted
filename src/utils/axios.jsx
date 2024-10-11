@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getUsernameFromToken } from "./user";
 
 // Set up the base URL based on an environment variable or default to the deployed backend
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/";
@@ -429,23 +428,8 @@ export const addTask = async (
   }
 };
 
-// Add home //TODO: first error msg in other comp?
-export const handleAddHome = async (
-  homeName,
-  setAdmins,
-  setHabitants,
-  admins,
-  habitants,
-  setError
-) => {
-  const username = getUsernameFromToken();
-  setAdmins(admins.push(username));
-  setHabitants(habitants.push(username));
-
-  if (!homeName) {
-    return alert("Please enter a name for your home.");
-  }
-
+// Add home
+export const handleAddHome = async (homeName, admins, habitants) => {
   try {
     const response = await axios.post(`${BASE_URL}/api/homes`, {
       homeName,
@@ -453,14 +437,14 @@ export const handleAddHome = async (
       admins,
     });
 
-    if (response.status === 200) {
-      alert("New home created successfully.");
+    if (response.status === 201) {
+      return response;
     } else {
-      alert(response.data.message);
+      throw new Error(response.data.message);
     }
   } catch (error) {
     console.error("Error:", error);
-    setError("An error occurred while creating the home");
+    throw new Error("An error occurred while creating the home");
   }
 };
 

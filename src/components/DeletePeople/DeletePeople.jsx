@@ -25,7 +25,9 @@ export default function DeletePeople({
       const response = await deleteHabitant(habitantToDelete, homeName);
 
       if (response.status === 200) {
-        alert(`${habitantToDelete} deleted from ${homeName} successfully.`);
+        alert(
+          `${habitantToDelete} and their tasks deleted from ${homeName} successfully.`
+        );
         setIsDeletePeopleOpen(false);
         window.location.reload();
       }
@@ -49,10 +51,16 @@ export default function DeletePeople({
           &times;
         </button>
         <h1 className="delete-people-overlay__h1">Delete a habitant</h1>
-        <p>
-          You can delete yourself, but you will loose access to this home and
-          its data.
+        <p className="delete-people-overlay__text">
+          If you delete a person from a home, all their 'done' tasks and data
+          will be deleted as well.
         </p>
+        <p className="delete-people-overlay__text">
+          You can delete yourself, but you will loose access to this home and
+          its data. If you're the only habitant, you won't be able to re-join
+          the home and it will be deleted.
+        </p>
+
         <form
           className="delete-people-overlay-form"
           onSubmit={handleDeletePeople}

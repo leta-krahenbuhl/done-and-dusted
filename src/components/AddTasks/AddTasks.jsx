@@ -41,10 +41,10 @@ export default function AddTasks({
     setEndDate(formattedTwoWeeksFromToday);
   }, []);
 
+  // Add task
   const handleAddTask = async (e) => {
     e.preventDefault();
 
-    // Error handling
     if (!taskName) {
       return alert("Please enter a task description.");
     }
@@ -127,7 +127,6 @@ export default function AddTasks({
           currentDate.setDate(currentDate.getDate() + 7); // Move to the next week
         }
       }
-      // console.log("tasks: ", tasks);
 
       try {
         // Create each task with its respective dueDate and ISO week
@@ -150,7 +149,6 @@ export default function AddTasks({
         }
         setIsAddTaskOpen(false);
         refreshTasks();
-        // window.location.reload();
       } catch (error) {
         alert(error.message);
       }

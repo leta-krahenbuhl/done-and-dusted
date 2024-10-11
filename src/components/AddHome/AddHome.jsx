@@ -1,24 +1,31 @@
 import "./AddHome.scss";
 import { useState } from "react";
 import { handleAddHome } from "../../utils/axios";
+import { getUsernameFromToken } from "../../utils/user";
 
 export default function AddHome({ isAddHomeOpen, handleCloseAddHome }) {
   const [homeName, setHomeName] = useState("");
-  const [admins, setAdmins] = useState([]);
-  const [habitants, setHabitants] = useState([]);
   const [error, setError] = useState(null);
 
   // Handle add home form submission
   const onSubmit = async (e) => {
-    e.preventDefault(); // Prevent the form from refreshing the page
-    await handleAddHome(
-      homeName,
-      setAdmins,
-      setHabitants,
-      admins,
-      habitants,
-      setError
-    );
+    e.preventDefault();
+
+    if (!homeName) {
+      return alert("Please enter a name for your home.");
+    }
+
+    const username = getUsernameFromToken();
+    const admins = [username];
+    const habitants = [username];
+
+    try {
+      const response = await handleAddHome(homeName, admins, habitants);
+      console.log("response: ", response);
+    } catch (error) {
+      setError(error.message);
+    }
+
     window.location.reload();
   };
 
