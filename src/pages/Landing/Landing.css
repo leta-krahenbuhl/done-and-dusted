@@ -26,6 +26,9 @@
   height: 20rem;
   margin-right: 5rem;
 }
+.landing-main__image-container {
+  text-align: center;
+}
 .landing-main__text-and-buttons {
   padding-top: 2rem;
   display: flex;
@@ -55,4 +58,12 @@
 .landing-main__button:hover {
   background-color: #27267e;
   color: #ffffff;
+}
+.landing-main__footnote {
+  color: #27267e;
+  font-size: 0.8rem;
+  margin-right: 5rem;
+}
+.landing-main__link {
+  color: #27267e;
 }/*# sourceMappingURL=Landing.css.map */

@@ -30,12 +30,27 @@ export default function Landing() {
       <header className="landing-header">
         <img src={logo} alt="logo" className="landing-logo" />
       </header>
+
       <main className="landing-main">
-        <img
-          src={cleaningIllustration1}
-          alt="cleaning illustration"
-          className="landing-main__illustration"
-        />
+        <div className="landing-main__image-container">
+          <img
+            src={cleaningIllustration1}
+            alt="cleaning illustration"
+            className="landing-main__illustration"
+          />
+
+          <p className="landing-main__footnote">
+            Image source:
+            <a
+              target="blank"
+              className="landing-main__link"
+              href="https://www.vecteezy.com/?utm_source=google&utm_medium=cpc&utm_campaign=brand&utm_term=vecteezy&utm_content=us&gad_source=1&gclid=CjwKCAjwvKi4BhABEiwAH2gcw0eXZXWrieq-DsBPfqhaQx0AMMYd9ejuOczApurk3-LYjrM0pFS5VRoCCL0QAvD_BwE"
+            >
+              vecteezy
+            </a>
+          </p>
+        </div>
+
         <div className="landing-main__text-and-buttons">
           <h1 className="landing-main__h1">Where Housework Meets Game Time</h1>
           <p className="landing-main__text">

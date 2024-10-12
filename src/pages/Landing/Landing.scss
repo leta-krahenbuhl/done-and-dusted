@@ -36,6 +36,10 @@
     margin-right: 5rem;
   }
 
+  &__image-container {
+    text-align: center;
+  }
+
   &__text-and-buttons {
     padding-top: 2rem;
 
@@ -61,5 +65,15 @@
 
   &__button:hover {
     @include button1-hover;
+  }
+
+  &__footnote {
+    color: $primary-font1;
+    font-size: 0.8rem;
+    margin-right: 5rem;
+  }
+
+  &__link {
+    color: $primary-font1;
   }
 }
