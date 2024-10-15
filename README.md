@@ -44,9 +44,9 @@ API endpoints:
 
 ### Screenshots
 
-<img src="./src/assets/images/dd-home.png" alt="screenshot of home" width="210" >
-<img src="./src/assets/images/dd-tasks.png" alt="screenshot of task lists" width="210" >
-<img src="./src/assets/images/dd-stats.png" alt="screenshot of stats" width="210" >
+<img src="./src/assets/images/dd-home.png" alt="screenshot of home" width="410" >
+<img src="./src/assets/images/dd-tasks.png" alt="screenshot of task lists" width="410" >
+<img src="./src/assets/images/dd-stats.png" alt="screenshot of stats" width="410" >
 
 ### Data
 
@@ -58,7 +58,55 @@ API endpoints:
 
 ### Endpoints
 
-Rest to come...
+**POST** '/api/homes/'
+
+**Description:** Creates a new home
+
+**Request body:**
+
+```
+[
+  {
+    "homeName": "My Home",
+    "habitants": ["Jane"],
+    "admins": ["Jane"]
+  }
+]
+```
+
+**Response:**
+
+```
+[
+  {
+    "message": "Home created successfully",
+    "home": {
+        "homeName": "Test Home 1",
+        "habitants": ["test1"],
+        "admins": ["test1"],
+        "_id": "670be8201c8fd58c4a8b76c0",
+        "__v": 0
+    }
+  }
+]
+```
+
+rest of API endpoints TBC
+
+### Developer Installation Guide
+
+TBC
+
+<!-- ### Next Steps
+
+- Complete readme documentation
+- Add .env example files
+- Forgot password functionality
+- Fully responsible layout -->
+
+### Key Takeaways
+
+TBC
 
 <!-- #### BASE_URL/api/homes
 
