@@ -1,12 +1,12 @@
+import React, { ReactNode } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Landing from "../src/pages/Landing/Landing";
-import Home from "../src/pages/Home/Home";
+import Landing from "./pages/Landing/Landing";
+import Home from "./pages/Home/Home";
 import PrivateRoute from "./components/PrivateRoute";
-
 import "./App.css";
 import MyAccount from "./pages/MyAccount/MyAccount";
 
-function App() {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="app">
@@ -32,6 +32,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

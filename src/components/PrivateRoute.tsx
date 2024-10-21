@@ -1,12 +1,24 @@
+import React, { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-const PrivateRoute = ({ children }) => {
+interface PrivateRouteProps {
+  children: ReactNode;
+}
+
+interface DecodedToken {
+  exp: number;
+  iat: number;
+  userId: string;
+  username: string;
+}
+
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const token = localStorage.getItem("token");
 
   if (token) {
     try {
-      const decodedToken = jwtDecode(token);
+      const decodedToken: DecodedToken = jwtDecode<DecodedToken>(token);
       const currentTime = Date.now() / 1000; // Get current time in seconds
 
       // Check if the token is expired
