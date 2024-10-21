@@ -2,16 +2,23 @@ import "./AddPeople.scss";
 import { useState } from "react";
 import { addHabitantToHome } from "../../utils/axios";
 
+interface AddPeopleProps {
+  homeName: string;
+  isAddPeopleOpen: boolean;
+  setIsAddPeopleOpen: (value: boolean) => void;
+  handleCloseAddPeople: () => void;
+}
+
 export default function AddPeople({
   homeName,
   isAddPeopleOpen,
   setIsAddPeopleOpen,
   handleCloseAddPeople,
-}) {
+}: AddPeopleProps) {
   const [newHabitant, setNewHabitant] = useState("");
 
   // Add habitant to home
-  const handleAddPeople = async (event) => {
+  const handleAddPeople = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Error handling
@@ -30,7 +37,11 @@ export default function AddPeople({
         window.location.reload();
       }
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert(`An unknown error occurred whilst trying to add ${newHabitant}.`);
+      }
     }
   };
 

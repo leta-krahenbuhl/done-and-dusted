@@ -2,8 +2,16 @@ import "./AddTasks.scss";
 import { useState, useEffect } from "react";
 import { addTask } from "../../utils/axios";
 
+interface AddTasksProps {
+  homeName: string;
+  isAddTaskOpen: boolean;
+  handleCloseAddTask: () => void;
+  setIsAddTaskOpen: (value: boolean) => void;
+  refreshTasks: () => void;
+}
+
 // Utility function to calculate the ISO week start date (Monday) for a given date
-function getISOWeekStartDate(date) {
+function getISOWeekStartDate(date: string) {
   const tempDate = new Date(date);
   const day = tempDate.getDay();
   const diff = tempDate.getDate() - day + (day === 0 ? -6 : 1); // Adjust to Monday
@@ -17,13 +25,13 @@ export default function AddTasks({
   handleCloseAddTask,
   setIsAddTaskOpen,
   refreshTasks,
-}) {
-  const [taskName, setTaskName] = useState("");
-  const [minutes, setMinutes] = useState(5);
+}: AddTasksProps) {
+  const [taskName, setTaskName] = useState<string>("");
+  const [minutes, setMinutes] = useState<number>(5);
   const [repeat, setRepeat] = useState("daily");
-  const [dueDate, setDueDate] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [dueDate, setDueDate] = useState<string>("");
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
 
   // Set the default values for startDate and endDate
   useEffect(() => {
@@ -42,7 +50,7 @@ export default function AddTasks({
   }, []);
 
   // Add task
-  const handleAddTask = async (e) => {
+  const handleAddTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!taskName) {
@@ -67,23 +75,26 @@ export default function AddTasks({
         if (response.status === 201) {
           setIsAddTaskOpen(false);
           refreshTasks();
-          // window.location.reload();
         }
       } catch (error) {
-        alert(error.message);
+        if (error instanceof Error) {
+          alert(error.message);
+        } else {
+          alert("An unknown error occurred.");
+        }
       }
-      return; // Exit the function after handling "other"
+      return; // Exit function after handling "other"
     }
 
     // If repeate "daily" or "weekly" (meaning both startDate and endDate are present)
     if (startDate && endDate) {
-      const tasks = []; // will be an array of dates, one for each task that needs to be created
-      const currentDate = new Date(startDate);
-      const lastDate = new Date(endDate);
+      const tasks: string[] = []; // will be an array of dates, one for each task that needs to be created
+      const currentDate: Date = new Date(startDate);
+      const lastDate: Date = new Date(endDate);
 
       // Calculate the difference in days between startDate and endDate
       const dateDifferenceInDays =
-        (lastDate - currentDate) / (1000 * 60 * 60 * 24);
+        (lastDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24); // Use getTime() so TS understands it can substract
 
       // Check if the repeat type is daily and the task period doesn't exceed 14-days
       // as I'm on a free MongoDB plan...
@@ -150,7 +161,11 @@ export default function AddTasks({
         setIsAddTaskOpen(false);
         refreshTasks();
       } catch (error) {
-        alert(error.message);
+        if (error instanceof Error) {
+          alert(error.message);
+        } else {
+          alert("An unknown error occurred.");
+        }
       }
     }
   };
@@ -186,7 +201,7 @@ export default function AddTasks({
             name="minutes"
             className="add-task-overlay-form__input"
             value={minutes}
-            onChange={(e) => setMinutes(e.target.value)}
+            onChange={(e) => setMinutes(Number(e.target.value))}
           >
             <option value="5">5mins</option>
             <option value="10">10mins</option>

@@ -3,12 +3,20 @@ import { useState } from "react";
 import { handleAddHome } from "../../utils/axios";
 import { getUsernameFromToken } from "../../utils/user";
 
-export default function AddHome({ isAddHomeOpen, handleCloseAddHome }) {
-  const [homeName, setHomeName] = useState("");
-  const [error, setError] = useState(null);
+interface AddHomeProps {
+  isAddHomeOpen: boolean;
+  handleCloseAddHome: () => void; // A function that takes no arguments and returns nothing
+}
+
+export default function AddHome({
+  isAddHomeOpen,
+  handleCloseAddHome,
+}: AddHomeProps) {
+  const [homeName, setHomeName] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   // Handle add home form submission
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!homeName) {
@@ -23,7 +31,11 @@ export default function AddHome({ isAddHomeOpen, handleCloseAddHome }) {
       const response = await handleAddHome(homeName, admins, habitants);
       console.log("response: ", response);
     } catch (error) {
-      setError(error.message);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
 
     window.location.reload();
