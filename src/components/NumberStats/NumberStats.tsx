@@ -1,12 +1,6 @@
 import InitialIconByHabitant from "../InitialIconByHabitant/InitialIconByHabitant";
 import "./NumberStats.scss";
-
-interface Home {
-  _id: string;
-  homeName: string;
-  habitants: string[];
-  admins: string[];
-}
+import { Home } from "../../types/interfaces";
 
 interface NumberStatsProps {
   homeData: Home;
@@ -19,8 +13,6 @@ export default function NumberStats({
   homeData,
   totalMinutesByHabitant,
 }: NumberStatsProps) {
-  console.log("totalMinutesByHabitant: ", totalMinutesByHabitant);
-
   return (
     <div className="number-stats-all">
       <div className="number-stats">

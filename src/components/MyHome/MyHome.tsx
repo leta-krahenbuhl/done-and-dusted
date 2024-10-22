@@ -4,16 +4,10 @@ import InitialIconByHabitant from "../InitialIconByHabitant/InitialIconByHabitan
 import AddPeople from "../AddPeople/AddPeople";
 import DeletePeople from "../DeletePeople/DeletePeople";
 import { fetchHomeData } from "../../utils/axios";
+import { Home } from "../../types/interfaces";
 
 interface MyHomeProps {
   homeName: string;
-}
-
-interface Home {
-  _id: string;
-  homeName: string;
-  habitants: string[];
-  admins: string[];
 }
 
 export default function MyHome({ homeName }: MyHomeProps) {

@@ -5,30 +5,10 @@ import WeekSlider from "../WeekSlider/WeekSlider";
 import { fetchHomeData, fetchTasksForMinutes } from "../../utils/axios";
 import Stats from "../Stats/Stats";
 import ScoreboardTasks from "../ScoreboardTasks/ScoreboardTasks";
+import { Task, Home } from "../../types/interfaces";
 
 interface ScoreboardProps {
   homeName: string;
-}
-
-interface Home {
-  _id: string;
-  homeName: string;
-  habitants: string[];
-  admins: string[];
-}
-
-interface Task {
-  _id: string;
-  taskName: string;
-  minutes: number;
-  repeat: "daily" | "weekly" | "other";
-  done: boolean;
-  doneBy: string;
-  homeName: string;
-  dueDate: string;
-  week: string;
-  startDate: string;
-  endDate: string;
 }
 
 export default function Scoreboard({ homeName }: ScoreboardProps) {

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 // Set up the base URL based on an environment variable or default to the deployed backend
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/";
@@ -363,7 +363,9 @@ export const updateDone = async (done, taskId, doneBy) => {
 };
 
 // Delete task
-export const deleteTask = async (taskId) => {
+export const deleteTask = async (
+  taskId: string
+): Promise<AxiosResponse | void> => {
   // Ask for confirmation
   const userConfirmed = window.confirm(
     "Are you sure you want to delete this task? This action cannot be undone."
@@ -378,11 +380,7 @@ export const deleteTask = async (taskId) => {
       data: { taskId },
     });
 
-    if (response.status === 204) {
-      return response;
-    } else {
-      throw new Error(response.data.message);
-    }
+    return response;
   } catch (error) {
     console.error("Error:", error);
     throw new Error("An error occurred while deleting the task");

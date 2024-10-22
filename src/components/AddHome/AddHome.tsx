@@ -29,7 +29,6 @@ export default function AddHome({
 
     try {
       const response = await handleAddHome(homeName, admins, habitants);
-      console.log("response: ", response);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

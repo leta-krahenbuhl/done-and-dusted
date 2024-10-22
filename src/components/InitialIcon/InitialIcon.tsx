@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { fetchUserandColour } from "../../utils/axios";
 
 interface InitialIconProps {
-  username: string | undefined;
+  username: string;
   inTaskComponent: boolean;
 }
 

@@ -3,10 +3,21 @@ import "./Stats.scss";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { fetchHomeData, fetchUserandColour } from "../../utils/axios";
 
-export default function Stats({ totalMinutesByHabitant, homeName }) {
-  const [error, setError] = useState(null);
-  const [habitants, setHabitants] = useState(null);
-  const [coloursByHabitants, setColoursByHabitants] = useState(null);
+interface StatsProps {
+  homeName: string;
+  totalMinutesByHabitant: Record<string, number>; // is this right?
+}
+
+export default function Stats({
+  totalMinutesByHabitant,
+  homeName,
+}: StatsProps) {
+  const [error, setError] = useState<string | null>(null);
+  const [habitants, setHabitants] = useState<string[] | null>(null);
+  const [coloursByHabitants, setColoursByHabitants] = useState<Record<
+    string,
+    string
+  > | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Get habitants
@@ -17,7 +28,11 @@ export default function Stats({ totalMinutesByHabitant, homeName }) {
         const data = await fetchHomeData(homeName, setError);
         setHabitants(data.habitants);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getHabitants();
@@ -42,7 +57,11 @@ export default function Stats({ totalMinutesByHabitant, homeName }) {
         habitantColours = Object.assign({}, ...coloursArray);
         setColoursByHabitants(habitantColours);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       } finally {
         setLoading(false);
       }

@@ -2,15 +2,26 @@ import { useEffect, useState } from "react";
 import { fetchHomeData, fetchTasksDoneByUser } from "../../utils/axios";
 import "./ScoreboardTasks.scss";
 import InitialIcon from "../InitialIcon/InitialIcon";
+import { Task } from "../../types/interfaces";
 
-export default function ScoreboardTasks({ homeName, currentWeekISO }) {
-  const [habitants, setHabitants] = useState([]);
-  const [taskArrays, setTaskArrays] = useState({});
-  const [error, setError] = useState(null);
+interface ScoreboardTasksProps {
+  homeName: string;
+  currentWeekISO: string;
+}
+
+export default function ScoreboardTasks({
+  homeName,
+  currentWeekISO,
+}: ScoreboardTasksProps) {
+  const [habitants, setHabitants] = useState<string[]>([]);
+  const [taskArrays, setTaskArrays] = useState<Record<string, Task[]>>({});
+  const [error, setError] = useState<string | null>(null);
 
   // Helper function to sort tasks by dueDate
-  const sortTasksByDueDate = (tasks) => {
-    return tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  const sortTasksByDueDate = (tasks: Task[]) => {
+    return tasks.sort(
+      (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+    );
   };
 
   // Get habitants of home
@@ -21,7 +32,11 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
         const data = await fetchHomeData(homeName, setError);
         setHabitants(data.habitants);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getHabitants();
@@ -33,7 +48,7 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
       const getTasksDoneByUser = async () => {
         try {
           // Create an object where keys are habitants and values are their task arrays
-          const tasksByUser = {};
+          const tasksByUser: Record<string, Task[]> = {};
           for (const habitant of habitants) {
             const data = await fetchTasksDoneByUser(
               habitant,
@@ -43,8 +58,12 @@ export default function ScoreboardTasks({ homeName, currentWeekISO }) {
             tasksByUser[habitant] = sortTasksByDueDate(data); // Sort the tasks by dueDate
           }
           setTaskArrays(tasksByUser); // Store the result in state as an object
-        } catch (err) {
-          setError(err.message);
+        } catch (error) {
+          if (error instanceof Error) {
+            setError(error.message);
+          } else {
+            setError("An unknown error occurred.");
+          }
         }
       };
 

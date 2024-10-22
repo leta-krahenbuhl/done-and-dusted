@@ -2,26 +2,13 @@ import "./OtherTasks.scss";
 import { useState, useEffect } from "react";
 import { fetchOtherTasksDone, fetchOtherTasksUndone } from "../../utils/axios";
 import InitialIcon from "../InitialIcon/InitialIcon";
+import { Task } from "../../types/interfaces";
 
 interface OtherTasksProps {
   homeName: string;
   currentWeekISO: string;
   handleListItemClick: (task: Task) => void;
   taskRefreshTrigger: () => void;
-}
-
-interface Task {
-  _id: string;
-  taskName: string;
-  minutes: number;
-  repeat: "daily" | "weekly" | "other";
-  done: boolean;
-  doneBy: string;
-  homeName: string;
-  dueDate: string;
-  week: string;
-  startDate: string;
-  endDate: string;
 }
 
 export default function OtherTasks({

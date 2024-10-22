@@ -2,16 +2,24 @@ import "./TaskDetail.scss";
 import { useState } from "react";
 import { editTask, updateDone, deleteTask } from "../../utils/axios";
 import { getUsernameFromToken } from "../../utils/user";
+import { Task } from "../../types/interfaces";
+
+interface TaskDetailProps {
+  selectedTask: Task;
+  closeTaskDetail: () => void;
+  isTaskDetailOpen: boolean;
+  refreshTasks: () => void;
+}
 
 export default function TaskDetail({
   selectedTask,
   closeTaskDetail,
   isTaskDetailOpen,
   refreshTasks,
-}) {
+}: TaskDetailProps) {
   const [isEdit, setIsEdit] = useState(false);
   const [taskName, setTaskName] = useState("");
-  const [minutes, setMinutes] = useState("");
+  const [minutes, setMinutes] = useState<number | string>("");
   const [dueDate, setDueDate] = useState("");
   const [repeat, setRepeat] = useState("");
   const [taskId, setTaskId] = useState("");
@@ -27,8 +35,8 @@ export default function TaskDetail({
   };
 
   // Edit task form submit
-  const handleSubmitEditTask = async (event) => {
-    event.preventDefault();
+  const handleSubmitEditTask = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     // Input validation
     if (!taskName) {
@@ -44,9 +52,11 @@ export default function TaskDetail({
       refreshTasks();
       closeTaskDetail();
     } catch (error) {
-      // User feedback for errors
-      console.error("Error updating task:", error);
-      alert(error.message || "An unexpected error occurred. Please try again.");
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("An unknown error occurred.");
+      }
     }
   };
 
@@ -61,7 +71,7 @@ export default function TaskDetail({
     const toggledDone = !selectedTask?.done;
     let doneBy = selectedTask.doneBy;
 
-    const username = getUsernameFromToken();
+    const username = getUsernameFromToken() || "unknown";
 
     if (!selectedTask?.doneBy) {
       return alert(
@@ -89,16 +99,28 @@ export default function TaskDetail({
       } else {
         alert(response.data.message);
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      // Specify the type as unknown
       console.error("Error:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        alert(error.response.data.message);
+
+      // Type narrowing to check if it's an AxiosError
+      if (error instanceof Error) {
+        // If you are using Axios, you can check for response structure
+        const axiosError = error as {
+          response?: { data?: { message?: string } };
+        };
+
+        if (
+          axiosError.response &&
+          axiosError.response.data &&
+          axiosError.response.data.message
+        ) {
+          alert(axiosError.response.data.message);
+        } else {
+          alert(`Error: ${error.message}`); // General error message
+        }
       } else {
-        alert(`An error occurred while trying to update this task.`);
+        alert(`An unknown error occurred.`);
       }
     }
     closeTaskDetail();
@@ -117,23 +139,20 @@ export default function TaskDetail({
     try {
       const response = await deleteTask(taskId);
 
-      if (response.status === 204) {
+      if (response && response.status === 204) {
         setIsEdit(false);
         refreshTasks();
         closeTaskDetail();
-      } else {
+      } else if (response) {
         alert(response.data.message);
       }
     } catch (error) {
       console.error("Error:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        alert(error.response.data.message);
+
+      if (error instanceof Error) {
+        alert(error.message);
       } else {
-        alert(`An error occurred, couldn't delete task.`);
+        alert(`An unknown error occurred, couldn't delete task.`);
       }
     }
   };

@@ -1,4 +1,9 @@
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+
+// Extend the JwtPayload to include your custom properties
+interface CustomJwtPayload extends JwtPayload {
+  username: string; // Add the username property
+}
 
 // get username from token
 export const getUsernameFromToken = () => {
@@ -8,7 +13,7 @@ export const getUsernameFromToken = () => {
   // Decode the token to get the username
   let username = "";
   if (token) {
-    const decoded = jwtDecode(token);
+    const decoded = jwtDecode<CustomJwtPayload>(token);
     username = decoded.username; // Access the username from the decoded token
     return username;
   }

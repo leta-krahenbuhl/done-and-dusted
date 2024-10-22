@@ -52,7 +52,6 @@ export default function EditAccount({
   // submit form (aka colour change)
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("in on submit function");
     await updateUser(username, colourNew);
     window.location.reload();
   };

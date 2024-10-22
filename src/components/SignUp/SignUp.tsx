@@ -1,15 +1,23 @@
 import { signUp } from "../../utils/axios";
 import "./SignUp.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
+interface SignUpProps {
+  isSignUpOpen: boolean;
+  handleCloseSignUp: () => void;
+}
+
+export default function SignUp({
+  isSignUpOpen,
+  handleCloseSignUp,
+}: SignUpProps) {
   const [username, setUsername] = useState("");
   const [colour, setColour] = useState("lightpink"); // use the first colour in the select input
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setError("");
@@ -33,12 +41,15 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
     try {
       const response = await signUp(username, password, colour);
       alert(
-        "User created successfully. Please log in to get started.",
-        response.message
+        `User created successfully. Please log in to get started. ${response.message}`
       );
-      handleCloseSignUp(false);
+      handleCloseSignUp();
     } catch (error) {
-      setError(error.message);
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("An unknown error occurred.");
+      }
     }
   };
 
@@ -97,11 +108,7 @@ export default function SignUp({ isSignUpOpen, handleCloseSignUp }) {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <button
-            type="submit"
-            className="signup-overlay-form__button"
-            onClick={handleSignUp}
-          >
+          <button type="submit" className="signup-overlay-form__button">
             Submit
           </button>
         </form>
