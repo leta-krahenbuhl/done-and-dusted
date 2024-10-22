@@ -3,14 +3,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logIn } from "../../utils/axios";
 
-export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
+interface LogInProps {
+  isLogInOpen: boolean;
+  handleCloseLogIn: () => void;
+}
+
+export default function LogIn({ isLogInOpen, handleCloseLogIn }: LogInProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setError(null);
@@ -29,9 +34,11 @@ export default function LogIn({ isLogInOpen, handleCloseLogIn }) {
 
       navigate("/home");
     } catch (error) {
-      // Show a user-friendly message
-      alert(error.message);
-      // setError(error.message);
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("An unknown error occurred.");
+      }
     }
   };
 

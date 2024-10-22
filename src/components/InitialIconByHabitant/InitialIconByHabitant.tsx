@@ -2,9 +2,15 @@ import "./InitialIconByHabitant.scss";
 import { useState, useEffect } from "react";
 import { fetchUserandColour } from "../../utils/axios";
 
-export default function InitialIconByHabitant({ habitant }) {
+interface InitialIconByHabitantProps {
+  habitant: string;
+}
+
+export default function InitialIconByHabitant({
+  habitant,
+}: InitialIconByHabitantProps) {
   const [colour, setColour] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Get user and set user colour
   useEffect(() => {
@@ -15,7 +21,11 @@ export default function InitialIconByHabitant({ habitant }) {
         const userColour = await fetchUserandColour(habitant);
         setColour(userColour);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
 

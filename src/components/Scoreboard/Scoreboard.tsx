@@ -6,15 +6,40 @@ import { fetchHomeData, fetchTasksForMinutes } from "../../utils/axios";
 import Stats from "../Stats/Stats";
 import ScoreboardTasks from "../ScoreboardTasks/ScoreboardTasks";
 
-export default function Scoreboard({ homeName }) {
-  const [currentWeekISO, setCurrentWeekISO] = useState("");
-  const [homeData, setHomeData] = useState(null);
+interface ScoreboardProps {
+  homeName: string;
+}
+
+interface Home {
+  _id: string;
+  homeName: string;
+  habitants: string[];
+  admins: string[];
+}
+
+interface Task {
+  _id: string;
+  taskName: string;
+  minutes: number;
+  repeat: "daily" | "weekly" | "other";
+  done: boolean;
+  doneBy: string;
+  homeName: string;
+  dueDate: string;
+  week: string;
+  startDate: string;
+  endDate: string;
+}
+
+export default function Scoreboard({ homeName }: ScoreboardProps) {
+  const [currentWeekISO, setCurrentWeekISO] = useState<string>("");
+  const [homeData, setHomeData] = useState<Home | null>(null);
   const [totalMinutesByHabitant, setTotalMinutesByHabitant] = useState({});
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   //   const [colour, setColour] = useState("");
 
   // set currentWeekISO
-  const setCurrentWeek = (currentWeekISO) => {
+  const setCurrentWeek = (currentWeekISO: string) => {
     setCurrentWeekISO(currentWeekISO);
   };
 
@@ -24,8 +49,12 @@ export default function Scoreboard({ homeName }) {
       try {
         const data = await fetchHomeData(homeName, setError);
         setHomeData(data);
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getHomeData();
@@ -39,19 +68,23 @@ export default function Scoreboard({ homeName }) {
           try {
             const data = await fetchTasksForMinutes(habitant, currentWeekISO);
             const totalMinutes = data.reduce(
-              (acc, task) => acc + (task.minutes || 0),
+              (acc: number, task: Task) => acc + (task.minutes || 0),
               0
             );
             return { habitant, totalMinutes };
-          } catch (err) {
-            setError(err.message);
+          } catch (error) {
+            if (error instanceof Error) {
+              alert(error.message);
+            } else {
+              alert("An unknown error occurred.");
+            }
             return { habitant, totalMinutes: 0 }; // Return 0 on error
           }
         });
 
         const results = await Promise.all(tasksPromises);
         const totalMinutesObject = results.reduce(
-          (acc, { habitant, totalMinutes }) => {
+          (acc: { [key: string]: number }, { habitant, totalMinutes }) => {
             acc[habitant] = totalMinutes;
             return acc;
           },

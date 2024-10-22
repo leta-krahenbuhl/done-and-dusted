@@ -5,10 +5,21 @@ import AddPeople from "../AddPeople/AddPeople";
 import DeletePeople from "../DeletePeople/DeletePeople";
 import { fetchHomeData } from "../../utils/axios";
 
-export default function MyHome({ homeName }) {
+interface MyHomeProps {
+  homeName: string;
+}
+
+interface Home {
+  _id: string;
+  homeName: string;
+  habitants: string[];
+  admins: string[];
+}
+
+export default function MyHome({ homeName }: MyHomeProps) {
   const [isAddPeopleOpen, setIsAddPeopleOpen] = useState(false);
   const [isDeletePeopleOpen, setIsDeletePeopleOpen] = useState(false);
-  const [homeData, setHomeData] = useState(null);
+  const [homeData, setHomeData] = useState<Home | null>(null);
   const [error, setError] = useState(null);
 
   // Fetch current home data (to get inhabitants)

@@ -3,22 +3,45 @@ import { useState, useEffect } from "react";
 import { fetchOtherTasksDone, fetchOtherTasksUndone } from "../../utils/axios";
 import InitialIcon from "../InitialIcon/InitialIcon";
 
+interface OtherTasksProps {
+  homeName: string;
+  currentWeekISO: string;
+  handleListItemClick: (task: Task) => void;
+  taskRefreshTrigger: () => void;
+}
+
+interface Task {
+  _id: string;
+  taskName: string;
+  minutes: number;
+  repeat: "daily" | "weekly" | "other";
+  done: boolean;
+  doneBy: string;
+  homeName: string;
+  dueDate: string;
+  week: string;
+  startDate: string;
+  endDate: string;
+}
+
 export default function OtherTasks({
   homeName,
   currentWeekISO,
   handleListItemClick,
   taskRefreshTrigger,
-}) {
-  const [otherTasksDone, setOtherTasksDone] = useState([]);
-  const [otherTasksUndone, setOtherTasksUndone] = useState([]);
-  const [error, setError] = useState(null);
+}: OtherTasksProps) {
+  const [otherTasksDone, setOtherTasksDone] = useState<Task[]>([]);
+  const [otherTasksUndone, setOtherTasksUndone] = useState<Task[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   // Sets class in InitialIcon to determine size
   const inTaskComponent = true;
 
   // Helper function to sort tasks by dueDate
-  const sortTasksByDueDate = (tasks) => {
-    return tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  const sortTasksByDueDate = (tasks: Task[]) => {
+    return tasks.sort(
+      (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+    );
   };
 
   // Get tasks other: undone
@@ -28,8 +51,12 @@ export default function OtherTasks({
         const data = await fetchOtherTasksUndone(homeName, currentWeekISO);
         const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
         setOtherTasksUndone(sortedTasks);
-      } catch (err) {
-        setError(err.message); // Handle the error locally in the component
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getOtherTasks();
@@ -42,8 +69,12 @@ export default function OtherTasks({
         const data = await fetchOtherTasksDone(homeName, currentWeekISO);
         const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
         setOtherTasksDone(sortedTasks);
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getOtherTasksDone();
