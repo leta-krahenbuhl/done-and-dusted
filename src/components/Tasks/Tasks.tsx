@@ -6,18 +6,23 @@ import WeeklyTasks from "../WeeklyTasks/WeeklyTasks";
 import OtherTasks from "../OtherTasks/OtherTasks";
 import TaskDetail from "../TaskDetail/TaskDetail";
 import WeekSlider from "../WeekSlider/WeekSlider";
+import { Task } from "../../types/interfaces";
+
+interface TasksProps {
+  homeName: string;
+}
 
 // Function to get the Monday of the current week
-function getMonday(date) {
+function getMonday(date: Date) {
   const day = date.getDay();
   const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday (0)
   return new Date(date.setDate(diff));
 }
 
-export default function Tasks({ homeName }) {
+export default function Tasks({ homeName }: TasksProps) {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
   const [isTaskDetailOpen, setIsTaskDetailOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [currentWeekISO, setCurrentWeekISO] = useState("");
   const [taskRefreshTrigger, setTaskRefreshTrigger] = useState(false);
 
@@ -50,7 +55,7 @@ export default function Tasks({ homeName }) {
   };
 
   // handle list item click
-  const handleListItemClick = (task) => {
+  const handleListItemClick = (task: Task) => {
     setSelectedTask(task);
     setIsTaskDetailOpen(true);
   };

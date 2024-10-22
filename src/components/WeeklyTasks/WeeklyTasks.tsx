@@ -5,23 +5,33 @@ import {
   fetchWeeklyTasksUndone,
 } from "../../utils/axios";
 import InitialIcon from "../InitialIcon/InitialIcon";
+import { Task } from "../../types/interfaces";
+
+interface WeeklyTasksProps {
+  homeName: string;
+  currentWeekISO: string;
+  handleListItemClick: (task: Task) => void;
+  taskRefreshTrigger: boolean;
+}
 
 export default function WeeklyTasks({
   homeName,
   currentWeekISO,
   handleListItemClick,
   taskRefreshTrigger,
-}) {
-  const [weeklyTasksUndone, setWeeklyTasksUndone] = useState([]);
-  const [weeklyTasksDone, setWeeklyTasksDone] = useState([]);
-  const [error, setError] = useState(null);
+}: WeeklyTasksProps) {
+  const [weeklyTasksUndone, setWeeklyTasksUndone] = useState<Task[]>([]);
+  const [weeklyTasksDone, setWeeklyTasksDone] = useState<Task[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   // Sets class in InitialIcon to determine icon size
   const inTaskComponent = true;
 
   // Helper function to sort tasks by dueDate
-  const sortTasksByDueDate = (tasks) => {
-    return tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  const sortTasksByDueDate = (tasks: Task[]) => {
+    return tasks.sort(
+      (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+    );
   };
 
   // Get weekly undone tasks
@@ -31,8 +41,12 @@ export default function WeeklyTasks({
         const data = await fetchWeeklyTasksUndone(homeName, currentWeekISO);
         const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
         setWeeklyTasksUndone(sortedTasks);
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getWeeklyTasksUndone();
@@ -45,8 +59,12 @@ export default function WeeklyTasks({
         const data = await fetchWeeklyTasksDone(homeName, currentWeekISO);
         const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
         setWeeklyTasksDone(sortedTasks);
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getWeeklyTasksDone();

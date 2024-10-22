@@ -15,14 +15,16 @@ export default function Home() {
   const [isAddHomeOpen, setIsAddHomeOpen] = useState(false);
   const [homeName, setHomeName] = useState(null);
   const [error, setError] = useState(null);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState<string>("");
   const [loading, setLoading] = useState(true); // NEW: Loading state
 
   // set username
   useEffect(() => {
     const getUsername = getUsernameFromToken();
-    setUsername(getUsername);
+    setUsername(getUsername || "undefined");
   }, []);
+
+  console.log("username: ", username);
 
   // Find homeName with username as habitant
   useEffect(() => {
@@ -31,8 +33,12 @@ export default function Home() {
         try {
           const data = await fetchHomeName(username);
           setHomeName(data);
-        } catch (err) {
-          setError(err.message); // Handle the error locally in the component
+        } catch (error) {
+          if (error instanceof Error) {
+            alert(error.message);
+          } else {
+            alert("An unknown error occurred.");
+          }
         } finally {
           setLoading(false); // Mark loading as complete after fetch attempt
         }
@@ -64,7 +70,7 @@ export default function Home() {
   if (!homeName) {
     return (
       <div className="home-none-all">
-        <Header user={username} />
+        <Header />
         <article className="home-none">
           <img src={cleaningWoman} alt="logo" className="home-none__image" />
           <div className="home-none__text-container">

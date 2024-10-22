@@ -5,7 +5,7 @@ import { getUsernameFromToken } from "../../utils/user";
 import { Task } from "../../types/interfaces";
 
 interface TaskDetailProps {
-  selectedTask: Task;
+  selectedTask: Task | null;
   closeTaskDetail: () => void;
   isTaskDetailOpen: boolean;
   refreshTasks: () => void;
@@ -69,7 +69,7 @@ export default function TaskDetail({
   // Handle marking as done / undone
   const handleDone = async () => {
     const toggledDone = !selectedTask?.done;
-    let doneBy = selectedTask.doneBy;
+    let doneBy = selectedTask?.doneBy;
 
     const username = getUsernameFromToken() || "unknown";
 

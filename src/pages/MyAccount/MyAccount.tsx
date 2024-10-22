@@ -5,18 +5,21 @@ import { getUsernameFromToken } from "../../utils/user";
 import { fetchUser, fetchHomeName } from "../../utils/axios";
 import { Link } from "react-router-dom";
 import EditAccount from "../../components/EditAccount/EditAccount";
+import { User } from "../../types/interfaces";
 
 export default function MyAccount() {
   const [username, setUsername] = useState("");
-  const [userDetails, setUserDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState<User[] | []>([]);
   const [homeName, setHomeName] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [isEditAccountOpen, setIsEditAccountOpen] = useState(false);
+
+  // console.log("userDetails: ", userDetails);
 
   // get username
   useEffect(() => {
     const user = getUsernameFromToken();
-    setUsername(user);
+    setUsername(user || "undefined");
   }, []);
 
   // get user's details (to get pw, to map through for name)
@@ -44,14 +47,14 @@ export default function MyAccount() {
     if (username) {
       const fetchHomeNameWithUsername = async () => {
         try {
-          const nameOfHome = await fetchHomeName(
-            username,
-            setHomeName,
-            setError
-          );
+          const nameOfHome = await fetchHomeName(username);
           setHomeName(nameOfHome);
-        } catch (err) {
-          console.error("Error fetching user data:", err);
+        } catch (error) {
+          if (error instanceof Error) {
+            setError(error.message);
+          } else {
+            setError("Error fetching user data.");
+          }
         }
       };
 
@@ -115,7 +118,6 @@ export default function MyAccount() {
         username={userDetails[0]?.username}
         setIsEditAccountOpen={setIsEditAccountOpen}
         isEditAccountOpen={isEditAccountOpen}
-        password={userDetails[0]?.password}
         homeName={homeName}
         colour={userDetails[0]?.colour}
       />

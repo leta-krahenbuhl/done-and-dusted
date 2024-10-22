@@ -18,3 +18,10 @@ export interface Home {
   habitants: string[];
   admins: string[];
 }
+
+export interface User {
+  _id: string;
+  username: string;
+  password: string;
+  colour: string;
+}

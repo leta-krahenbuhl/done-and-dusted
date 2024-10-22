@@ -2,7 +2,11 @@ import "./WeekSlider.scss";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 
-export default function WeekSlider({ setCurrentWeek }) {
+interface WeekSliderPropss {
+  setCurrentWeek: (currentWeekISO: string) => void;
+}
+
+export default function WeekSlider({ setCurrentWeek }: WeekSliderPropss) {
   const [currentWeekStart, setCurrentWeekStart] = useState(
     getMonday(new Date())
   );
@@ -14,7 +18,7 @@ export default function WeekSlider({ setCurrentWeek }) {
   }, [currentWeekStart]);
 
   // Function to get the Monday of the given date's week
-  function getMonday(date) {
+  function getMonday(date: Date) {
     const day = date.getDay();
     const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday (0)
     return new Date(date.setDate(diff));

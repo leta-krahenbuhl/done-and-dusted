@@ -8,7 +8,7 @@ interface OtherTasksProps {
   homeName: string;
   currentWeekISO: string;
   handleListItemClick: (task: Task) => void;
-  taskRefreshTrigger: () => void;
+  taskRefreshTrigger: boolean;
 }
 
 export default function OtherTasks({

@@ -7,7 +7,7 @@ import InitialIcon from "../InitialIcon/InitialIcon";
 import { getUsernameFromToken } from "../../utils/user";
 
 export default function Header() {
-  const username = getUsernameFromToken();
+  const username = getUsernameFromToken() || "undefined";
 
   // Sets class in InitialIcon to determine size
   // ToDo: Fix this!
