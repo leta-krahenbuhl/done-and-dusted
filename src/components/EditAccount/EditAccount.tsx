@@ -2,14 +2,21 @@ import { deleteHabitant, updateUser } from "../../utils/axios";
 import "./EditAccount.scss";
 import { useEffect, useState } from "react";
 
+interface EditAccountProps {
+  username: string;
+  homeName: string;
+  colour: string;
+  isEditAccountOpen: boolean;
+  setIsEditAccountOpen: (value: boolean) => void;
+}
+
 export default function EditAccount({
-  isEditAccountOpen,
-  setIsEditAccountOpen,
   username,
-  // password,
   homeName,
   colour,
-}) {
+  isEditAccountOpen,
+  setIsEditAccountOpen,
+}: EditAccountProps) {
   const [colourNew, setColourNew] = useState("");
 
   // Update states
@@ -43,8 +50,8 @@ export default function EditAccount({
   };
 
   // submit form (aka colour change)
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     console.log("in on submit function");
     await updateUser(username, colourNew);
     window.location.reload();

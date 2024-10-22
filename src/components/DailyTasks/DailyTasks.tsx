@@ -3,22 +3,45 @@ import { useState, useEffect } from "react";
 import InitialIcon from "../InitialIcon/InitialIcon";
 import { fetchDailyTasksUndone, fetchDailyTasksDone } from "../../utils/axios";
 
+interface AddTasksProps {
+  homeName: string;
+  currentWeekISO: string;
+  handleListItemClick: (task: Task) => void;
+  taskRefreshTrigger: () => void;
+}
+
+interface Task {
+  _id: string;
+  taskName: string;
+  minutes: number;
+  repeat: "daily" | "weekly" | "other";
+  done: boolean;
+  doneBy: string;
+  homeName: string;
+  dueDate: string;
+  week: string;
+  startDate: string;
+  endDate: string;
+}
+
 export default function DailyTasks({
   homeName,
   currentWeekISO,
   handleListItemClick,
   taskRefreshTrigger,
-}) {
-  const [dailyTasksUndone, setDailyTasksUndone] = useState([]);
-  const [dailyTasksDone, setDailyTasksDone] = useState([]);
-  const [error, setError] = useState(null);
+}: AddTasksProps) {
+  const [dailyTasksUndone, setDailyTasksUndone] = useState<Task[]>([]);
+  const [dailyTasksDone, setDailyTasksDone] = useState<Task[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   // Sets class in InitialIcon to determine size
-  const inTaskComponent = true;
+  const inTaskComponent: boolean = true;
 
   // Helper function to sort tasks by dueDate
-  const sortTasksByDueDate = (tasks) => {
-    return tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  const sortTasksByDueDate = (tasks: Task[]) => {
+    return tasks.sort(
+      (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+    );
   };
 
   // Get daily undone tasks
@@ -28,8 +51,12 @@ export default function DailyTasks({
         const data = await fetchDailyTasksUndone(homeName, currentWeekISO);
         const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
         setDailyTasksUndone(sortedTasks);
-      } catch (err) {
-        setError(err.message); // Handle the error locally in the component
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getDailyTasksUndone();
@@ -42,8 +69,12 @@ export default function DailyTasks({
         const data = await fetchDailyTasksDone(homeName, currentWeekISO);
         const sortedTasks = sortTasksByDueDate(data); // Sort the tasks by dueDate
         setDailyTasksDone(sortedTasks);
-      } catch (err) {
-        setError(err.message); // Handle the error locally in the component
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
     getDailyTasksDone();

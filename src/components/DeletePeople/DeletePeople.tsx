@@ -2,16 +2,25 @@ import "./DeletePeople.scss";
 import { useState } from "react";
 import { deleteHabitant } from "../../utils/axios";
 
+interface DeletePeopleProps {
+  homeName: string;
+  isDeletePeopleOpen: boolean;
+  handleCloseDeletePeople: () => void;
+  setIsDeletePeopleOpen: (value: boolean) => void;
+}
+
 export default function DeletePeople({
   homeName,
   isDeletePeopleOpen,
   setIsDeletePeopleOpen,
   handleCloseDeletePeople,
-}) {
+}: DeletePeopleProps) {
   const [habitantToDelete, setHabitantToDelete] = useState("");
 
   // Delete habitant
-  const handleDeletePeople = async (event) => {
+  const handleDeletePeople = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
     // Error handling
@@ -32,7 +41,11 @@ export default function DeletePeople({
         window.location.reload();
       }
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("An unknown error occurred.");
+      }
     }
   };
 

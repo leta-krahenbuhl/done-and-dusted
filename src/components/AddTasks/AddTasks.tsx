@@ -50,8 +50,8 @@ export default function AddTasks({
   }, []);
 
   // Add task
-  const handleAddTask = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleAddTask = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     if (!taskName) {
       return alert("Please enter a task description.");

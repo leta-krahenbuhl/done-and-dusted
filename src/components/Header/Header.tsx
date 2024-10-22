@@ -9,6 +9,10 @@ import { getUsernameFromToken } from "../../utils/user";
 export default function Header() {
   const username = getUsernameFromToken();
 
+  // Sets class in InitialIcon to determine size
+  // ToDo: Fix this!
+  const inTaskComponent: boolean = false;
+
   return (
     <div className="header">
       <Link to="/home">
@@ -23,7 +27,10 @@ export default function Header() {
             <img src={avatarJane} alt="avatar" className="header__avatar" />
           ) : (
             <>
-              <InitialIcon username={username} />
+              <InitialIcon
+                username={username}
+                inTaskComponent={inTaskComponent}
+              />
             </>
           )}
         </div>

@@ -2,9 +2,17 @@ import "./InitialIcon.scss";
 import { useState, useEffect } from "react";
 import { fetchUserandColour } from "../../utils/axios";
 
-export default function InitialIcon({ username, inTaskComponent }) {
+interface InitialIconProps {
+  username: string | undefined;
+  inTaskComponent: boolean;
+}
+
+export default function InitialIcon({
+  username,
+  inTaskComponent,
+}: InitialIconProps) {
   const [colour, setColour] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Get user and set user colour
   useEffect(() => {
@@ -17,7 +25,11 @@ export default function InitialIcon({ username, inTaskComponent }) {
         const userColour = await fetchUserandColour(habitant);
         setColour(userColour);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
       }
     };
 
