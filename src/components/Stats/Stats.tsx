@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Stats.scss";
 import { PieChart } from "@mui/x-charts/PieChart";
-import { fetchHomeData, fetchUserandColour } from "../../utils/axios";
+import { fetchHomeData, fetchUserandColour } from "../../utils/axiosCalls";
 
 interface StatsProps {
   homeName: string;
@@ -25,7 +25,7 @@ export default function Stats({
     const getHabitants = async () => {
       setError(null);
       try {
-        const data = await fetchHomeData(homeName, setError);
+        const data = await fetchHomeData(homeName);
         setHabitants(data.habitants);
       } catch (error) {
         if (error instanceof Error) {

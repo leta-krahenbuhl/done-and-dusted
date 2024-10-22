@@ -1,6 +1,6 @@
 import "./InitialIconByHabitant.scss";
 import { useState, useEffect } from "react";
-import { fetchUserandColour } from "../../utils/axios";
+import { fetchUserandColour } from "../../utils/axiosCalls";
 
 interface InitialIconByHabitantProps {
   habitant: string;

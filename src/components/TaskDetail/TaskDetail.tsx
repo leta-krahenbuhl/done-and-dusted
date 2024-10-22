@@ -1,6 +1,6 @@
 import "./TaskDetail.scss";
 import { useState } from "react";
-import { editTask, updateDone, deleteTask } from "../../utils/axios";
+import { editTask, updateDone, deleteTask } from "../../utils/axiosCalls";
 import { getUsernameFromToken } from "../../utils/user";
 import { Task } from "../../types/interfaces";
 
@@ -19,17 +19,19 @@ export default function TaskDetail({
 }: TaskDetailProps) {
   const [isEdit, setIsEdit] = useState(false);
   const [taskName, setTaskName] = useState("");
-  const [minutes, setMinutes] = useState<number | string>("");
+  const [minutes, setMinutes] = useState<number>(5);
   const [dueDate, setDueDate] = useState("");
-  const [repeat, setRepeat] = useState("");
+  const [repeat, setRepeat] = useState<
+    "daily" | "weekly" | "other" | "not selected"
+  >("not selected");
   const [taskId, setTaskId] = useState("");
 
   // Update states when entering edit mode
   const handleEditClick = () => {
     setTaskName(selectedTask?.taskName || "");
-    setMinutes(selectedTask?.minutes || "");
+    setMinutes(selectedTask?.minutes || 5);
     setDueDate(selectedTask?.dueDate || "");
-    setRepeat(selectedTask?.repeat || "");
+    setRepeat(selectedTask?.repeat || "not selected");
     setTaskId(selectedTask?._id || "");
     setIsEdit(true);
   };
@@ -69,7 +71,7 @@ export default function TaskDetail({
   // Handle marking as done / undone
   const handleDone = async () => {
     const toggledDone = !selectedTask?.done;
-    let doneBy = selectedTask?.doneBy;
+    let doneBy = selectedTask?.doneBy || "unknown";
 
     const username = getUsernameFromToken() || "unknown";
 
@@ -253,7 +255,7 @@ export default function TaskDetail({
               name="minutes"
               className="add-task-overlay-form__input"
               value={minutes}
-              onChange={(e) => setMinutes(e.target.value)}
+              onChange={(e) => setMinutes(Number(e.target.value))}
             >
               <option value="5">5mins</option>
               <option value="10">10mins</option>
@@ -280,7 +282,9 @@ export default function TaskDetail({
               name="repeat"
               className="add-task-overlay-form__input"
               value={repeat}
-              onChange={(e) => setRepeat(e.target.value)}
+              onChange={(e) =>
+                setRepeat(e.target.value as "daily" | "weekly" | "other")
+              }
             >
               <option value="daily">daily</option>
               <option value="weekly">weekly</option>

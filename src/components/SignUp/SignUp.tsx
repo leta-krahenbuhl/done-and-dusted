@@ -1,4 +1,4 @@
-import { signUp } from "../../utils/axios";
+import { signUp } from "../../utils/axiosCalls";
 import "./SignUp.scss";
 import { useState } from "react";
 

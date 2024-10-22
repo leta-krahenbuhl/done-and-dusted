@@ -1,7 +1,10 @@
 import "./DailyTasks.scss";
 import { useState, useEffect } from "react";
 import InitialIcon from "../InitialIcon/InitialIcon";
-import { fetchDailyTasksUndone, fetchDailyTasksDone } from "../../utils/axios";
+import {
+  fetchDailyTasksUndone,
+  fetchDailyTasksDone,
+} from "../../utils/axiosCalls";
 import { Task } from "../../types/interfaces";
 
 interface AddTasksProps {

@@ -1,6 +1,9 @@
 import "./OtherTasks.scss";
 import { useState, useEffect } from "react";
-import { fetchOtherTasksDone, fetchOtherTasksUndone } from "../../utils/axios";
+import {
+  fetchOtherTasksDone,
+  fetchOtherTasksUndone,
+} from "../../utils/axiosCalls";
 import InitialIcon from "../InitialIcon/InitialIcon";
 import { Task } from "../../types/interfaces";
 

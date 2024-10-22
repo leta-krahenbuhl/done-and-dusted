@@ -1,6 +1,6 @@
 import "./DeletePeople.scss";
 import { useState } from "react";
-import { deleteHabitant } from "../../utils/axios";
+import { deleteHabitant } from "../../utils/axiosCalls";
 
 interface DeletePeopleProps {
   homeName: string;

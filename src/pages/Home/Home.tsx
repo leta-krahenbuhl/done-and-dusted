@@ -8,7 +8,7 @@ import "react-tabs/style/react-tabs.css";
 import Tasks from "../../components/Tasks/Tasks";
 import MyHome from "../../components/MyHome/MyHome";
 import { getUsernameFromToken } from "../../utils/user";
-import { fetchHomeName } from "../../utils/axios";
+import { fetchHomeName } from "../../utils/axiosCalls";
 import Scoreboard from "../../components/Scoreboard/Scoreboard";
 
 export default function Home() {

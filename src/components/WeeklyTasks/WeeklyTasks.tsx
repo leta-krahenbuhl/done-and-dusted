@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import {
   fetchWeeklyTasksDone,
   fetchWeeklyTasksUndone,
-} from "../../utils/axios";
+} from "../../utils/axiosCalls";
 import InitialIcon from "../InitialIcon/InitialIcon";
 import { Task } from "../../types/interfaces";
 

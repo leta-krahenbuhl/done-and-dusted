@@ -1,6 +1,6 @@
 import "./AddHome.scss";
 import { useState } from "react";
-import { handleAddHome } from "../../utils/axios";
+import { handleAddHome } from "../../utils/axiosCalls";
 import { getUsernameFromToken } from "../../utils/user";
 
 interface AddHomeProps {
@@ -23,7 +23,7 @@ export default function AddHome({
       return alert("Please enter a name for your home.");
     }
 
-    const username = getUsernameFromToken();
+    const username = getUsernameFromToken() || "undefined";
     const admins = [username];
     const habitants = [username];
 

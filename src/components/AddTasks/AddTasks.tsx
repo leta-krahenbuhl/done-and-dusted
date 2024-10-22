@@ -1,6 +1,6 @@
 import "./AddTasks.scss";
 import { useState, useEffect } from "react";
-import { addTask } from "../../utils/axios";
+import { addTask } from "../../utils/axiosCalls";
 
 interface AddTasksProps {
   homeName: string;
@@ -28,7 +28,9 @@ export default function AddTasks({
 }: AddTasksProps) {
   const [taskName, setTaskName] = useState<string>("");
   const [minutes, setMinutes] = useState<number>(5);
-  const [repeat, setRepeat] = useState("daily");
+  const [repeat, setRepeat] = useState<
+    "daily" | "weekly" | "other" | "not selected"
+  >("not selected");
   const [dueDate, setDueDate] = useState<string>("");
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
@@ -218,7 +220,9 @@ export default function AddTasks({
             name="repeat"
             className="add-task-overlay-form__input"
             value={repeat}
-            onChange={(e) => setRepeat(e.target.value)}
+            onChange={(e) =>
+              setRepeat(e.target.value as "daily" | "weekly" | "other")
+            }
           >
             <option value="daily">daily</option>
             <option value="weekly">weekly</option>

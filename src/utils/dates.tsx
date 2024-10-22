@@ -4,7 +4,7 @@
  * @returns {string[]} - An array of ISO date strings for the week.
  */
 
-export function getWeekDates(currentWeekISO) {
+export function getWeekDates(currentWeekISO: string) {
   const startDate = new Date(currentWeekISO); // Create a Date object from the input ISO string
   const weekDates = [];
 

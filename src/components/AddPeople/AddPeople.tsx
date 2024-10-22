@@ -1,6 +1,6 @@
 import "./AddPeople.scss";
 import { useState } from "react";
-import { addHabitantToHome } from "../../utils/axios";
+import { addHabitantToHome } from "../../utils/axiosCalls";
 
 interface AddPeopleProps {
   homeName: string;

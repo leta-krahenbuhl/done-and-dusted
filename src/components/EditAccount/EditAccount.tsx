@@ -1,4 +1,4 @@
-import { deleteHabitant, updateUser } from "../../utils/axios";
+import { deleteHabitant, updateUser } from "../../utils/axiosCalls";
 import "./EditAccount.scss";
 import { useEffect, useState } from "react";
 

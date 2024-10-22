@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import InitialIconByHabitant from "../InitialIconByHabitant/InitialIconByHabitant";
 import AddPeople from "../AddPeople/AddPeople";
 import DeletePeople from "../DeletePeople/DeletePeople";
-import { fetchHomeData } from "../../utils/axios";
+import { fetchHomeData } from "../../utils/axiosCalls";
 import { Home } from "../../types/interfaces";
 
 interface MyHomeProps {
@@ -14,13 +14,21 @@ export default function MyHome({ homeName }: MyHomeProps) {
   const [isAddPeopleOpen, setIsAddPeopleOpen] = useState(false);
   const [isDeletePeopleOpen, setIsDeletePeopleOpen] = useState(false);
   const [homeData, setHomeData] = useState<Home | null>(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Fetch current home data (to get inhabitants)
   useEffect(() => {
     const getHomeData = async () => {
-      const data = await fetchHomeData(homeName, setError);
-      setHomeData(data);
+      try {
+        const data = await fetchHomeData(homeName);
+        setHomeData(data);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
+      }
     };
     getHomeData();
   }, [homeName]);

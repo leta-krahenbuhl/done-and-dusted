@@ -1,7 +1,7 @@
 import "./LogIn.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logIn } from "../../utils/axios";
+import { logIn } from "../../utils/axiosCalls";
 
 interface LogInProps {
   isLogInOpen: boolean;

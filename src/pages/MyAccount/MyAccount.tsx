@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import "./MyAccount.scss";
 import { getUsernameFromToken } from "../../utils/user";
-import { fetchUser, fetchHomeName } from "../../utils/axios";
+import { fetchUser, fetchHomeName } from "../../utils/axiosCalls";
 import { Link } from "react-router-dom";
 import EditAccount from "../../components/EditAccount/EditAccount";
 import { User } from "../../types/interfaces";
 
 export default function MyAccount() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState<string>("");
   const [userDetails, setUserDetails] = useState<User[] | []>([]);
   const [homeName, setHomeName] = useState("");
   const [error, setError] = useState<string | null>(null);

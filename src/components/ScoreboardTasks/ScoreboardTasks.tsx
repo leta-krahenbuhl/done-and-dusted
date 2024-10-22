@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchHomeData, fetchTasksDoneByUser } from "../../utils/axios";
+import { fetchHomeData, fetchTasksDoneByUser } from "../../utils/axiosCalls";
 import "./ScoreboardTasks.scss";
 import InitialIcon from "../InitialIcon/InitialIcon";
 import { Task } from "../../types/interfaces";
@@ -29,7 +29,7 @@ export default function ScoreboardTasks({
     const getHabitants = async () => {
       setError(null);
       try {
-        const data = await fetchHomeData(homeName, setError);
+        const data = await fetchHomeData(homeName);
         setHabitants(data.habitants);
       } catch (error) {
         if (error instanceof Error) {
@@ -50,11 +50,7 @@ export default function ScoreboardTasks({
           // Create an object where keys are habitants and values are their task arrays
           const tasksByUser: Record<string, Task[]> = {};
           for (const habitant of habitants) {
-            const data = await fetchTasksDoneByUser(
-              habitant,
-              currentWeekISO,
-              setError
-            );
+            const data = await fetchTasksDoneByUser(habitant, currentWeekISO);
             tasksByUser[habitant] = sortTasksByDueDate(data); // Sort the tasks by dueDate
           }
           setTaskArrays(tasksByUser); // Store the result in state as an object
