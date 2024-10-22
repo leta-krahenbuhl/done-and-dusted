@@ -24,8 +24,6 @@ export default function Home() {
     setUsername(getUsername || "undefined");
   }, []);
 
-  console.log("username: ", username);
-
   // Find homeName with username as habitant
   useEffect(() => {
     if (username) {
